@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".CompanyHome">
+    tools:context=".SendMessage">
     <item android:id="@+id/action_home"
         android:icon="@drawable/home_icon"
         android:title="@string/home_icon"
@@ -14,4 +14,5 @@
         android:icon="@drawable/logout_icon"
         android:title="@string/logout_icon"
         app:showAsAction="ifRoom"/>
+
 </menu>

@@ -13,7 +13,7 @@
         <activity
             android:name=".LogIn"
             android:label="@string/app_name"
-            android:theme="@style/CustomActionBarTheme">
+            android:theme="@style/CustomActionBarTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,6 +35,34 @@
         <activity
             android:name=".Registration"
             android:label="@string/title_activity_registration" >
+        </activity>
+        <activity
+            android:name=".ProfileCompany"
+            android:label="@string/title_activity_profile_company" >
+        </activity>
+        <activity
+            android:name=".SearchStudents"
+            android:label="@string/title_activity_search_students" >
+        </activity>
+        <activity
+            android:name=".ResultStudents"
+            android:label="@string/title_activity_result_students" >
+        </activity>
+        <activity
+            android:name=".ViewStudent"
+            android:label="@string/title_activity_view_student" >
+        </activity>
+        <activity
+            android:name=".SendMessage"
+            android:label="@string/title_activity_send_message" >
+        </activity>
+        <activity
+            android:name=".ListJobs"
+            android:label="@string/title_activity_list_jobs" >
+        </activity>
+        <activity
+            android:name=".UpdateOffer"
+            android:label="@string/title_activity_update_offer" >
         </activity>
     </application>
 

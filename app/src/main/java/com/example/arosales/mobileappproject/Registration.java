@@ -33,15 +33,15 @@ import java.util.List;
 
 public class Registration extends AppCompatActivity {
 
-    public final static String INFO_STUDENTNAME = "com.example.ricardogarcia.politojobs.STUDENTNAME";
-    public final static String INFO_STUDENTPASSWORD = "com.example.ricardogarcia.politojobs.STUDENTPASSWORD";
-    public final static String INFO_STUDENTSURNAME = "com.example.ricardogarcia.politojobs.STUDENTSURNAME";
-    public final static String INFO_COMPANYNAME = "com.example.ricardogarcia.politojobs.COMPANYNAME";
-    public final static String INFO_COMPANYPASSWORD = "com.example.ricardogarcia.politojobs.COMPANYPASSWORD";
-    public final static String INFO_COMPANYADDRESS = "com.example.ricardogarcia.politojobs.COMPANYADDRESS";
-    public final static String INFO_COMPANYLOCATION = "com.example.ricardogarcia.politojobs.COMPANYLOCATION";
+    public final static String INFO_STUDENTNAME = "com.example.arosales.mobileappproject.STUDENTNAME";
+    public final static String INFO_STUDENTPASSWORD = "com.example.arosales.mobileappproject.STUDENTPASSWORD";
+    public final static String INFO_STUDENTSURNAME = "com.example.arosales.mobileappproject.STUDENTSURNAME";
+    public final static String INFO_COMPANYNAME = "com.example.arosales.mobileappproject.COMPANYNAME";
+    public final static String INFO_COMPANYPASSWORD = "com.example.arosales.mobileappproject.COMPANYPASSWORD";
+    public final static String INFO_COMPANYADDRESS = "com.example.arosales.mobileappproject.COMPANYADDRESS";
+    public final static String INFO_COMPANYLOCATION = "com.example.arosales.mobileappproject.COMPANYLOCATION";
 
-    public final static String CURRENTAB = "com.example.ricardogarcia.politojobs.CURRENTAB";
+    public final static String CURRENTAB = "com.example.arosales.mobileappproject.CURRENTAB";
 
     private EditText studentName;
     private EditText studentSurname;
@@ -268,11 +268,6 @@ public class Registration extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }

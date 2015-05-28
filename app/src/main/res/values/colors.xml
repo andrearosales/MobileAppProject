@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="missing">#93A619</color>
+    <color name="background_layout">#e8e8e7</color>
+    <color name="background_header">#043577</color>
+    <color name="white">#ffffff</color>
+    <color name="background_button">#0862DD</color>
+    <color name="background_bottom">#054090</color>
+    <color name="black">#000000</color>
+    <color name="background_text">#f3f3f3</color>
+    <color name="background_tab">#969696</color>
+</resources>

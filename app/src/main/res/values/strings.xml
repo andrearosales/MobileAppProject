@@ -48,7 +48,7 @@
     <string name="title_activity_view_student">Student Information</string>
     <string name="save_student_button">Save Student</string>
     <string name="remove_student_button">Remove Student</string>
-    <string name="title_activity_search_students">Search Filter</string>
+    <string name="title_activity_search_students">Search Students</string>
     <string name="search_button">Search</string>
     <string name="foreign_language">Foreign language</string>
     <string name="search_text">Search Students</string>
@@ -70,8 +70,8 @@
     <string name="title_activity_publish_offer">Publish Job Offer</string>
     <string name="new_job">New Job Offer</string>
     <string name="title_activity_update_offer">Update Job Offer</string>
-    <string name="title_activity_profile_student">Students Profile</string>
-    <string name="title_activity_profile_company">Profile Company</string>
+    <string name="title_activity_profile_student">Profile</string>
+    <string name="title_activity_profile_company">Profile</string>
     <string name="profile">Profile</string>
     <string name="title_activity_log_in">Log In</string>
     <string name="login">Log In</string>

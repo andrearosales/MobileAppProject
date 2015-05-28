@@ -11,6 +11,8 @@
         <item name="android:actionMenuTextColor">@color/white</item>
         <item name="android:itemBackground">@drawable/overflow_style</item>
         <item name="android:actionMenuTextAppearance">@style/TextColor</item>
+        <item name="android:actionBarWidgetTheme">@style/PopUpStyle</item>
+        <item name="android:displayOptions">useLogo|showTitle</item>
 
         <!-- Support library compatibility -->
         <item name="actionBarStyle">@style/MyActionBar</item>
@@ -18,6 +20,7 @@
         <item name="actionMenuTextColor">@color/white</item>
         <item name="actionMenuTextAppearance">@style/TextColor</item>
         <item name="actionBarTheme">@style/ActionBarTheme</item>
+        <item name="displayOptions">useLogo|showTitle</item>
     </style>
 
     <style name="ActionBarTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -63,6 +66,16 @@
 
     <style name="TextColor">
         <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="PopUpStyle" parent="Theme.AppCompat">
+        <item name="android:popupMenuStyle">@style/PopUpMenu</item>
+    </style>
+
+    <style name="PopUpMenu" parent="@style/Widget.AppCompat.Light.PopupMenu">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textAppearanceLargePopupMenu">@color/white</item>
+        <item name="android:textAppearanceSmallPopupMenu">@color/white</item>
     </style>
 
 </resources>
