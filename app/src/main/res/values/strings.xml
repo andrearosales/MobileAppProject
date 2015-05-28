@@ -1,6 +1,323 @@
 <resources>
-    <string name="app_name">MobileAppProject</string>
+    <string name="app_name">POLITO Life</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_view_company">Company Information</string>
+    <string name="name">Name</string>
+    <string name="industry">Industry</string>
+    <string name="description">Description</string>
+    <string name="location">Location</string>
+    <string name="company_size">Company Size</string>
+    <string name="company_address">Address</string>
+    <string name="company_web">Website</string>
+    <string name="send_button">Send Message</string>
+    <string name="save_company_button">Save Company</string>
+    <string name="remove_company_button">Remove Company</string>
+    <string name="back_button">Back to Results</string>
+    <string name="home_button">HOME</string>
+    <string name="profile_button">PROFILE</string>
+    <string name="title_activity_send_message">Send Message</string>
+    <string name="polito_jobs">POLITO JOBS</string>
+    <string name="receiver">TO</string>
+    <string name="subject">Subject</string>
+    <string name="subject_hint">Subject of the message</string>
+    <string name="message">Message</string>
+    <string name="message_hint">Message to send</string>
+    <string name="title_activity_view_job">Job Information</string>
+    <string name="job_position">Job Position</string>
+    <string name="date_posted">Date Posted</string>
+    <string name="salary">Salary</string>
+    <string name="job_type">Type of Job</string>
+    <string name="job_duration">Duration</string>
+    <string name="apply_button">Apply Now</string>
+    <string name="save_job_button">Save Job</string>
+    <string name="remove_job_button">Remove Job</string>
+    <string name="student_surname">Surname</string>
+    <string name="date_birth">Date of birth</string>
+    <string name="place_birth">Place of birth</string>
+    <string name="technical_skills">Technical Skills</string>
+    <string name="experience">Years of Experience</string>
+    <string name="degree">Type of degree</string>
+    <string name="interests">Interests</string>
+    <string name="current_company">Current Company</string>
+    <string name="company_clients">Clients</string>
+    <string name="type_of_contract">Type of Contract</string>
+    <string name="phone">Phone number</string>
+    <string name="languages">Languages</string>
+    <string name="title_activity_view_student">Student Information</string>
+    <string name="save_student_button">Save Student</string>
+    <string name="remove_student_button">Remove Student</string>
+    <string name="title_activity_search_students">Search Filter</string>
+    <string name="search_button">Search</string>
+    <string name="foreign_language">Foreign language</string>
+    <string name="search_text">Search Students</string>
+    <string name="show_only">Show only available students</string>
+    <string name="title_activity_result_students">Search Results</string>
+    <string name="result_students">Search Results</string>
+    <string name="new_search_button">New Search</string>
+    <string name="view_button">View</string>
+    <string name="save_button">Save</string>
+    <string name="edit_button">Edit</string>
+    <string name="remove_button">Remove</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="update_button">Update</string>
+    <string name="delete_button">Delete</string>
+    <string name="title_activity_list_jobs">List Job Offers</string>
+    <string name="job_offers">Job Offers of Company</string>
+    <string name="publish_offer">Publish new offer</string>
+    <string name="publish_button">Publish</string>
+    <string name="title_activity_publish_offer">Publish Job Offer</string>
+    <string name="new_job">New Job Offer</string>
+    <string name="title_activity_update_offer">Update Job Offer</string>
+    <string name="title_activity_profile_student">Students Profile</string>
+    <string name="title_activity_profile_company">Profile Company</string>
+    <string name="profile">Profile</string>
+    <string name="title_activity_log_in">Log In</string>
+    <string name="login">Log In</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="header">POLITO Life</string>
+    <string name="title_activity_registration">Registration</string>
+    <string name="title_activity_username">Your username is</string>
+
+    <string name="singin">Sign in</string>
+    <string name="inbox_title">Inbox</string>
+    <string name="backinbox_button">Back to messages</string>
+    <string name="backsearch_button">Back to search</string>
+    <string name="searchjobs_title">Search jobs</string>
+    <string name="savedjobs_button">Saved jobs</string>
+    <string name="savedcompanies_button">Saved companies</string>
+    <string name="savedstudents_button">Saved students</string>
+    <string name="keywords_title">Keywords</string>
+    <string name="surname">Surname</string>
+    <string name="studentID">Student ID</string>
+    <string name="address">Address</string>
+    <string name="company_title">Company</string>
+    <string name="searchresults_title">Search results</string>
+    <string name="home_title">Home</string>
+    <string name="message_title">Message</string>
+    <string name="search_students_button">Search students</string>
+    <string name="view_job_offers_button">View list of job offers</string>
+    <string name="view_messages_button">View messages</string>
+    <string name="log_out_button">Log out</string>
+
+    <string name="title_activity_search_company">SearchCompanyActivity</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_student_home">Home</string>
+    <string name="title_activity_company_search">Company Search</string>
+    <string name="title_activity_inbox_description">InboxDescription</string>
+    <string name="title_activity_company_home">Home</string>
+    <string name="title_activity_company_search_results">CompanySearchResults</string>
+    <string name="title_activity_job_search_results">JobSearchResults</string>
+    <string name="title_activity_job_search">JobSearch</string>
+    <string name="no_results_text">No results found</string>
+
+    <string name="createAccount">Create an account </string>
+    <string name="logoImage">Logo image</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="sampleTxt"> Sample text </string>
+    <string name="addedSavedJobMessage">This job has been saved successfully</string>
+    <string name="existingSavedJobMessage">This job has already been saved before</string>
+    <string name="addedSavedCompanyMessage">This company has been saved successfully</string>
+    <string name="existingSavedCompanyMessage">This company has already been saved before</string>
+    <string name="removedSavedCompanyMessage">This company has been removed from your saved companies</string>
+    <string name="removedSavedJobMessage">This company has been removed from your saved job offers</string>
+    <string name="addedApplyMessage">The application has been sent successfully</string>
+    <string name="existingApplication">This application has already been sent before</string>
+    <string name="addedSavedStudentMessage">This student has been saved successfully</string>
+    <string name="existingSavedStudentMessage">This student has already been saved before</string>
+    <string name="removedSavedStudentMessage">This student has been removed from your saved students</string>
+    <string name="myApplicationsButton">My Job Applications</string>
+    <string name="myApplicantsButton">My Job Applicants</string>
+    <string name="backListApplications">Back to Applications</string>
+    <string name="backListApplicants">Back to Applicants</string>
+    <string name="titleApplications">Applications</string>
+    <string name="titleApplicants">Applicants</string>
+    <string name="backHome">Return to Home</string>
+    <string name="dateFormat">dd/MM/yyyy</string>
+    <string name="saveprofiletitle">Upload in progress</string>
+    <string name="saveprofilemessage">Saving Profile.  Please wait...</string>
+    <string name="publishoffermessage">Publishing new offer.  Please wait...</string>
+    <string name="home_icon">Home</string>
+    <string name="profile_icon">Profile</string>
+    <string name="logout_icon">Log out</string>
+
+    <string name="english">English</string>
+    <string name="french">French</string>
+    <string name="german">German</string>
+    <string name="italian">Italian</string>
+    <string name="mandarin">Mandarin</string>
+    <string name="portuguese">Portuguese</string>
+    <string name="spanish">Spanish</string>
+
+
+    <string-array name="tabNames">
+        <item name="student">Student</item>
+        <item name="teacher">Teacher</item>
+        <item name="company">Company</item>
+    </string-array>
+
+
+    <string-array name="arrayIndustry">
+        <item>-</item>
+        <item>Accountancy, banking and finance</item>
+        <item>Business, consulting and management</item>
+        <item>Charity and voluntary work</item>
+        <item>Creative arts and design</item>
+        <item>Energy and utilities</item>
+        <item>Engineering and manufacturing</item>
+        <item>Environment and agriculture</item>
+        <item>Health care</item>
+        <item>Hospitality</item>
+        <item>Information technology</item>
+        <item>Law</item>
+        <item>Law enforcement and security</item>
+        <item>Leisure, sport and tourism</item>
+        <item>Marketing, advertising and PR</item>
+        <item>Media and internet</item>
+        <item>Property and construction</item>
+        <item>Public services and admin</item>
+        <item>Recruitment and HR</item>
+        <item>Retail</item>
+        <item>Sales</item>
+        <item>Science and pharmaceuticals</item>
+        <item>Social care</item>
+        <item>Teaching and education</item>
+        <item>Transport and logistics</item>
+    </string-array>
+
+    <string-array name="arrayLocation">
+        <item>-</item>
+        <item>Africa</item>
+        <item>Antarctica</item>
+        <item>Asia</item>
+        <item>Australia</item>
+        <item>Europe</item>
+        <item>North America</item>
+        <item>South America</item>
+    </string-array>
+
+    <string-array name="arrayExperience">
+        <item>-</item>
+        <item>No experience</item>
+        <item>1 year</item>
+        <item>2 years</item>
+        <item>More than 3 years</item>
+    </string-array>
+
+    <string-array name="arrayDegree">
+        <item>-</item>
+        <item>Associate\'s Degree</item>
+        <item>Bachelor\'s Degree</item>
+        <item>Master’s Degree</item>
+        <item>Doctorate Degree</item>
+    </string-array>
+
+    <string-array name="arraySalary">
+        <item>-</item>
+        <item>Greater than 1000</item>
+        <item>Greater than 5000</item>
+        <item>Greater than 10000</item>
+        <item>Greater than 20000</item>
+    </string-array>
+
+    <string-array name="arrayJobType">
+        <item>-</item>
+        <item>Employee</item>
+        <item>Intern</item>
+        <item>Full-Time</item>
+        <item>Part-Time</item>
+        <item>Per Diem</item>
+        <item>Temporary, Contract, and Project</item>
+        <item>Seasonal</item>
+    </string-array>
+
+    <string-array name="arrayDuration">
+        <item>-</item>
+        <item>Less than 6 months</item>
+        <item>6 months - 1 year</item>
+        <item>Greater than 1 year</item>
+        <item>Undefined term</item>
+    </string-array>
+
+    <string-array name="arrayContractType">
+        <item>-</item>
+        <item>Agency staff</item>
+        <item>Employing family, young people and volunteers</item>
+        <item>Fixed-term contract</item>
+        <item>Freelancers, consultants and contractors</item>
+        <item>Full-time and part-time contract</item>
+        <item>Zero hour contracts</item>
+    </string-array>
+
+    <string-array name="arraySize">
+        <item>-</item>
+        <item>Greater than 100 employees</item>
+        <item>Greater than 500 employees</item>
+        <item>Greater than 1000 employees</item>
+        <item>Greater than 10000 employees</item>
+    </string-array>
+
+    <string name="register">Register</string>
+    <string name="registerHere">Register here</string>
+    <string name="registration">Registration</string>
+    <string name="searchcompanies_button">Search Companies</string>
+    <string name="searchjobs_button">Search Job Offers</string>
+    <string name="viewMessage_button">View Messages</string>
+    <string name="companySize">Company size</string>
+    <string name="title_activity_company_view">CompanyView</string>
+    <string name="message_prev">Message Preview</string>
+    <string name="title_activity_list_application">Job Applications</string>
+    <string name="title_activity_application_description">Application Description</string>
+    <string name="title_activity_list_applicant">List Applicants</string>
+    <string name="title_activity_applicant_description">Applicant Description</string>
+
+
+
+    <string name="error_invalid_Jobposition">Invalid Job Position</string>
+    <string name="error_invalid_location">Invalid Location</string>
+    <string name="error_invalid_Description">Invalid Description</string>
+    <string name="error_invalid_Salary">Invalid Salary</string>
+    <string name="error_invalid_typeofjob">Invalid Type of Job</string>
+    <string name="error_invalid_duration">Invalid Job duration</string>
+    <string name="error_invalid_industry">Invalid Job industry</string>
+
+    <string name="error_invalid_name">Invalid Name</string>
+    <string name="error_invalid_surname">Invalid Surname</string>
+    <string name="error_invalid_DateOfBirth">Invalid Date Of Birth</string>
+    <string name="error_invalid_PlaceOfBirth">Invalid Place Of Birth</string>
+    <string name="error_invalid_TechnicalSkills">Invalid TechnicalSkills</string>
+
+    <string name="error_invalid_Languages">Invalid Languages</string>
+    <string name="error_invalid_YearOfExp">Invalid Year Of Experience</string>
+    <string name="error_invalid_Seniority">Invalid Seniority</string>
+    <string name="error_invalid_PhoneNumber">Invalid PhoneNumber</string>
+
+    <string name="error_invalid_address">Invalid address</string>
+    <string name="error_invalid_Website">Invalid Website</string>
+    <string name="error_invalid_Companysize">Invalid Companysize</string>
+    <string name="error_invalid_Clients">Invalid Clients</string>
+
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="error_intro">Missing fields:</string>
+    <string name="error_blank_username">Enter a username</string>
+    <string name="error_blank_password">Enter a password</string>
+    <string name="error_blank_name">Enter a name</string>
+    <string name="error_blank_surname">Enter a surname</string>
+    <string name="error_blank_address">Enter an address</string>
+    <string name="error_blank_location">Enter a location</string>
+    <string name="error_blank_position">Enter a Job Position</string>
+    <string name="error_blank_email">Enter an email</string>
+    <string name="error_blank_course">Enter a course</string>
+    <string name="error_mismatched_passwords">Enter the same password twice</string>
+    <string name="error_join">", and "</string>
+    <string name="error_end">.</string>
+    <string name="title_activity_professor_home">Home</string>
+    <string name="email">Email</string>
+    <string name="course">Course</string>
+
+
 </resources>
