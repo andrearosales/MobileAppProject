@@ -1,0 +1,166 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_layout"
+    android:fillViewport="true"
+    tools:context=".ViewCompany">
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/companyName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_title"
+                android:gravity="start"
+                android:paddingLeft="@dimen/padding_left"
+                android:text="@string/name"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/companyIndustry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/companyName"
+                android:layout_marginTop="@dimen/margin_top_title"
+                android:gravity="start"
+                android:paddingLeft="@dimen/padding_left"
+                android:text="@string/industry"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/companyDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/companyIndustry"
+                android:layout_marginTop="@dimen/margin_top"
+                android:gravity="start"
+                android:paddingLeft="@dimen/padding_left"
+                android:text="@string/description"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/companyLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/companyDescription"
+                android:layout_marginTop="@dimen/margin_top"
+                android:gravity="start"
+                android:paddingLeft="@dimen/padding_left"
+                android:text="@string/location"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/companySize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/companyLocation"
+                android:layout_marginTop="@dimen/margin_top"
+                android:gravity="start"
+                android:paddingLeft="@dimen/padding_left"
+                android:text="@string/company_size"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/website"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/companySize"
+                android:layout_marginTop="@dimen/margin_top"
+                android:gravity="start"
+                android:paddingLeft="@dimen/padding_left"
+                android:text="@string/company_web"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/clients"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/website"
+                android:layout_marginTop="@dimen/margin_top"
+                android:gravity="start"
+                android:paddingLeft="@dimen/padding_left"
+                android:text="@string/company_clients"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size"
+                android:textStyle="bold"/>
+
+            <TableRow
+                android:id="@+id/table"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/clients"
+                android:layout_marginTop="@dimen/margin_top_title"
+
+                >
+
+                <Button
+                    android:id="@+id/saveButton"
+                    android:layout_height="@dimen/button_height"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:layout_marginRight="@dimen/margin_between"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_color"
+                    android:onClick="saveCompany"
+                    android:text="@string/save_company_button"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/sendButton"
+                    android:layout_height="@dimen/button_height"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:layout_marginLeft="@dimen/margin_between"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_color"
+                    android:onClick="sendMessage"
+                    android:text="@string/send_button"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size"
+                    android:textStyle="bold" />
+            </TableRow>
+
+            <Button
+                android:id="@+id/backButton"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/button_height"
+                android:layout_below="@+id/table"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="@dimen/margin_top"
+                android:background="@drawable/background_color"
+                android:onClick="backToResults"
+                android:text="@string/back_button"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

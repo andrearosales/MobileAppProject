@@ -105,12 +105,12 @@
     <string name="title_activity_search_company">SearchCompanyActivity</string>
     <string name="title_activity_login">Login</string>
     <string name="title_activity_student_home">Home</string>
-    <string name="title_activity_company_search">Company Search</string>
-    <string name="title_activity_inbox_description">InboxDescription</string>
+    <string name="title_activity_company_search">Search Companies</string>
+    <string name="title_activity_inbox_description">Message Description</string>
     <string name="title_activity_company_home">Home</string>
-    <string name="title_activity_company_search_results">CompanySearchResults</string>
-    <string name="title_activity_job_search_results">JobSearchResults</string>
-    <string name="title_activity_job_search">JobSearch</string>
+    <string name="title_activity_company_search_results">Search Results</string>
+    <string name="title_activity_job_search_results">Search Results</string>
+    <string name="title_activity_job_search">Search Jobs</string>
     <string name="no_results_text">No results found</string>
 
     <string name="createAccount">Create an account </string>
@@ -268,9 +268,9 @@
     <string name="companySize">Company size</string>
     <string name="title_activity_company_view">CompanyView</string>
     <string name="message_prev">Message Preview</string>
-    <string name="title_activity_list_application">Job Applications</string>
+    <string name="title_activity_list_application">List Job Applications</string>
     <string name="title_activity_application_description">Application Description</string>
-    <string name="title_activity_list_applicant">List Applicants</string>
+    <string name="title_activity_list_applicant">List Job Applicants</string>
     <string name="title_activity_applicant_description">Applicant Description</string>
 
 
@@ -318,6 +318,8 @@
     <string name="title_activity_professor_home">Home</string>
     <string name="email">Email</string>
     <string name="course">Course</string>
-
+    <string name="title_activity_inbox">Inbox</string>
+    <string name="reply">Reply</string>
+    <string name="title_activity_profile_professor">Profile</string>
 
 </resources>

@@ -68,6 +68,62 @@
             android:name=".PublishOffer"
             android:label="@string/title_activity_publish_offer" >
         </activity>
+        <activity
+            android:name=".Inbox"
+            android:label="@string/title_activity_inbox" >
+        </activity>
+        <activity
+            android:name=".InboxDescription"
+            android:label="@string/title_activity_inbox_description" >
+        </activity>
+        <activity
+            android:name=".ListApplicant"
+            android:label="@string/title_activity_list_applicant" >
+        </activity>
+        <activity
+            android:name=".ApplicantDescription"
+            android:label="@string/title_activity_applicant_description" >
+        </activity>
+        <activity
+            android:name=".ProfileStudent"
+            android:label="@string/title_activity_profile_student" >
+        </activity>
+        <activity
+            android:name=".CompanySearch"
+            android:label="@string/title_activity_company_search" >
+        </activity>
+        <activity
+            android:name=".CompanySearchResults"
+            android:label="@string/title_activity_company_search_results" >
+        </activity>
+        <activity
+            android:name=".ViewCompany"
+            android:label="@string/title_activity_view_company" >
+        </activity>
+        <activity
+            android:name=".JobSearch"
+            android:label="@string/title_activity_job_search" >
+        </activity>
+        <activity
+            android:name=".JobSearchResults"
+            android:label="@string/title_activity_job_search_results" >
+        </activity>
+        <activity
+            android:name=".ViewJob"
+            android:label="@string/title_activity_view_job" >
+        </activity>
+        <activity
+            android:name=".ListApplication"
+            android:label="@string/title_activity_list_application" >
+        </activity>
+        <activity
+            android:name=".ApplicationDescription"
+            android:label="@string/title_activity_application_description" >
+        </activity>
+        <activity
+            android:name=".ProfileProfessor"
+            android:label="@string/title_activity_profile_professor" >
+        </activity>
     </application>
 
 </manifest>
