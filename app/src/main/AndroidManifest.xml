@@ -64,6 +64,10 @@
             android:name=".UpdateOffer"
             android:label="@string/title_activity_update_offer" >
         </activity>
+        <activity
+            android:name=".PublishOffer"
+            android:label="@string/title_activity_publish_offer" >
+        </activity>
     </application>
 
 </manifest>

@@ -33,8 +33,8 @@ import java.util.List;
 
 public class ListJobs extends AppCompatActivity {
 
-    public static final String APPLICATION_ID = "H9NFC1K9LmahxGcCrMOdT0qMaE0lDGT6BgbrSOAc";
-    public static final String CLIENT_KEY = "4K2VfxRGIyk69KlQJ2B8NMnD71llrlkEPLdTNh9M";
+    public static final String APPLICATION_ID = "qT7ozC6SpBUGiaKxHQwZHRyNfT0GX2xECCVsJYyv";
+    public static final String CLIENT_KEY = "jLWrQSMm4uC97tkzwPZLeJ3000GQS8cDm65uXQnc";
 
     public void publishOffer (View view){
         Intent intent = new Intent(this, PublishOffer.class);
