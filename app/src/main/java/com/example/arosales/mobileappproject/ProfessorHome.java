@@ -1,10 +1,13 @@
 package com.example.arosales.mobileappproject;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.parse.ParseUser;
 
 
 public class ProfessorHome extends AppCompatActivity {
@@ -30,10 +33,45 @@ public class ProfessorHome extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_home) {
+            ParseUser currentUser = ParseUser.getCurrentUser();
+            String typeUser = currentUser.getString("TypeUser");
+            if(typeUser.equals("Student")){
+                Intent intent = new Intent(this, StudentHome.class);
+                startActivity(intent);
+            }
+            else if (typeUser.equals("Company")){
+                Intent intent = new Intent(this, CompanyHome.class);
+                startActivity(intent);
+            }
+            else if (typeUser.equals("Teacher")){
+                Intent intent = new Intent(this, ProfessorHome.class);
+                startActivity(intent);
+            }
             return true;
         }
-
+        else if (id == R.id.action_profile) {
+            ParseUser currentUser = ParseUser.getCurrentUser();
+            String typeUser = currentUser.getString("TypeUser");
+            if(typeUser.equals("Student")){
+                Intent intent = new Intent(this, ProfileStudent.class);
+                startActivity(intent);
+            }
+            else if (typeUser.equals("Company")){
+                Intent intent = new Intent(this, ProfileCompany.class);
+                startActivity(intent);
+            }else if (typeUser.equals("Teacher")){
+                Intent intent = new Intent(this, ProfileProfessor.class);
+                startActivity(intent);
+            }
+            return true;
+        }
+        else if (id == R.id.action_logout) {
+            ParseUser.logOut();
+            Intent intent= new Intent(this,LogIn.class);
+            startActivity(intent);
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 }

@@ -69,8 +69,12 @@ public class JobCompanyAdapter extends BaseAdapter implements View.OnClickListen
             }
             if(listJobs.get(position).getPosition()!=null)
                 vholder.jobPosition.setText(listJobs.get(position).getPosition());
+            else
+                vholder.jobPosition.setText("");
             if(listJobs.get(position).getLocation()!=null)
                 vholder.jobLocation.setText(listJobs.get(position).getLocation());
+            else
+                vholder.jobLocation.setText("");
 
             vholder.buttonEdit.setOnClickListener(new View.OnClickListener() {
                 @Override

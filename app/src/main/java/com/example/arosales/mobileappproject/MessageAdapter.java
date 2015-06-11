@@ -68,12 +68,17 @@ public class MessageAdapter extends BaseAdapter implements View.OnClickListener 
             }
             if (listmessages.get(position).getSubject() != null && !listmessages.get(position).getSubject().equals(""))
                 vholder.textSubject.setText(listmessages.get(position).getSubject());
+            else
+                vholder.textSubject.setText("");
 
-            if (listmessages.get(position).getMessage() != null && !listmessages.get(position).getMessage().equals(""))
+            if (listmessages.get(position).getMessage() != null && !listmessages.get(position).getMessage().equals("")) {
                 if (listmessages.get(position).getMessage().length() > 78)
                     vholder.textMessage.setText(listmessages.get(position).getMessage().substring(0, 78) + "...");
                 else
                     vholder.textMessage.setText(listmessages.get(position).getMessage());
+            }
+            else
+                vholder.textMessage.setText("");
 
             v.setOnClickListener(new View.OnClickListener() {
                 @Override

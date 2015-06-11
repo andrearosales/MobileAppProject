@@ -86,9 +86,13 @@ public class StudentAdapter extends BaseAdapter {
                 else
                     vholder.textDescription.setText(listStudents.get(position).getDescription());
             }
+            else
+                vholder.textDescription.setText("");
 
             if (listStudents.get(position).getIndustry() != null && !listStudents.get(position).getIndustry().equals(""))
                 vholder.textIndustry.setText(listStudents.get(position).getIndustry().substring(0, 1).toUpperCase() + listStudents.get(position).getIndustry().substring(1));
+            else
+                vholder.textIndustry.setText("");
 
             if (searchType.equals("Search"))
                 vholder.buttonSaveDelete.setText(R.string.save_button);
