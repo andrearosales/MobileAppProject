@@ -4,8 +4,20 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
 
     <application
+        android:name=".ParseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -13,12 +25,8 @@
         <activity
             android:name=".LogIn"
             android:label="@string/app_name"
-            android:theme="@style/CustomActionBarTheme" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:theme="@style/CustomActionBarTheme"
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".StudentHome"
@@ -34,11 +42,13 @@
         </activity>
         <activity
             android:name=".Registration"
-            android:label="@string/title_activity_registration" >
+            android:label="@string/title_activity_registration"
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".ProfileCompany"
-            android:label="@string/title_activity_profile_company" >
+            android:label="@string/title_activity_profile_company"
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".SearchStudents"
@@ -46,7 +56,8 @@
         </activity>
         <activity
             android:name=".ResultStudents"
-            android:label="@string/title_activity_result_students" >
+            android:label="@string/title_activity_result_students"
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".ViewStudent"
@@ -54,7 +65,8 @@
         </activity>
         <activity
             android:name=".SendMessage"
-            android:label="@string/title_activity_send_message" >
+            android:label="@string/title_activity_send_message"
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".ListJobs"
@@ -62,11 +74,13 @@
         </activity>
         <activity
             android:name=".UpdateOffer"
-            android:label="@string/title_activity_update_offer" >
+            android:label="@string/title_activity_update_offer"
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".PublishOffer"
-            android:label="@string/title_activity_publish_offer" >
+            android:label="@string/title_activity_publish_offer"
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".Inbox"
@@ -86,11 +100,13 @@
         </activity>
         <activity
             android:name=".ProfileStudent"
-            android:label="@string/title_activity_profile_student" >
+            android:label="@string/title_activity_profile_student"
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".CompanySearch"
-            android:label="@string/title_activity_company_search" >
+            android:label="@string/title_activity_company_search"
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".CompanySearchResults"
@@ -102,7 +118,8 @@
         </activity>
         <activity
             android:name=".JobSearch"
-            android:label="@string/title_activity_job_search" >
+            android:label="@string/title_activity_job_search"
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".JobSearchResults"
@@ -122,7 +139,46 @@
         </activity>
         <activity
             android:name=".ProfileProfessor"
-            android:label="@string/title_activity_profile_professor" >
+            android:label="@string/title_activity_profile_professor"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
+        <activity
+            android:name=".ManageSession"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+            <meta-data
+                android:name="com.parse.ui.ParseLoginActivity.PARSE_LOGIN_ENABLED"
+                android:value="true" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyA_GYQPSLcBXvRH5htN2R-Iw1lW3xJPlOQ" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name=".ProfessorCourses"
+            android:label="@string/title_activity_professor_courses" >
+        </activity>
+        <activity
+            android:name=".ProfessorNotification"
+            android:label="@string/title_activity_professor_notification" >
+        </activity>
+        <activity
+            android:name=".ProfessorConsultingHours"
+            android:label="@string/title_activity_professor_consulting_hours" >
+        </activity>
+        <activity
+            android:name=".UpdateConsultingHours"
+            android:label="@string/title_activity_update_consulting_hours" >
         </activity>
     </application>
 

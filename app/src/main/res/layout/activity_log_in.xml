@@ -90,8 +90,6 @@
                 android:textStyle="bold"
                 android:onClick="onLoginClick"
                 android:id="@+id/loginBtn" />
-
-
         </LinearLayout>
     </ScrollView>
 

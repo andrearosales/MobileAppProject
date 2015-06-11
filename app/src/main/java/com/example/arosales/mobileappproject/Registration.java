@@ -1,11 +1,9 @@
 package com.example.arosales.mobileappproject;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -45,6 +43,7 @@ public class Registration extends AppCompatActivity {
 
     private EditText studentName;
     private EditText studentSurname;
+    private EditText studentUsername;
     private EditText studentEmail;
     private ArrayAdapter<String> adapterStudentCourse;
     private Spinner studentCourse;
@@ -58,8 +57,9 @@ public class Registration extends AppCompatActivity {
 
     private EditText teacherName;
     private EditText teacherSurname;
-    private ArrayAdapter<String> adapterTeacherCourse;
-    private Spinner teacherCourse;
+    private EditText teacherUsername;
+    private ArrayAdapter<String> adapterTeacherDepartment;
+    private Spinner teacherDepartment;
     private EditText teacherPassword;
 
     private TabHost tabHost;
@@ -72,15 +72,14 @@ public class Registration extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-        Spinner courseStudent = (Spinner) findViewById(R.id.spinnerCourse);
+        studentCourse = (Spinner) findViewById(R.id.spinnerCourse);
         final ArrayList<String> courses = new ArrayList<>();
         courses.add("-");
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Course");
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("StudyCourse");
         query.findInBackground(new FindCallback<ParseObject>() {
             public void done(List<ParseObject> courseList, ParseException e) {
                 if (e == null) {
-                    for (int i = 0; i <courseList.size(); i++) {
-                        ParseObject course = courseList.get(i);
+                    for (ParseObject course:courseList) {
                         courses.add(course.getString("Name"));
                     }
                 }
@@ -88,96 +87,81 @@ public class Registration extends AppCompatActivity {
         });
         adapterStudentCourse = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, courses);
         adapterStudentCourse.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        courseStudent.setAdapter(adapterStudentCourse);
+        studentCourse.setAdapter(adapterStudentCourse);
 
-        Spinner location = (Spinner) findViewById(R.id.spinnerLocation);
+        location = (Spinner) findViewById(R.id.spinnerLocation);
         adapterLocation = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.arrayLocation));
         adapterLocation.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         location.setAdapter(adapterLocation);
 
-        Spinner courseTeacher = (Spinner) findViewById(R.id.spinnerCourseTeacher);
-        final ArrayList<String> coursesTeacher = new ArrayList<>();
-        coursesTeacher.add("-");
-        ParseQuery<ParseObject> queryTeacher = ParseQuery.getQuery("Course");
-        queryTeacher.findInBackground(new FindCallback<ParseObject>() {
-            public void done(List<ParseObject> courseList, ParseException e) {
-                if (e == null) {
-                    for (int i = 0; i <courseList.size(); i++) {
-                        ParseObject course = courseList.get(i);
-                        coursesTeacher.add(course.getString("Name"));
-                    }
-                }
-            }
-        });
-        adapterTeacherCourse = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, coursesTeacher);
-        adapterTeacherCourse.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        courseTeacher.setAdapter(adapterStudentCourse);
+        teacherDepartment = (Spinner) findViewById(R.id.spinnerDepartment);
+        adapterTeacherDepartment = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.arrayDepartment));
+        adapterTeacherDepartment.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        teacherDepartment.setAdapter(adapterTeacherDepartment);
 
         //final TabHost tabHost= (TabHost) findViewById(R.id.mainTabbHost);
         tabHost= (TabHost) findViewById(R.id.mainTabbHost);
         tabHost.setup();
 
         createTabs(tabHost);
-        init();
-    }
 
-    private void init()
-    {
         studentName = (EditText) findViewById(R.id.studentNameTxt);
         studentSurname = (EditText) findViewById(R.id.studentSrnameTxt);
+        studentUsername = (EditText) findViewById(R.id.studentUsernameTxt);
         studentEmail = (EditText) findViewById(R.id.studentEmailTxt);
-        studentCourse = (Spinner) findViewById(R.id.spinnerCourse);
         studentPassword = (EditText) findViewById(R.id.studentPasswordTxt);
 
         companyName = (EditText) findViewById(R.id.companyNameTxt);
         address = (EditText) findViewById(R.id.companyAddressTxt);
         companyPassword = (EditText) findViewById(R.id.companyPasswordTxt);
-        location=(Spinner) findViewById(R.id.spinnerLocation);
 
         teacherName = (EditText) findViewById(R.id.TeacherNameTxt);
         teacherSurname = (EditText) findViewById(R.id.TeacherSrnameTxt);
-        teacherCourse = (Spinner) findViewById(R.id.spinnerCourseTeacher);
+        teacherUsername= (EditText) findViewById(R.id.teacherUsernameTxt);
         teacherPassword = (EditText) findViewById(R.id.teacherPasswordTxt);
+
+
     }
 
-    public void onRegisterCompanyClick(View v)
+    public void registerCompany(View v)
     {
-        String []data=  new String[2];
+        String []data=  new String[3];
         // Check for input data validation error, display the error
         //false used as a flag to say company
         if (validateRegisterInput("Company")) {
             data[0] = location.getSelectedItem().toString();
             data[1] = address.getText().toString();
-            registerUser("Company",companyName.getText().toString(),companyPassword.getText().toString(),data);
+            data[2] = companyName.getText().toString();
+            registerUser("Company",companyPassword.getText().toString(),data);
         }
     }
 
-    public void onRegisterTeacherClick(View v)
+    public void registerTeacher(View v)
     {
-        String []data=  new String[3];
+        String []data=  new String[4];
         // Check for input data validation error, display the error
         //false used as a flag to say company
         if (validateRegisterInput("Teacher")) {
             data[0] = teacherName.getText().toString();
             data[1] = teacherSurname.getText().toString();
-            data[2] = teacherCourse.getSelectedItem().toString();
-            String username=(teacherName.getText().toString().toLowerCase()+teacherSurname.getText().toString().toLowerCase()).replaceAll("\\s+","");
-            registerUser("Teacher", username, teacherPassword.getText().toString(), data);
+            data[2] = teacherUsername.getText().toString();
+            data[3] = teacherDepartment.getSelectedItem().toString();
+            registerUser("Teacher", teacherPassword.getText().toString(), data);
         }
     }
 
-    public void onRegisterStudentClick(View v)
+    public void registerStudent(View v)
     {
-        String []data=  new String[4];
+        String []data=  new String[5];
         // Check for input data validation error, display the error
         //true used as a flag to say student
         if (validateRegisterInput("Student")) {
             data[0] = studentName.getText().toString();
             data[1] = studentSurname.getText().toString();
-            data[2] = studentEmail.getText().toString();
-            data[3] = studentCourse.getSelectedItem().toString();
-            String username=(studentName.getText().toString().toLowerCase()+studentSurname.getText().toString().toLowerCase()).replaceAll("\\s+","");
-            registerUser("Student", username, studentPassword.getText().toString(), data);
+            data[2] = studentUsername.getText().toString();
+            data[3] = studentEmail.getText().toString();
+            data[4] = studentCourse.getSelectedItem().toString();
+            registerUser("Student",studentPassword.getText().toString(), data);
         }
     }
 
@@ -196,6 +180,10 @@ public class Registration extends AppCompatActivity {
             if (isEmpty(studentSurname)) {
                 validationError = true;
                 validationErrorMessage.append(getResources().getString(R.string.error_blank_surname)+"\n");
+            }
+            if (isEmpty(studentUsername)) {
+                validationError = true;
+                validationErrorMessage.append(getResources().getString(R.string.error_blank_username)+"\n");
             }
             if (isEmpty(studentEmail)) {
                 validationError = true;
@@ -237,7 +225,11 @@ public class Registration extends AppCompatActivity {
                 validationError = true;
                 validationErrorMessage.append(getResources().getString(R.string.error_blank_surname)+"\n");
             }
-            if (teacherCourse.getSelectedItem().toString().equals("-")) {
+            if (isEmpty(teacherUsername)) {
+                validationError = true;
+                validationErrorMessage.append(getResources().getString(R.string.error_blank_username)+"\n");
+            }
+            if (teacherDepartment.getSelectedItem().toString().equals("-")) {
                 validationError = true;
                 validationErrorMessage.append(getResources().getString(R.string.error_blank_course)+"\n");
             }
@@ -309,11 +301,12 @@ public class Registration extends AppCompatActivity {
         }
     }
 
-    protected void registerUser(final String type, final String username,String password,String[] data) {
+    protected void registerUser(final String type,String password,String[] data) {
         ParseUser user = new ParseUser();
         final ParseObject registerStudent = new ParseObject("Student");
         final ParseObject registerCompany = new ParseObject("Company");
         final ParseObject registerTeacher = new ParseObject("Teacher");
+        final String username= data[2];
 
         user.setUsername(username);
         user.setPassword(password);
@@ -322,35 +315,28 @@ public class Registration extends AppCompatActivity {
         {
             registerStudent.put("Name",data[0].toLowerCase());//data[0] name of student
             registerStudent.put("Surname", data[1].toLowerCase());//data[1] surname of student
-            registerStudent.put("Email", data[2]);//data[2] email of student
-            ParseQuery<ParseObject> query = ParseQuery.getQuery("Course");
-            query.whereEqualTo("Name", data[3]);
+            registerStudent.put("Email", data[3]);//data[2] email of student
+
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("StudyCourse");
+            query.whereEqualTo("Name", data[4]);
             query.getFirstInBackground(new GetCallback<ParseObject>() {
                 public void done(ParseObject object, ParseException e) {
                     if (object != null) {
-                        registerStudent.put("Course", object);
+                        registerStudent.put("CurrentStudyCourse", object);
                     }
                 }
             });
             user.put("TypeUser", "Student");
         } else if (type.equals("Company")) {
-            registerCompany.put("Name",username.toLowerCase());
+            registerCompany.put("Name",data[2].toLowerCase());
             registerCompany.put("Location",data[0]);//data[0] is Company Location
             registerCompany.put("Address", data[1]);//data[1] is address of company
             user.put("TypeUser","Company");
         }
-        else {
-            registerTeacher.put("Name",data[0].toLowerCase());//data[0] name of student
-            registerTeacher.put("Surname", data[1].toLowerCase());//data[1] surname of student
-            ParseQuery<ParseObject> query = ParseQuery.getQuery("Course");
-            query.whereEqualTo("Name",data[2]);
-            query.getFirstInBackground(new GetCallback<ParseObject>() {
-                public void done(ParseObject object, ParseException e) {
-                    if (object != null) {
-                        registerTeacher.put("Course", object);
-                    }
-                }
-            });
+        else if(type.equals("Teacher")){
+            registerTeacher.put("Name",data[0]);//data[0] name of teacher
+            registerTeacher.put("Surname", data[1]);//data[1] surname of teacher
+            registerTeacher.put("Department",data[3]);
             user.put("TypeUser", "Teacher");
         }
 

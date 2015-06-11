@@ -105,6 +105,34 @@
                                 android:textSize="@dimen/text_size"
                                 android:background="@color/background_text"/>
                         </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_top">
+
+                            <TextView
+                                android:id="@+id/studentUsername"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1"
+                                android:gravity="start"
+                                android:paddingLeft="@dimen/padding_left"
+                                android:text="@string/username"
+                                android:textColor="@color/material_blue_grey_800"
+                                android:textSize="@dimen/text_size" />
+
+                            <EditText
+                                android:id="@+id/studentUsernameTxt"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="end"
+                                android:layout_weight="1"
+                                android:background="@color/background_text"
+                                android:textSize="@dimen/text_size" />
+                        </TableRow>
+
                         <TableRow
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -134,8 +162,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_top">
-                            <TextView android:text="@string/course"
-                                android:id="@+id/studentCourse"
+                            <TextView android:text="@string/courseOfStudy"
+                                android:id="@+id/studentCareer"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -193,7 +221,7 @@
                         android:paddingLeft="@dimen/abc_control_padding_material"
                         android:paddingRight="@dimen/abc_control_padding_material"
                         android:text="@string/register"
-                        android:onClick="onRegisterStudentClick" />
+                        android:onClick="registerStudent" />
 
                 </RelativeLayout>
 
@@ -285,8 +313,35 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_top">
-                            <TextView android:text="@string/course"
-                                android:id="@+id/TeacherCourse"
+
+                            <TextView
+                                android:id="@+id/teacherUsername"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1"
+                                android:gravity="start"
+                                android:paddingLeft="@dimen/padding_left"
+                                android:text="@string/username"
+                                android:textColor="@color/material_blue_grey_800"
+                                android:textSize="@dimen/text_size" />
+
+                            <EditText
+                                android:id="@+id/teacherUsernameTxt"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="end"
+                                android:layout_weight="1"
+                                android:background="@color/background_text"
+                                android:textSize="@dimen/text_size" />
+
+                        </TableRow>
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_top">
+                            <TextView android:text="@string/department"
+                                android:id="@+id/TeacherDepartment"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -296,7 +351,7 @@
                                 android:textColor="@color/material_blue_grey_800"
                                 android:textSize="@dimen/text_size"/>
                             <Spinner
-                                android:id="@+id/spinnerCourseTeacher"
+                                android:id="@+id/spinnerDepartment"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="end"
@@ -344,7 +399,7 @@
                         android:paddingLeft="@dimen/abc_control_padding_material"
                         android:paddingRight="@dimen/abc_control_padding_material"
                         android:text="@string/register"
-                        android:onClick="onRegisterTeacherClick" />
+                        android:onClick="registerTeacher" />
 
                 </RelativeLayout>
 
@@ -495,7 +550,7 @@
                         android:paddingLeft="@dimen/abc_control_padding_material"
                         android:paddingRight="@dimen/abc_control_padding_material"
                         android:text="@string/register"
-                        android:onClick="onRegisterCompanyClick" />
+                        android:onClick="registerCompany" />
 
 
                 </RelativeLayout>

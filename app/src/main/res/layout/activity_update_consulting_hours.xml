@@ -1,10 +1,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/background_layout"
-    android:fillViewport="true"
-    tools:context=".ProfileProfessor">
+    tools:context=".UpdateConsultingHours">
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -13,48 +12,32 @@
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin">
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <TextView
+                android:id="@+id/updateConsultingHours"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_top_title"
+                android:text="@string/update_consulting_hours"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textStyle="bold"
+                android:textSize="@dimen/text_size"/>
+
+
             <TableLayout
                 android:id="@+id/table"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:stretchColumns="*">
-
-                <TableRow android:layout_marginTop="@dimen/margin_top_title">
-
-                    <TextView
-                        android:id="@+id/teacherProfile"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
-                        android:gravity="start"
-                        android:paddingLeft="@dimen/padding_left"
-                        android:text="@string/profile"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size"
-                        android:textStyle="bold" />
-
-                    <Button
-                        android:id="@+id/editButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/button_height"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_weight="1.0"
-                        android:background="@drawable/background_color"
-                        android:gravity="center"
-                        android:onClick="editProfile"
-                        android:text="@string/edit_button"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/text_size"
-                        android:textStyle="bold" />
-                </TableRow>
+                android:stretchColumns="*"
+                android:layout_below="@id/updateConsultingHours">
 
                 <TableRow
                     android:layout_width="match_parent"
@@ -62,47 +45,19 @@
                     android:layout_marginTop="@dimen/margin_top_title">
 
                     <TextView
-                        android:id="@+id/teacherName"
+                        android:id="@+id/course"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
                         android:gravity="start"
                         android:paddingLeft="@dimen/padding_left"
-                        android:text="@string/name"
+                        android:text="@string/course"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size" />
 
                     <EditText
-                        android:id="@+id/textName"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="end"
-                        android:layout_weight="1"
-                        android:background="@color/background_text"
-                        android:inputType="text"
-                        android:textSize="@dimen/text_size" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_top_title">
-
-                    <TextView
-                        android:id="@+id/teacherSurname"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
-                        android:gravity="start"
-                        android:paddingLeft="@dimen/padding_left"
-                        android:text="@string/surname"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size" />
-
-                    <EditText
-                        android:id="@+id/textSurname"
+                        android:id="@+id/textCourse"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
@@ -118,47 +73,19 @@
                     android:layout_marginTop="@dimen/margin_top">
 
                     <TextView
-                        android:id="@+id/teacherDepartment"
+                        android:id="@+id/time"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
                         android:gravity="start"
                         android:paddingLeft="@dimen/padding_left"
-                        android:text="@string/department"
+                        android:text="@string/time"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size" />
-
-                    <Spinner
-                        android:id="@+id/spinnerDepartment"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="end"
-                        android:layout_weight="1"
-                        android:background="@color/background_text"
-                        android:textSize="@dimen/text_size" />
-                </TableRow>
-
-
-                <TableRow android:layout_marginTop="@dimen/margin_top">
-
-                    <TextView
-                        android:id="@+id/studentDescription"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
-                        android:gravity="start"
-                        android:paddingLeft="@dimen/padding_left"
-                        android:text="@string/description"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size" />
-                </TableRow>
-
-                <TableRow>
 
                     <EditText
-                        android:id="@+id/descriptionText"
+                        android:id="@+id/textTime"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
@@ -167,35 +94,60 @@
                         android:inputType="text"
                         android:textSize="@dimen/text_size" />
                 </TableRow>
+
+
+                <TableRow android:layout_marginTop="@dimen/margin_top">
+
+                    <TextView
+                        android:id="@+id/place"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        android:paddingLeft="@dimen/padding_left"
+                        android:text="@string/place"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size" />
+
+                    <EditText
+                        android:id="@+id/placeText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_weight="1"
+                        android:background="@color/background_text"
+                        android:inputType="text"
+                        android:textSize="@dimen/text_size" />
+                </TableRow>
+
+
             </TableLayout>
 
-
             <Button
-                android:id="@+id/saveButton"
+                android:id="@+id/updateButton"
                 android:layout_width="@dimen/width_buttons"
                 android:layout_height="@dimen/button_height"
                 android:layout_below="@+id/table"
                 android:layout_centerHorizontal="true"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/margin_top"
+                android:layout_margin="@dimen/margin_top_title"
                 android:background="@drawable/background_color"
-                android:onClick="saveProfile"
-                android:text="@string/save_button"
+                android:onClick=""
+                android:text="@string/update_button"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size"
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/deleteButton"
+                android:id="@+id/cancelButton"
                 android:layout_width="@dimen/width_buttons"
                 android:layout_height="@dimen/button_height"
-                android:layout_below="@+id/saveButton"
+                android:layout_below="@+id/updateButton"
                 android:layout_centerHorizontal="true"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/margin_top"
+                android:layout_margin="@dimen/margin_top_title"
                 android:background="@drawable/background_color"
-                android:onClick="deleteProfile"
-                android:text="@string/delete_button"
+                android:onClick=""
+                android:text="@string/cancel_button"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size"
                 android:textStyle="bold" />

@@ -21,8 +21,6 @@ import com.parse.ParseUser;
 
 public class LogIn extends AppCompatActivity {
 
-    public static final String APPLICATION_ID = "qT7ozC6SpBUGiaKxHQwZHRyNfT0GX2xECCVsJYyv";
-    public static final String CLIENT_KEY = "jLWrQSMm4uC97tkzwPZLeJ3000GQS8cDm65uXQnc";
     private EditText username;
     private EditText password;
 
@@ -31,14 +29,7 @@ public class LogIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
 
-        //Parse.enableLocalDatastore(this);
-        Parse.initialize(getApplicationContext(), APPLICATION_ID, CLIENT_KEY);
-
-        /*ParseObject testObject = new ParseObject("TestObject");
-        testObject.put("foo", "bar");
-        testObject.saveInBackground();*/
-
-        init();
+        //init();
     }
 
     public void onRegisterClick(View v)

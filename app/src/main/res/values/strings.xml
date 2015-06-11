@@ -318,8 +318,40 @@
     <string name="title_activity_professor_home">Home</string>
     <string name="email">Email</string>
     <string name="course">Course</string>
+    <string name="department">Department</string>
+    <string name="courseOfStudy">Course of Study</string>
+    <string name="schedule_button">Schedule</string>
+    <string name="consultinghours_button">Consulting hours</string>
+    <string name="professor_courses">Schedule</string>
     <string name="title_activity_inbox">Inbox</string>
     <string name="reply">Reply</string>
+    <string name="no_courses_text">No courses registered</string>
     <string name="title_activity_profile_professor">Profile</string>
+    <string name="title">Title</string>
+    <string name="notify_button">Notify students</string>
+    <string name="consulting_hours">Consulting Hours</string>
+    <string name="no_consulting_hours_text">No consulting hours registered</string>
+    <string name="update_consulting_hours">Update consulting hours</string>
+    <string name="time">Time</string>
+    <string name="place">Place</string>
+
+    <string-array name="arrayDepartment">
+        <item>-</item>
+        <item>Department of Architecture and Design</item>
+        <item>Department of Control and Computer Engineering</item>
+        <item>Department of Energy</item>
+        <item>Department of Electronics and Telecommunications</item>
+        <item>Department of Environment, Land and Infrastructure Engineering</item>
+        <item>Department of Management and Production Engineering</item>
+        <item>Department of Mechanical and Aerospace Engineering</item>
+        <item>Department of Applied Science and Technology</item>
+        <item>Department of Structural, Geotechnical and Building Engineering</item>
+        <item>Department of Mathematical Sciences</item>
+        <item>Interuniversity Department of Regional and Urban Studies and Planning</item>
+    </string-array>
+    <string name="title_activity_professor_courses">ProfessorCourses</string>
+    <string name="title_activity_professor_notification">ProfessorNotification</string>
+    <string name="title_activity_professor_consulting_hours">ProfessorConsultingHours</string>
+    <string name="title_activity_update_consulting_hours">UpdateConsultingHours</string>
 
 </resources>
