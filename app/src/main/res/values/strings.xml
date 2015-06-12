@@ -15,6 +15,8 @@
     <string name="save_company_button">Save Company</string>
     <string name="remove_company_button">Remove Company</string>
     <string name="back_button">Back to Results</string>
+    <string name="back_didacticalmenu_button">Back to Menu</string>
+    <string name="back_noticeboard_button">Back to Noticeboard</string>
     <string name="home_button">HOME</string>
     <string name="profile_button">PROFILE</string>
     <string name="title_activity_send_message">Send Message</string>
@@ -334,6 +336,20 @@
     <string name="update_consulting_hours">Update consulting hours</string>
     <string name="time">Time</string>
     <string name="place">Place</string>
+    <string name="didactical_information">Didactical information</string>
+    <string name="locate_classrooms">Locate classrooms</string>
+    <string name="schedule">Schedule</string>
+    <string name="view_consulting_hours">View consulting hours</string>
+    <string name="search_classrooms">Search classrooms</string>
+    <string name="campus">Campus</string>
+    <string name="classroom">Classroom</string>
+    <string name="notifications">Notifications</string>
+    <string name="no_notifications_text">No notifications</string>
+    <string name="search_timetables">Search timetables</string>
+    <string name="mycourses_button">My courses</string>
+    <string name="course_name">Course</string>
+    <string name="teacher_name">Teacher</string>
+
 
     <string-array name="arrayDepartment">
         <item>-</item>
@@ -353,5 +369,21 @@
     <string name="title_activity_professor_notification">ProfessorNotification</string>
     <string name="title_activity_professor_consulting_hours">ProfessorConsultingHours</string>
     <string name="title_activity_update_consulting_hours">UpdateConsultingHours</string>
-
+    <string name="title_activity_didactical_info_menu">DidacticalInfoMenu</string>
+    <string name="title_activity_job_placement_menu">JobPlacementMenu</string>
+    <string name="title_activity_noticeboard">Noticeboard</string>
+    <string name="publish_notice_button">Publish notice</string>
+    <string name="title_activity_publish_notice">PublishNotice</string>
+    <string name="notice_title">Notice title</string>
+    <string name="category">Category</string>
+    <string name="title_activity_view_notice">ViewNotice</string>
+    <string name="title_activity_edit_notice">EditNotice</string>
+    <string name="title_activity_search_classrooms">SearchClassrooms</string>
+    <string name="title_activity_map_classrooms">MapClassrooms</string>
+    <string name="title_activity_student_schedule">StudentSchedule</string>
+    <string name="no_notices_text">No notices</string>
+    <string name="title_activity_view_notifications">ViewNotifications</string>
+    <string name="title_activity_view_consulting_hours">ViewConsultingHours</string>
+    <string name="course_description_title">Course Description</string>
+    <string name="title_activity_search_timetables">SearchTimetables</string>
 </resources>

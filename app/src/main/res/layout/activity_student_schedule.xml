@@ -1,0 +1,62 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_layout"
+    tools:context=".StudentSchedule">
+
+    <TextView
+        android:id="@+id/scheduleTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_top_title"
+        android:gravity="center_horizontal"
+        android:paddingLeft="@dimen/padding_left"
+        android:text="@string/schedule"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size"
+        android:textStyle="bold" />
+
+    <ListView
+        android:id="@+id/listNotices"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/scheduleTitle"
+        android:layout_marginTop="@dimen/margin_top_title"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:divider="@drawable/list_divider"/>
+
+    <LinearLayout
+        android:id="@+id/emptyView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/scheduleTitle"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textNoResults"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:paddingTop="@dimen/margin_top"
+            android:text="@string/no_courses_text"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="@dimen/width_buttons"
+            android:layout_height="@dimen/button_height"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/margin_top"
+            android:background="@drawable/background_color"
+            android:onClick=""
+            android:text="@string/back_didacticalmenu_button"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</RelativeLayout>

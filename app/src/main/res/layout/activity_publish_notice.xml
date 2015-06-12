@@ -1,9 +1,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@color/background_layout"
-    tools:context=".UpdateConsultingHours">
+    android:fillViewport="true"
+    tools:context=".PublishNotice">
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -12,8 +13,7 @@
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin">
+        android:paddingRight="@dimen/activity_horizontal_margin">
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
@@ -21,23 +21,22 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/updateConsultingHours"
+                android:id="@+id/publishNotice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/margin_top_title"
-                android:text="@string/update_consulting_hours"
+                android:text="@string/publish_notice_button"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textStyle="bold"
                 android:textSize="@dimen/text_size"/>
-
 
             <TableLayout
                 android:id="@+id/table"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:stretchColumns="*"
-                android:layout_below="@id/updateConsultingHours">
+                android:layout_below="@id/publishNotice">
 
                 <TableRow
                     android:layout_width="match_parent"
@@ -45,19 +44,19 @@
                     android:layout_marginTop="@dimen/margin_top_title">
 
                     <TextView
-                        android:id="@+id/course"
+                        android:id="@+id/noticeTitle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
                         android:gravity="start"
                         android:paddingLeft="@dimen/padding_left"
-                        android:text="@string/course"
+                        android:text="@string/notice_title"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size" />
 
                     <EditText
-                        android:id="@+id/textCourse"
+                        android:id="@+id/textName"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
@@ -73,45 +72,43 @@
                     android:layout_marginTop="@dimen/margin_top">
 
                     <TextView
-                        android:id="@+id/time"
+                        android:id="@+id/noticeCategory"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
                         android:gravity="start"
                         android:paddingLeft="@dimen/padding_left"
-                        android:text="@string/time"
+                        android:text="@string/category"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size" />
 
-                    <EditText
-                        android:id="@+id/textTime"
+                    <Spinner
+                        android:id="@+id/spinnerCategory"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
                         android:layout_weight="1"
                         android:background="@color/background_text"
-                        android:inputType="text"
                         android:textSize="@dimen/text_size" />
                 </TableRow>
-
 
                 <TableRow android:layout_marginTop="@dimen/margin_top">
 
                     <TextView
-                        android:id="@+id/place"
+                        android:id="@+id/noticeDescription"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
                         android:gravity="start"
                         android:paddingLeft="@dimen/padding_left"
-                        android:text="@string/place"
+                        android:text="@string/description"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size" />
 
                     <EditText
-                        android:id="@+id/placeText"
+                        android:id="@+id/descriptionText"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
@@ -121,33 +118,19 @@
                         android:textSize="@dimen/text_size" />
                 </TableRow>
 
-
             </TableLayout>
 
             <Button
-                android:id="@+id/updateButton"
+                android:id="@+id/publishButton"
                 android:layout_width="@dimen/width_buttons"
                 android:layout_height="@dimen/button_height"
                 android:layout_below="@+id/table"
                 android:layout_centerHorizontal="true"
-                android:layout_margin="@dimen/margin_top"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/margin_top"
                 android:background="@drawable/background_color"
                 android:onClick=""
-                android:text="@string/update_button"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_size"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/deleteButton"
-                android:layout_width="@dimen/width_buttons"
-                android:layout_height="@dimen/button_height"
-                android:layout_below="@+id/updateButton"
-                android:layout_centerHorizontal="true"
-                android:layout_margin="@dimen/margin_top"
-                android:background="@drawable/background_color"
-                android:onClick=""
-                android:text="@string/delete_button"
+                android:text="@string/publish_notice_button"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size"
                 android:textStyle="bold" />
@@ -156,10 +139,11 @@
                 android:id="@+id/cancelButton"
                 android:layout_width="@dimen/width_buttons"
                 android:layout_height="@dimen/button_height"
-                android:layout_below="@+id/deleteButton"
+                android:layout_below="@+id/publishButton"
                 android:layout_centerHorizontal="true"
-                android:layout_margin="@dimen/margin_top"
+                android:layout_gravity="center_horizontal"
                 android:background="@drawable/background_color"
+                android:layout_marginTop="@dimen/margin_top"
                 android:onClick=""
                 android:text="@string/cancel_button"
                 android:textColor="@color/white"
