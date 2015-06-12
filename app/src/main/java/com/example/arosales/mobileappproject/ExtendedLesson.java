@@ -9,13 +9,13 @@ public class ExtendedLesson extends Lesson {
     private Integer color;
 
     public ExtendedLesson(Lesson lesson, Type type) {
-        super(lesson.getCourse(), lesson.getStartTime(), lesson.getEndTime(), lesson.getRoom());
+        super(lesson.getId(),lesson.getCourse(), lesson.getStartTime(), lesson.getEndTime(), lesson.getRoom());
         this.type = type;
     }
 
 
     public ExtendedLesson(Lesson lesson, Type type, Integer color) {
-        super(lesson.getCourse(), lesson.getStartTime(), lesson.getEndTime(), lesson.getRoom());
+        super(lesson.getId(),lesson.getCourse(), lesson.getStartTime(), lesson.getEndTime(), lesson.getRoom());
         this.type = type;
         this.color = color;
     }
@@ -41,6 +41,5 @@ public class ExtendedLesson extends Lesson {
 enum Type {
     DAY_SEPARATOR,
     LESSON,
-    NO_RESULTS
 }
 

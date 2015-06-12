@@ -18,5 +18,7 @@
     <dimen name="margin_between">5dp</dimen>
     <dimen name="width_buttons">250dp</dimen>
     <dimen name="height_map">300dp</dimen>
+    <dimen name="width_coursepopup">300dp</dimen>
+    <dimen name="height_coursepopup">200dp</dimen>
 
 </resources>

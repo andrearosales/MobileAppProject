@@ -24,6 +24,8 @@ public class Student implements Serializable{
     private String degree;
     private String phonenumber;
     private Company current_company;
+    private String email;
+    private String currentStudyCourse;
 
     public String getId() {
         return id;
@@ -143,6 +145,22 @@ public class Student implements Serializable{
 
     public void setCurrent_company(Company current_company) {
         this.current_company = current_company;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getCurrentStudyCourse() {
+        return currentStudyCourse;
+    }
+
+    public void setCurrentStudyCourse(String currentStudyCourse) {
+        this.currentStudyCourse = currentStudyCourse;
     }
 }
 

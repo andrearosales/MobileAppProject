@@ -349,7 +349,13 @@
     <string name="mycourses_button">My courses</string>
     <string name="course_name">Course</string>
     <string name="teacher_name">Teacher</string>
-
+    <string-array name="week_days">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+    </string-array>
 
     <string-array name="arrayDepartment">
         <item>-</item>
@@ -386,4 +392,7 @@
     <string name="title_activity_view_consulting_hours">ViewConsultingHours</string>
     <string name="course_description_title">Course Description</string>
     <string name="title_activity_search_timetables">SearchTimetables</string>
+    <string name="export_button">Export calendar</string>
+    <string name="message_course_not_found">has been exported successfully to your calendar</string>
+    <string name="message_course_found"> is already in your calendar</string>
 </resources>

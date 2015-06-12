@@ -13,13 +13,6 @@ public class Course {
     private Date startDate;
     private Date endDate;
 
-    public Course(String name, Teacher teacher, Date startDate, Date endDate) {
-        this.name = name;
-        this.teacher = teacher;
-        this.startDate = startDate;
-        this.endDate = endDate;
-    }
-
     public String getId() {
         return id;
     }

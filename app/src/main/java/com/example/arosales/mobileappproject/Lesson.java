@@ -17,7 +17,8 @@ public class Lesson {
 
 
 
-    public Lesson(Course course, Date startTime, Date endTime, String room) {
+    public Lesson(String id,Course course, Date startTime, Date endTime, String room) {
+        this.id=id;
         this.course = course;
         this.startTime = startTime;
         this.endTime = endTime;

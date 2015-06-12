@@ -29,7 +29,8 @@ public class LogIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
 
-        //init();
+        username = (EditText) findViewById(R.id.loginUsernameTxt);
+        password = (EditText) findViewById(R.id.loginPasswordTxt);
     }
 
     public void onRegisterClick(View v)
@@ -64,12 +65,6 @@ public class LogIn extends AppCompatActivity {
                 }
             });
         }
-    }
-
-    private void init()
-    {
-        username = (EditText) findViewById(R.id.loginUsernameTxt);
-        password = (EditText) findViewById(R.id.loginPasswordTxt);
     }
 
     //use type value = true for student and false for company data
