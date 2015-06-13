@@ -17,19 +17,9 @@
             android:layout_weight="3.4"
             android:gravity="start"
             android:paddingLeft="@dimen/padding_left"
-            android:textSize="@dimen/text_size" />
-
-        <Button
-            android:id="@+id/buttonEdit"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/button_height_small"
-            android:layout_gravity="right|center_vertical"
-            android:layout_weight="1"
-            android:background="@drawable/background_color"
-            android:text="@string/edit_button"
-            android:textColor="@color/white"
             android:textSize="@dimen/text_size"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
+
 
     </TableRow>
 
@@ -45,6 +35,19 @@
             android:paddingLeft="@dimen/padding_left"
             android:textSize="@dimen/text_size" />
 
+        <Button
+            android:id="@+id/buttonEdit"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/button_height_small"
+            android:layout_gravity="right|center_vertical"
+            android:layout_weight="1"
+            android:background="@drawable/background_color"
+            android:text="@string/edit_button"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size"
+            android:textStyle="bold" />
+
+
     </TableRow>
 
     <TableRow android:gravity="center_horizontal">
@@ -59,17 +62,6 @@
             android:paddingLeft="@dimen/padding_left"
             android:textSize="@dimen/text_size" />
 
-        <Button
-            android:id="@+id/buttonDelete"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/button_height_small"
-            android:layout_gravity="right|center_vertical"
-            android:layout_weight="1"
-            android:background="@drawable/background_color"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size"
-            android:textStyle="bold"
-            android:text="@string/delete_button"/>
 
     </TableRow>
 </TableLayout>

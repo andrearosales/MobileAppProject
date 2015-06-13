@@ -315,6 +315,8 @@
     <string name="error_blank_email">Enter an email</string>
     <string name="error_blank_course">Enter a course</string>
     <string name="error_mismatched_passwords">Enter the same password twice</string>
+    <string name="error_blank_classroom">Please select a classroom</string>
+
     <string name="error_join">", and "</string>
     <string name="error_end">.</string>
     <string name="title_activity_professor_home">Home</string>

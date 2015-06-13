@@ -1,9 +1,11 @@
 package com.example.arosales.mobileappproject;
 
+import java.io.Serializable;
+
 /**
  * Created by ricardogarcia on 12/06/15.
  */
-public class ConsultingHour {
+public class ConsultingHour implements Serializable{
 
     private String id;
     private Course course;

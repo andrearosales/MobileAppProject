@@ -97,13 +97,13 @@
 
             <Button
                 android:id="@+id/search_button"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/width_buttons"
                 android:layout_height="@dimen/button_height"
                 android:layout_below="@+id/table"
                 android:layout_centerHorizontal="true"
-                android:layout_margin="@dimen/margin_top"
+                android:layout_margin="@dimen/margin_top_title"
                 android:background="@drawable/background_color"
-                android:onClick="search"
+                android:onClick="Search"
                 android:text="@string/search_button"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size"
