@@ -107,13 +107,13 @@ public class ProfileCompany extends AppCompatActivity {
             if (company.getString("Clients") != null) {
                 ClientsView.setText(company.getString("Clients"));
             }
-        } catch (
-                ParseException e
-                )
 
+            disableFields();
+        } catch (ParseException e)
         {
             e.printStackTrace();
         }
+
 
     }
 
@@ -196,6 +196,7 @@ public class ProfileCompany extends AppCompatActivity {
                 enableFields();
             } else {
                 disableFields();
+                isEditable = false;
             }
         }
 

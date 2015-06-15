@@ -11,23 +11,61 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ScrollView;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.parse.ParseException;
+import com.parse.ParseGeoPoint;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 
 public class MapClassrooms extends AppCompatActivity {
 
     private ScrollView mScrollView;
+    private String campus;
+    private String classroom;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_classrooms);
 
+        Intent intent=getIntent();
+        campus= (String) intent.getSerializableExtra(SearchClassrooms.CAMPUS);
+        classroom= (String) intent.getSerializableExtra(SearchClassrooms.CLASSROOM);
+
         GoogleMap mapFragment = ((ClassroomMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
         mScrollView = (ScrollView) findViewById(R.id.scroll);
+
+        ParseQuery campusQuery = new ParseQuery("Campus");
+        campusQuery.whereEqualTo("Name",campus);
+
+        try {
+            ParseObject parseCampus=campusQuery.getFirst();
+
+            if(parseCampus!=null) {
+                ParseQuery classroomQuery = new ParseQuery("Classroom");
+                classroomQuery.include("CampusId");
+                classroomQuery.whereEqualTo("CampusId", parseCampus);
+                classroomQuery.whereEqualTo("Name", classroom);
+                ParseObject parseClassroom = classroomQuery.getFirst();
+                if(parseClassroom!=null){
+                    ParseGeoPoint geopoint= parseClassroom.getParseGeoPoint("Location");
+                    if(geopoint!=null){
+                        mapFragment.addMarker(new MarkerOptions().position(new LatLng(geopoint.getLatitude(),geopoint.getLongitude())).title(classroom));
+                        mapFragment.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(geopoint.getLatitude(),geopoint.getLongitude()), 20));
+                    }
+                }
+            }
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
 
         ((ClassroomMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).setListener(new ClassroomMapFragment.OnTouchListener() {
             @Override
@@ -35,6 +73,8 @@ public class MapClassrooms extends AppCompatActivity {
                 mScrollView.requestDisallowInterceptTouchEvent(true);
             }
         });
+
+
 
     }
 
@@ -94,6 +134,10 @@ public class MapClassrooms extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void goBack(View view){
+        finish();
     }
 }
 

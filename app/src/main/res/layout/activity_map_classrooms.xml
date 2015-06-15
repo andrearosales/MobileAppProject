@@ -50,7 +50,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/background_color"
-                android:onClick=""
+                android:onClick="goBack"
                 android:text="@string/new_search_button"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size"
