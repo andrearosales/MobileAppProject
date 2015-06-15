@@ -55,7 +55,6 @@
                 android:textSize="@dimen/text_size"
                 android:textStyle="bold"/>
 
-
             <TextView android:text="@string/technical_skills"
                 android:id="@+id/techSkills"
                 android:layout_marginTop="@dimen/margin_top"
