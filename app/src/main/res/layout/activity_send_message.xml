@@ -40,9 +40,11 @@
                 android:layout_marginTop="@dimen/margin_top"
                 android:gravity="start"
                 android:paddingLeft="@dimen/padding_left"
-                android:text="@string/name"
+                android:text="@string/select_receiver"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size" />
+                android:textSize="@dimen/text_size"
+                android:clickable="true"
+                android:onClick="selectReceivers"/>
 
             <TextView
                 android:id="@+id/subject"

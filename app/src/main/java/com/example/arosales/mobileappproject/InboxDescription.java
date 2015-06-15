@@ -122,9 +122,9 @@ public class InboxDescription extends AppCompatActivity {
     public void reply(View view) {
         Intent intent = new Intent(this, SendMessage.class);
         //intent.putExtra(RECEIVER, student.getId());
-        intent.putExtra(RECEIVER, "?");
+        //intent.putExtra(RECEIVER, "?");
         if(ParseUser.getCurrentUser().getString("TypeUser").equals("Student"))
-            intent.putExtra(RECEIVERTYPE, "Company");
+            intent.putExtra(RECEIVERTYPE, "StudentSocial");
         else if (ParseUser.getCurrentUser().getString("TypeUser").equals("Company"))
             intent.putExtra(RECEIVERTYPE, "Student");
         startActivity(intent);

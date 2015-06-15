@@ -31,68 +31,61 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textStyle="bold" />
 
-            <LinearLayout
+            <TableLayout
+                android:id="@+id/table"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/titleHome"
-                android:layout_marginTop="@dimen/margin_top_title"
-                android:orientation="vertical">
+                android:stretchColumns="*"
+                android:layout_below="@id/titleHome"
+                android:layout_marginTop="@dimen/margin_top_home"
+                android:gravity="center">
 
-                <Button
-                    android:id="@+id/searchCompanyButton"
-                    android:layout_width="@dimen/width_buttons"
-                    android:layout_height="@dimen/button_height"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/margin_top"
-                    android:background="@drawable/background_color"
-                    android:text="@string/searchcompanies_button"
-                    android:onClick="searchCompanies"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size"
-                    android:textStyle="bold" />
+                <TableRow>
+                    <ImageButton
+                        android:id="@+id/classes_button"
+                        android:layout_width="0dp"
+                        android:layout_height="120dp"
+                        android:onClick="goDidactica"
+                        android:layout_gravity="center_horizontal|center_vertical"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/didactic_icon"
+                        android:scaleType="fitCenter"
+                        android:adjustViewBounds="true"/>
+                    <ImageButton
+                        android:id="@+id/messages_button"
+                        android:layout_width="0dp"
+                        android:layout_height="120dp"
+                        android:onClick="viewMessages"
+                        android:layout_gravity="center_horizontal|center_vertical"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/inbox_icon"
+                        android:scaleType="fitCenter"
+                        android:adjustViewBounds="true"/>
+                </TableRow>
+                <TableRow android:layout_marginTop="@dimen/button_height">
+                    <ImageButton
+                        android:id="@+id/notices_button"
+                        android:layout_width="0dp"
+                        android:layout_height="120dp"
+                        android:onClick="goNoticeBoard"
+                        android:layout_gravity="center_horizontal|center_vertical"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/noticeboard_icon"
+                        android:scaleType="fitCenter"
+                        android:adjustViewBounds="true"/>
+                    <ImageButton
+                        android:id="@+id/jobs_button"
+                        android:layout_width="0dp"
+                        android:layout_height="120dp"
+                        android:onClick="goJobs"
+                        android:layout_gravity="center_horizontal|center_vertical"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/job_icon"
+                        android:scaleType="fitCenter"
+                        android:adjustViewBounds="true"/>
+                </TableRow>
+            </TableLayout>
 
-
-                <Button
-                    android:id="@+id/searchJobButton"
-                    android:layout_width="@dimen/width_buttons"
-                    android:layout_height="@dimen/button_height"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/margin_top"
-                    android:background="@drawable/background_color"
-                    android:onClick="searchJobOffers"
-                    android:text="@string/searchjobs_button"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size"
-                    android:textStyle="bold" />
-
-
-                <Button
-                    android:id="@+id/viewMessageButton"
-                    android:layout_width="@dimen/width_buttons"
-                    android:layout_height="@dimen/button_height"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/margin_top"
-                    android:background="@drawable/background_color"
-                    android:text="@string/view_messages_button"
-                    android:onClick="viewMessages"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size"
-                    android:textStyle="bold" />
-
-                <Button
-                    android:id="@+id/viewApplicationsButton"
-                    android:layout_width="@dimen/width_buttons"
-                    android:layout_height="@dimen/button_height"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/margin_top"
-                    android:background="@drawable/background_color"
-                    android:text="@string/myApplicationsButton"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size"
-                    android:textStyle="bold"
-                    android:onClick="viewApplications"/>
-
-            </LinearLayout>
         </RelativeLayout>
     </ScrollView>
 

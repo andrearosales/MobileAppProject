@@ -2,14 +2,19 @@ package com.example.arosales.mobileappproject;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.parse.FindCallback;
@@ -28,6 +33,7 @@ public class Inbox extends AppCompatActivity {
     public final static String INFO_MESSAGE = "com.example.arosales.mobileappproject.MESSAGE";
     public final static String INFO_SUBJECT = "com.example.arosales.mobileappproject.SUBJECT";
     public final static String LIST_MESSAGES = "com.example.arosales.mobileappproject.LIST";
+    public static final String RECEIVERTYPE = "com.example.arosales.mobileappproject.RECEIVERTYPE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +102,12 @@ public class Inbox extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void newMessage(View view) {
+        Intent intent= new Intent(this,SendMessage.class);
+        intent.putExtra(RECEIVERTYPE, "StudentSocial");
+        startActivity(intent);
+    }
+
     private class RetrieveFromDatabase extends AsyncTask<String,Void,ArrayList<Message>>{
 
         private ProgressDialog progressDialog= new ProgressDialog(Inbox.this);
@@ -143,8 +155,39 @@ public class Inbox extends AppCompatActivity {
             MessageAdapter mAdapter= new MessageAdapter(Inbox.this,messages);
 
             ListView list_messages= (ListView) findViewById(R.id.listMessages);
+
+            if(!ParseUser.getCurrentUser().getString("TypeUser").equals("Company")) {
+                final Button sendMessage = new Button(Inbox.this);
+                Drawable background = getResources().getDrawable(R.drawable.background_color);
+
+                if (android.os.Build.VERSION.SDK_INT >= 16)
+                    sendMessage.setBackground(background);
+                else
+                    sendMessage.setBackgroundDrawable(background);
+
+                sendMessage.setHeight(getResources().getDimensionPixelSize(R.dimen.button_height));
+                sendMessage.setWidth(getResources().getDimensionPixelSize(R.dimen.width_buttons));
+                sendMessage.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.text_size));
+                sendMessage.setTextColor(Color.WHITE);
+                sendMessage.setTypeface(null, Typeface.BOLD);
+                sendMessage.setText(getResources().getString(R.string.send_button));
+
+                sendMessage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        newMessage(sendMessage);
+                    }
+                });
+
+                list_messages.addFooterView(sendMessage);
+            }
+
             list_messages.setAdapter(mAdapter);
             list_messages.setEmptyView(findViewById(R.id.emptyView));
+            if(ParseUser.getCurrentUser().getString("TypeUser").equals("Company")) {
+                Button newEmptyButton = (Button) findViewById(R.id.sendNewMessage);
+                newEmptyButton.setVisibility(View.GONE);
+            }
 
         }
     }

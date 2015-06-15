@@ -104,4 +104,15 @@ public class StudentHome extends AppCompatActivity {
     }
 
 
+    public void goDidactica(View view) {
+        startActivity(new Intent(this,DidacticalInfoMenu.class));
+    }
+
+    public void goNoticeBoard(View view) {
+        startActivity(new Intent(this,Noticeboard.class));
+    }
+
+    public void goJobs(View view) {
+        startActivity(new Intent(this,JobPlacementMenu.class));
+    }
 }
