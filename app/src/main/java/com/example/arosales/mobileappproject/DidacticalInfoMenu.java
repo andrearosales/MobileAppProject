@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.parse.ParseUser;
 
@@ -74,5 +75,20 @@ public class DidacticalInfoMenu extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void searchTimeTables(View view) {
+        Intent intent = new Intent(this, SearchTimetables.class);
+        startActivity(intent);
+    }
+
+    public void viewConstultingHours(View view) {
+        Intent intent = new Intent(this, ViewConsultingHours.class);
+        startActivity(intent);
+    }
+
+    public void locateClassrooms(View view) {
+        Intent intent = new Intent(this, SearchClassrooms.class);
+        startActivity(intent);
     }
 }

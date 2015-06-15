@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.parse.ParseUser;
 
@@ -75,4 +76,19 @@ public class JobPlacementMenu extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    public void searchCompanies(View view) {
+        startActivity(new Intent(this,CompanySearch.class));
+    }
+
+    public void searchJobOffers(View v)
+    {
+        startActivity(new Intent(this, JobSearch.class));
+    }
+
+    public void viewApplications(View view){
+        Intent intent= new Intent(this,ListApplication.class);
+        startActivity(intent);
+    }
+
 }

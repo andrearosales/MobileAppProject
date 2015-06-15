@@ -1,13 +1,24 @@
 package com.example.arosales.mobileappproject;
 
+import android.app.ActionBar;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.TypedValue;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.parse.GetCallback;
@@ -15,6 +26,9 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class SendMessage extends AppCompatActivity {
@@ -28,6 +42,7 @@ public class SendMessage extends AppCompatActivity {
     private String receiverId;
     private String receiverType;
     private String receiverIdtoDB;
+    private List<String> selected;
 
     public void sendMessage(View view) {
         String senderId = ParseUser.getCurrentUser().getObjectId();
@@ -64,9 +79,10 @@ public class SendMessage extends AppCompatActivity {
         setContentView(R.layout.activity_send_message);
 
         Intent intent = getIntent();
-        receiverId = intent.getStringExtra(RECEIVER);
+        //receiverId = intent.getStringExtra(RECEIVER);
         receiverType = intent.getStringExtra(RECEIVERTYPE);
         if(receiverType.equals("Company")) {
+            receiverId = intent.getStringExtra(RECEIVER);
             try {
                 ParseQuery<ParseObject> query = ParseQuery.getQuery("Company");
                 query.include("CompanyId");
@@ -81,17 +97,20 @@ public class SendMessage extends AppCompatActivity {
             }
         }
         else {
-            try {
-                ParseQuery<ParseObject> query = ParseQuery.getQuery("Student");
-                query.whereEqualTo("objectId",receiverId);
-                query.include("StudentId");
-                ParseObject object = query.getFirst();
-                ParseUser user = object.getParseUser("StudentId");
-                receiverIdtoDB = user.getObjectId();
-                TextView name = (TextView) findViewById(R.id.receiverText);
-                name.setText(object.getString("Name").toUpperCase()+" "+object.getString("Surname").toUpperCase());
-            } catch (ParseException e) {
-                e.printStackTrace();
+            if(receiverType.equals("Student")) {
+                receiverId = intent.getStringExtra(RECEIVER);
+                try {
+                    ParseQuery<ParseObject> query = ParseQuery.getQuery("Student");
+                    query.whereEqualTo("objectId", receiverId);
+                    query.include("StudentId");
+                    ParseObject object = query.getFirst();
+                    ParseUser user = object.getParseUser("StudentId");
+                    receiverIdtoDB = user.getObjectId();
+                    TextView name = (TextView) findViewById(R.id.receiverText);
+                    name.setText(object.getString("Name").toUpperCase() + " " + object.getString("Surname").toUpperCase());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         }
 
@@ -182,4 +201,70 @@ public class SendMessage extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void selectReceivers(View view) {
+        ArrayList<String> receivers = new ArrayList<>();
+
+        ParseQuery queryStudents = new ParseQuery("Student");
+        queryStudents.include("StudentId");
+        queryStudents.whereNotEqualTo("StudentId", ParseUser.getCurrentUser());
+
+        try {
+            List<ParseObject> results=queryStudents.find();
+            for(ParseObject p:results){
+                receivers.add(p.getString("Name").substring(0, 1).toUpperCase() + p.getString("Name").substring(1).toLowerCase()+
+                        " "+p.getString("Surname").substring(0,1).toUpperCase()+p.getString("Surname").substring(1).toLowerCase());
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        LayoutInflater inflater = (LayoutInflater) SendMessage.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View layout = inflater.inflate(R.layout.popup_receivers, (ViewGroup) findViewById(R.id.popup));
+
+        final ReceiverAdapter receiverAdapter= new ReceiverAdapter(SendMessage.this,receivers);
+        ListView list_messages= (ListView) layout.findViewById(R.id.listStudents);
+        EditText filter = new EditText(SendMessage.this);
+        filter.setHeight(ActionBar.LayoutParams.WRAP_CONTENT);
+        filter.setWidth(ActionBar.LayoutParams.MATCH_PARENT);
+        filter.setHint("Filter by Name");
+        filter.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.text_size));
+
+        list_messages.setAdapter(receiverAdapter);
+
+        final PopupWindow popupWindow = new PopupWindow(layout, ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT, true);
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.setTouchable(true);
+        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+        /*popupWindow.setTouchInterceptor(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    popupWindow.dismiss();
+                    return true;
+                }
+                return false;
+            }
+        });*/
+        Button ok_button = (Button) layout.findViewById(R.id.ok_button);
+        ok_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView receiverText = (TextView) findViewById(R.id.receiverText);
+                selected = receiverAdapter.selected;
+                if(selected.size()>0){
+                    receiverText.setText("");
+                    Boolean first = true;
+                    for(int i=0;i<selected.size();i++){
+                        if(first) {
+                            receiverText.setText(selected.get(i));
+                            first = false;
+                        }
+                        else
+                            receiverText.setText(receiverText.getText()+","+selected.get(i));
+                    }
+                }
+                popupWindow.dismiss();
+            }
+        });
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+    }
 }

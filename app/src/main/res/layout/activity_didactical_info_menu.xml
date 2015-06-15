@@ -48,7 +48,7 @@
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size"
                     android:textStyle="bold"
-                    android:onClick=""/>
+                    android:onClick="locateClassrooms"/>
 
                 <Button
                     android:id="@+id/buttonSchedule"
@@ -61,7 +61,7 @@
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size"
                     android:textStyle="bold"
-                    android:onClick="viewJobOffers"/>
+                    android:onClick="searchTimeTables"/>
 
                 <Button
                     android:id="@+id/buttonConsultingHours"
@@ -74,7 +74,7 @@
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size"
                     android:textStyle="bold"
-                    android:onClick="viewMessages"/>
+                    android:onClick="viewConstultingHours"/>
 
             </LinearLayout>
         </RelativeLayout>
