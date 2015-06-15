@@ -19,8 +19,8 @@ import com.parse.ParseUser;
 
 public class InboxDescription extends AppCompatActivity {
 
-    public final static String INFOLOCAL_MESSAGE = "com.example.ricardogarcia.politojobs.MESSAGE";
-    public final static String INFOLOCAL_SUBJECT = "com.example.ricardogarcia.politojobs.SUBJECT";
+    public final static String INFOLOCAL_MESSAGE = "com.example.arosales.mobileappproject.MESSAGE";
+    public final static String INFOLOCAL_SUBJECT = "com.example.arosales.mobileappproject.SUBJECT";
     public static final String RECEIVER = "com.example.arosales.mobileappproject.RECEIVER";
     public static final String RECEIVERTYPE = "com.example.arosales.mobileappproject.RECEIVERTYPE";
     public static final String NAMERECEIVER = "com.example.arosales.mobileappproject.NAMERECEIVER";
@@ -93,7 +93,7 @@ public class InboxDescription extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_inbox_description, menu);
+        getMenuInflater().inflate(R.menu.menu_global, menu);
         return true;
     }
 

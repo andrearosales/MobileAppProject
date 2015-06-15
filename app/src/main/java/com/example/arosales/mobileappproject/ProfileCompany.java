@@ -205,7 +205,7 @@ public class ProfileCompany extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_profile_company, menu);
+        getMenuInflater().inflate(R.menu.menu_global, menu);
         return true;
     }
 

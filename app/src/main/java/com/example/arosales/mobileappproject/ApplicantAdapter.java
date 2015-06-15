@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class ApplicantAdapter extends BaseAdapter implements View.OnClickListener{
 
-    public static final String APPLICANT = "com.example.ricardogarcia.politojobs.APPLICANT";
+    public static final String APPLICANT = "com.example.arosales.mobileappproject.APPLICANT";
     private LayoutInflater inflater;
     private Activity activity;
     private List<Application> listApplications;

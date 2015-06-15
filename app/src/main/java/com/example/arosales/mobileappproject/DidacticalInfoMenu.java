@@ -23,7 +23,7 @@ public class DidacticalInfoMenu extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_didactical_info_menu, menu);
+        getMenuInflater().inflate(R.menu.menu_global, menu);
         return true;
     }
 

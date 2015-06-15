@@ -21,7 +21,7 @@ public class EditNotice extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_edit_notice, menu);
+        getMenuInflater().inflate(R.menu.menu_global, menu);
         return true;
     }
 

@@ -50,7 +50,7 @@ public class ResultStudents extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_result_students, menu);
+        getMenuInflater().inflate(R.menu.menu_global, menu);
         return true;
     }
 
