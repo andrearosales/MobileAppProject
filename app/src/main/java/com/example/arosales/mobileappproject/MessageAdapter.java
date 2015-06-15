@@ -85,6 +85,8 @@ public class MessageAdapter extends BaseAdapter implements View.OnClickListener 
                 public void onClick(View v) {
                     Intent intent = new Intent(activity, InboxDescription.class);
                     Bundle b = new Bundle();
+                    b.putString(Inbox.INFO_FROM, listmessages.get(position).getFrom().getObjectId());
+                    b.putString(Inbox.INFO_FROM_TYPE, listmessages.get(position).getFrom().getString("TypeUser"));
                     b.putString(Inbox.INFO_MESSAGE, listmessages.get(position).getMessage());
                     b.putString(Inbox.INFO_SUBJECT, listmessages.get(position).getSubject());
                     intent.putExtras(b);

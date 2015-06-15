@@ -20,10 +20,10 @@ import java.util.List;
  */
 public class ReceiverAdapter extends BaseAdapter implements View.OnClickListener {
 
-    public List<String> selected;
+    public List<Student> selected;
     private LayoutInflater inflater;
     private Activity activity;
-    private List<String> listReceivers;
+    private List<Student> listReceivers;
 
 
     public ReceiverAdapter(Activity activity, ArrayList list) {
@@ -67,16 +67,17 @@ public class ReceiverAdapter extends BaseAdapter implements View.OnClickListener
             } else {
                 vholder = (ViewHolder) v.getTag();
             }
-            vholder.textTo.setText(listReceivers.get(position));
+            //vholder.textTo.setText(listReceivers.get(position));
+            vholder.textTo.setText(listReceivers.get(position).getName().substring(0, 1).toUpperCase() + listReceivers.get(position).getName().substring(1).toLowerCase()+
+                    " "+listReceivers.get(position).getSurname().substring(0,1).toUpperCase()+listReceivers.get(position).getSurname().substring(1).toLowerCase());
             vholder.check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if(isChecked){
-                        if(!selected.contains(listReceivers.get(position)))
+                    if (isChecked) {
+                        if (!selected.contains(listReceivers.get(position)))
                             selected.add(listReceivers.get(position));
-                    }
-                    else {
-                        if(selected.contains(listReceivers.get(position)))
+                    } else {
+                        if (selected.contains(listReceivers.get(position)))
                             selected.remove(listReceivers.get(position));
                     }
                 }

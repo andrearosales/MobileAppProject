@@ -3,12 +3,16 @@ package com.example.arosales.mobileappproject;
 import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,6 +26,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.parse.GetCallback;
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -38,11 +43,14 @@ public class SendMessage extends AppCompatActivity {
     private static final String MESSAGE = "com.example.arosales.mobileappproject.MESSAGE";
     public static final String RECEIVER = "com.example.arosales.mobileappproject.RECEIVER";
     public static final String RECEIVERTYPE = "com.example.arosales.mobileappproject.RECEIVERTYPE";
+    public static final String NAMERECEIVER = "com.example.arosales.mobileappproject.NAMERECEIVER";
 
     private String receiverId;
     private String receiverType;
     private String receiverIdtoDB;
-    private List<String> selected;
+    private List<Student> selected;
+    private ArrayList<Student> receivers;
+    private TextView receiverText;
 
     public void sendMessage(View view) {
         String senderId = ParseUser.getCurrentUser().getObjectId();
@@ -58,9 +66,21 @@ public class SendMessage extends AppCompatActivity {
         }*/
 
         //
+
         ParseObject message = new ParseObject("Message");
-        message.put("SenderId", senderId);
-        message.put("ReceiverId", receiverIdtoDB);
+        //message.put("SenderId", senderId);
+        message.put("SenderId", ParseUser.getCurrentUser());
+        ArrayList<String> receiversIds = new ArrayList<>();
+        if(receiverType.equals("Company") || receiverType.equals("Student") || receiverType.equals("Reply")) {
+            //message.put("ReceiverIds", receiverIdtoDB);
+            receiversIds.add(receiverIdtoDB);
+        }
+        else{
+            for(int i=0;i<selected.size();i++){
+                receiversIds.add(selected.get(i).getId());
+            }
+        }
+        message.put("ReceiverIds", receiversIds);
         EditText subjectText = (EditText) findViewById(R.id.textSubject);
         String subject = subjectText.getText().toString();
         message.put("Subject", subject);
@@ -92,6 +112,7 @@ public class SendMessage extends AppCompatActivity {
                 receiverIdtoDB = user.getObjectId();
                 TextView name = (TextView) findViewById(R.id.receiverText);
                 name.setText(object.getString("Name").toUpperCase());
+                name.setClickable(false);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -108,9 +129,16 @@ public class SendMessage extends AppCompatActivity {
                     receiverIdtoDB = user.getObjectId();
                     TextView name = (TextView) findViewById(R.id.receiverText);
                     name.setText(object.getString("Name").toUpperCase() + " " + object.getString("Surname").toUpperCase());
+                    name.setClickable(false);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+            }
+            if(receiverType.equals("Reply")){
+                receiverIdtoDB = intent.getStringExtra(RECEIVER);
+                TextView name = (TextView) findViewById(R.id.receiverText);
+                name.setText(intent.getStringExtra(NAMERECEIVER));
+                name.setClickable(false);
             }
         }
 
@@ -120,11 +148,11 @@ public class SendMessage extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
 
-        TextView name = (TextView) findViewById(R.id.companyName);
+        TextView name = (TextView) findViewById(R.id.receiverText);
         EditText subjectText = (EditText) findViewById(R.id.textSubject);
         EditText messageText = (EditText) findViewById(R.id.textMessage);
 
-        savedInstanceState.putString(NAME, name.toString());
+        savedInstanceState.putString(NAME, name.getText().toString());
         savedInstanceState.putString(SUBJECT, subjectText.getText().toString());
         savedInstanceState.putString(MESSAGE, messageText.getText().toString());
 
@@ -135,7 +163,7 @@ public class SendMessage extends AppCompatActivity {
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
 
-        TextView name = (TextView) findViewById(R.id.companyName);
+        TextView name = (TextView) findViewById(R.id.receiverText);
         EditText subjectText = (EditText) findViewById(R.id.textSubject);
         EditText messageText = (EditText) findViewById(R.id.textMessage);
 
@@ -202,17 +230,23 @@ public class SendMessage extends AppCompatActivity {
     }
 
     public void selectReceivers(View view) {
-        ArrayList<String> receivers = new ArrayList<>();
 
-        ParseQuery queryStudents = new ParseQuery("Student");
-        queryStudents.include("StudentId");
-        queryStudents.whereNotEqualTo("StudentId", ParseUser.getCurrentUser());
+        receivers = new ArrayList<>();
+
+        ParseQuery queryStudent = new ParseQuery("Student");
+        queryStudent.include("StudentId");
+        queryStudent.whereNotEqualTo("StudentId", ParseUser.getCurrentUser());
 
         try {
-            List<ParseObject> results=queryStudents.find();
+            List<ParseObject> results=queryStudent.find();
             for(ParseObject p:results){
-                receivers.add(p.getString("Name").substring(0, 1).toUpperCase() + p.getString("Name").substring(1).toLowerCase()+
-                        " "+p.getString("Surname").substring(0,1).toUpperCase()+p.getString("Surname").substring(1).toLowerCase());
+                Student student = new Student();
+                student.setName(p.getString("Name").substring(0, 1).toUpperCase() + p.getString("Name").substring(1).toLowerCase());
+                student.setSurname(p.getString("Surname").substring(0, 1).toUpperCase() + p.getString("Surname").substring(1).toLowerCase());
+                student.setId(p.getParseObject("StudentId").getObjectId());
+                //receivers.add(p.getString("Name").substring(0, 1).toUpperCase() + p.getString("Name").substring(1).toLowerCase()+
+                  //      " "+p.getString("Surname").substring(0,1).toUpperCase()+p.getString("Surname").substring(1).toLowerCase());
+                receivers.add(student);
             }
         } catch (ParseException e) {
             e.printStackTrace();
@@ -223,11 +257,28 @@ public class SendMessage extends AppCompatActivity {
 
         final ReceiverAdapter receiverAdapter= new ReceiverAdapter(SendMessage.this,receivers);
         ListView list_messages= (ListView) layout.findViewById(R.id.listStudents);
-        EditText filter = new EditText(SendMessage.this);
+        /*EditText filter = new EditText(SendMessage.this);
         filter.setHeight(ActionBar.LayoutParams.WRAP_CONTENT);
         filter.setWidth(ActionBar.LayoutParams.MATCH_PARENT);
         filter.setHint("Filter by Name");
         filter.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.text_size));
+        filter.setTextColor(Color.BLACK);
+        filter.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                receivers = searchStudents(s);
+                receiverAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+        list_messages.addHeaderView(filter);*/
 
         list_messages.setAdapter(receiverAdapter);
 
@@ -248,23 +299,63 @@ public class SendMessage extends AppCompatActivity {
         ok_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView receiverText = (TextView) findViewById(R.id.receiverText);
+                receiverText = (TextView) findViewById(R.id.receiverText);
                 selected = receiverAdapter.selected;
                 if(selected.size()>0){
                     receiverText.setText("");
                     Boolean first = true;
                     for(int i=0;i<selected.size();i++){
                         if(first) {
-                            receiverText.setText(selected.get(i));
+                            receiverText.setText(selected.get(i).getName().substring(0, 1).toUpperCase() + selected.get(i).getName().substring(1).toLowerCase()+
+                                    " "+selected.get(i).getSurname().substring(0,1).toUpperCase()+selected.get(i).getSurname().substring(1).toLowerCase());
                             first = false;
                         }
                         else
-                            receiverText.setText(receiverText.getText()+","+selected.get(i));
+                            receiverText.setText(receiverText.getText()+", "+selected.get(i).getName().substring(0, 1).toUpperCase() + selected.get(i).getName().substring(1).toLowerCase()+
+                                    " "+selected.get(i).getSurname().substring(0,1).toUpperCase()+selected.get(i).getSurname().substring(1).toLowerCase());
                     }
+                }
+                else {
+                    receiverText.setText(getResources().getString(R.string.select_receiver));
                 }
                 popupWindow.dismiss();
             }
         });
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+    }
+
+    public ArrayList<String> searchStudents(CharSequence filter){
+        ArrayList<String> receivers = new ArrayList<>();
+
+        ParseQuery<ParseObject> queryStudentName = new ParseQuery("Student");
+        //queryStudentName.include("StudentId");
+        //queryStudentName.whereNotEqualTo("StudentId", ParseUser.getCurrentUser());
+        queryStudentName.whereContains("Name", filter.toString());
+
+        ParseQuery<ParseObject> queryStudentSurname = new ParseQuery("Student");
+        //queryStudentSurname.include("StudentId");
+        //queryStudentSurname.whereNotEqualTo("StudentId", ParseUser.getCurrentUser());
+        queryStudentSurname.whereContains("Surname", filter.toString());
+
+        List<ParseQuery<ParseObject>> queries = new ArrayList<ParseQuery<ParseObject>>();
+        queries.add(queryStudentName);
+        queries.add(queryStudentSurname);
+
+        ParseQuery<ParseObject> superQuery = new ParseQuery("Student");
+        superQuery.include("StudentId");
+        superQuery.whereNotEqualTo("StudentId", ParseUser.getCurrentUser());
+        ParseQuery.or(queries);
+
+        try {
+            List<ParseObject> results=superQuery.find();
+            for(ParseObject p:results){
+                receivers.add(p.getString("Name").substring(0, 1).toUpperCase() + p.getString("Name").substring(1).toLowerCase()+
+                        " "+p.getString("Surname").substring(0,1).toUpperCase()+p.getString("Surname").substring(1).toLowerCase());
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return receivers;
     }
 }

@@ -7,9 +7,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 
@@ -19,7 +23,9 @@ public class InboxDescription extends AppCompatActivity {
     public final static String INFOLOCAL_SUBJECT = "com.example.ricardogarcia.politojobs.SUBJECT";
     public static final String RECEIVER = "com.example.arosales.mobileappproject.RECEIVER";
     public static final String RECEIVERTYPE = "com.example.arosales.mobileappproject.RECEIVERTYPE";
+    public static final String NAMERECEIVER = "com.example.arosales.mobileappproject.NAMERECEIVER";
 
+    private String fromId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,12 +34,39 @@ public class InboxDescription extends AppCompatActivity {
         Bundle b = intent.getExtras();
         String subject = (String) b.get(Inbox.INFO_SUBJECT);
         String message = (String) b.get(Inbox.INFO_MESSAGE);
+        String fromType = (String) b.get(Inbox.INFO_FROM_TYPE);
+        fromId = (String) b.get(Inbox.INFO_FROM);
 
         TextView txt_subject= (TextView) findViewById(R.id.textSubject);
         TextView txt_message= (TextView) findViewById(R.id.messageText);
+        TextView txt_from= (TextView) findViewById(R.id.textFrom);
 
         txt_subject.setText(subject);
         txt_message.setText(message);
+
+        if(fromType.equals("Company")){
+            try {
+                ParseQuery<ParseUser> queryUser = ParseUser.getQuery();
+                ParseUser company = queryUser.get(fromId);
+                txt_from.setText(company.getUsername());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            try {
+                ParseQuery<ParseUser> queryUser = ParseUser.getQuery();
+                ParseUser student = queryUser.get(fromId);
+                ParseQuery<ParseObject> queryStudent = ParseQuery.getQuery("Student");
+                queryStudent.include("StudentId");
+                queryStudent.whereEqualTo("StudentId", student);
+                ParseObject result = queryStudent.getFirst();
+                txt_from.setText(result.getString("Name").substring(0, 1).toUpperCase() + result.getString("Name").substring(1).toLowerCase()+
+                        " "+result.getString("Surname").substring(0,1).toUpperCase()+result.getString("Surname").substring(1).toLowerCase());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 
@@ -120,13 +153,11 @@ public class InboxDescription extends AppCompatActivity {
     }
 
     public void reply(View view) {
+        TextView txt_from= (TextView) findViewById(R.id.textFrom);
         Intent intent = new Intent(this, SendMessage.class);
-        //intent.putExtra(RECEIVER, student.getId());
-        //intent.putExtra(RECEIVER, "?");
-        if(ParseUser.getCurrentUser().getString("TypeUser").equals("Student"))
-            intent.putExtra(RECEIVERTYPE, "StudentSocial");
-        else if (ParseUser.getCurrentUser().getString("TypeUser").equals("Company"))
-            intent.putExtra(RECEIVERTYPE, "Student");
+        intent.putExtra(RECEIVER, fromId);
+        intent.putExtra(RECEIVERTYPE, "Reply");
+        intent.putExtra(NAMERECEIVER, txt_from.getText().toString());
         startActivity(intent);
     }
 }

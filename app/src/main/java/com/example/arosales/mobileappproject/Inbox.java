@@ -32,6 +32,8 @@ public class Inbox extends AppCompatActivity {
 
     public final static String INFO_MESSAGE = "com.example.arosales.mobileappproject.MESSAGE";
     public final static String INFO_SUBJECT = "com.example.arosales.mobileappproject.SUBJECT";
+    public final static String INFO_FROM = "com.example.arosales.mobileappproject.FROM";
+    public final static String INFO_FROM_TYPE = "com.example.arosales.mobileappproject.FROMTYPE";
     public final static String LIST_MESSAGES = "com.example.arosales.mobileappproject.LIST";
     public static final String RECEIVERTYPE = "com.example.arosales.mobileappproject.RECEIVERTYPE";
 
@@ -124,11 +126,15 @@ public class Inbox extends AppCompatActivity {
         protected ArrayList<Message> doInBackground(String... params) {
             ArrayList<Message> result_messages=new ArrayList<Message>();
             ParseQuery<ParseObject> query = ParseQuery.getQuery("Message");
-            query.whereEqualTo("ReceiverId",params[0]);
+            query.include("SenderId");
+            query.whereEqualTo("ReceiverIds",params[0]);
+
             try {
                 List<ParseObject> results=query.find();
                 for(ParseObject p:results){
                     Message msg= new Message();
+
+                    msg.setFrom(p.getParseUser("SenderId"));
 
                     if(!p.get("Subject").equals(""))
                         msg.setSubject((String) p.get("Subject"));
