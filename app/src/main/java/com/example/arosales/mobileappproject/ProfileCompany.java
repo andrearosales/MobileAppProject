@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,6 +33,7 @@ public class ProfileCompany extends AppCompatActivity {
     private static final String INFO_SIZE = "com.example.arosales.mobileappproject.INFO_SIZE";
     private static final String INFO_WEBSITE = "com.example.arosales.mobileappproject.INFO_WEBSITE";
     private static final String INFO_CLIENTS = "com.example.arosales.mobileappproject.INFO_CLIENTS";
+    private static final String INFO_EDIT = "com.example.arosales.mobileappproject.INFO_EDIT";
 
     private EditText NameView;
     private Spinner LocationView;
@@ -44,6 +46,8 @@ public class ProfileCompany extends AppCompatActivity {
 
     private ArrayAdapter<String> adapterLocation;
     private ArrayAdapter<String> adapterIndustry;
+
+    private boolean isEditable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,65 +77,36 @@ public class ProfileCompany extends AppCompatActivity {
         try {
             ParseObject company = query.getFirst();
             NameView.setText(company.getString("Name"));
-            NameView.setFocusable(false);
-            NameView.setFocusableInTouchMode(false);
-            NameView.setClickable(false);
-
             AddressView.setText(company.getString("Address"));
-            AddressView.setFocusable(false);
-            AddressView.setFocusableInTouchMode(false);
-            AddressView.setClickable(false);
 
-            if (company.get("Location")==null) {
+            if (company.get("Location") == null) {
                 LocationView.setSelection(0);
             } else {
                 LocationView.setSelection(adapterLocation.getPosition(company.getString("Location")));
             }
 
-            LocationView.setFocusable(false);
-            LocationView.setFocusableInTouchMode(false);
-            LocationView.setClickable(false);
-            LocationView.setEnabled(false);
-
             if (company.get("Description") != null) {
                 DescriptionView.setText(company.getString("Description"));
             }
-            DescriptionView.setFocusable(false);
-            DescriptionView.setFocusableInTouchMode(false);
-            DescriptionView.setClickable(false);
 
             if (company.get("Industry") == null) {
                 IndustryView.setSelection(0);
             } else {
                 IndustryView.setSelection(adapterIndustry.getPosition(company.getString("Industry")));
             }
-            IndustryView.setFocusable(false);
-            IndustryView.setFocusableInTouchMode(false);
-            IndustryView.setClickable(false);
-            IndustryView.setEnabled(false);
 
             if (company.get("Size") != null && company.getInt("Size") != 0) {
                 int csize = company.getInt("Size");
                 CompanySizeView.setText(String.valueOf(csize));
             }
-            CompanySizeView.setFocusable(false);
-            CompanySizeView.setFocusableInTouchMode(false);
-            CompanySizeView.setClickable(false);
 
             if (company.getString("Website") != null) {
                 WebsiteView.setText(company.getString("Website"));
             }
-            WebsiteView.setFocusable(false);
-            WebsiteView.setFocusableInTouchMode(false);
-            WebsiteView.setClickable(false);
 
             if (company.getString("Clients") != null) {
                 ClientsView.setText(company.getString("Clients"));
             }
-            ClientsView.setFocusable(false);
-            ClientsView.setFocusableInTouchMode(false);
-            ClientsView.setClickable(false);
-
         } catch (
                 ParseException e
                 )
@@ -182,6 +157,7 @@ public class ProfileCompany extends AppCompatActivity {
         if (!ClientsView.getText().toString().equals(""))
             outState.putString(INFO_CLIENTS, ClientsView.getText().toString());
 
+        outState.putBoolean(INFO_EDIT, isEditable);
 
         super.onSaveInstanceState(outState);
     }
@@ -214,6 +190,15 @@ public class ProfileCompany extends AppCompatActivity {
             ClientsView.setText(savedInstanceState.getString(INFO_CLIENTS));
         }
 
+
+        if (savedInstanceState.containsKey(INFO_EDIT)) {
+            if (savedInstanceState.getBoolean(INFO_EDIT)) {
+                enableFields();
+            } else {
+                disableFields();
+            }
+        }
+
     }
 
     @Override
@@ -233,39 +218,34 @@ public class ProfileCompany extends AppCompatActivity {
         if (id == R.id.action_home) {
             ParseUser currentUser = ParseUser.getCurrentUser();
             String typeUser = currentUser.getString("TypeUser");
-            if(typeUser.equals("Student")){
+            if (typeUser.equals("Student")) {
                 Intent intent = new Intent(this, StudentHome.class);
                 startActivity(intent);
-            }
-            else if (typeUser.equals("Company")){
+            } else if (typeUser.equals("Company")) {
                 Intent intent = new Intent(this, CompanyHome.class);
                 startActivity(intent);
-            }
-            else if (typeUser.equals("Teacher")){
+            } else if (typeUser.equals("Teacher")) {
                 Intent intent = new Intent(this, ProfessorHome.class);
                 startActivity(intent);
             }
             return true;
-        }
-        else if (id == R.id.action_profile) {
+        } else if (id == R.id.action_profile) {
             ParseUser currentUser = ParseUser.getCurrentUser();
             String typeUser = currentUser.getString("TypeUser");
-            if(typeUser.equals("Student")){
+            if (typeUser.equals("Student")) {
                 Intent intent = new Intent(this, ProfileStudent.class);
                 startActivity(intent);
-            }
-            else if (typeUser.equals("Company")){
+            } else if (typeUser.equals("Company")) {
                 Intent intent = new Intent(this, ProfileCompany.class);
                 startActivity(intent);
-            }else if (typeUser.equals("Teacher")){
+            } else if (typeUser.equals("Teacher")) {
                 Intent intent = new Intent(this, ProfileProfessor.class);
                 startActivity(intent);
             }
             return true;
-        }
-        else if (id == R.id.action_logout) {
+        } else if (id == R.id.action_logout) {
             ParseUser.logOut();
-            Intent intent= new Intent(this,LogIn.class);
+            Intent intent = new Intent(this, LogIn.class);
             startActivity(intent);
             return true;
         }
@@ -291,7 +271,7 @@ public class ProfileCompany extends AppCompatActivity {
             } else {
                 company.remove("Industry");
             }
-            if(!DescriptionView.getText().toString().equals(""))
+            if (!DescriptionView.getText().toString().equals(""))
                 company.put("Description", DescriptionView.getText().toString());
             else
                 company.remove("Description");
@@ -301,12 +281,12 @@ public class ProfileCompany extends AppCompatActivity {
             else
                 company.remove("Size");
 
-            if(!WebsiteView.getText().toString().equals(""))
+            if (!WebsiteView.getText().toString().equals(""))
                 company.put("Website", WebsiteView.getText().toString());
             else
                 company.remove("Website");
 
-            if(!ClientsView.getText().toString().equals(""))
+            if (!ClientsView.getText().toString().equals(""))
                 company.put("Clients", ClientsView.getText().toString());
             else
                 company.remove("Clients");
@@ -331,8 +311,11 @@ public class ProfileCompany extends AppCompatActivity {
 
 
     public void editProfile(View view) {
+        enableFields();
+    }
 
-        Button editButton= (Button) findViewById(R.id.editButton);
+    private void enableFields() {
+        Button editButton = (Button) findViewById(R.id.editButton);
         editButton.setVisibility(View.GONE);
 
         DescriptionView.setFocusable(true);
@@ -356,6 +339,44 @@ public class ProfileCompany extends AppCompatActivity {
         ClientsView.setFocusableInTouchMode(true);
         ClientsView.setClickable(true);
 
+        isEditable = true;
+    }
+
+    private void disableFields() {
+        NameView.setFocusable(false);
+        NameView.setFocusableInTouchMode(false);
+        NameView.setClickable(false);
+
+        AddressView.setFocusable(false);
+        AddressView.setFocusableInTouchMode(false);
+        AddressView.setClickable(false);
+
+        LocationView.setFocusable(false);
+        LocationView.setFocusableInTouchMode(false);
+        LocationView.setClickable(false);
+        LocationView.setEnabled(false);
+
+
+        DescriptionView.setFocusable(false);
+        DescriptionView.setFocusableInTouchMode(false);
+        DescriptionView.setClickable(false);
+
+        IndustryView.setFocusable(false);
+        IndustryView.setFocusableInTouchMode(false);
+        IndustryView.setClickable(false);
+        IndustryView.setEnabled(false);
+
+        CompanySizeView.setFocusable(false);
+        CompanySizeView.setFocusableInTouchMode(false);
+        CompanySizeView.setClickable(false);
+
+        WebsiteView.setFocusable(false);
+        WebsiteView.setFocusableInTouchMode(false);
+        WebsiteView.setClickable(false);
+
+        ClientsView.setFocusable(false);
+        ClientsView.setFocusableInTouchMode(false);
+        ClientsView.setClickable(false);
     }
 
     public void deleteProfile(View view) {
@@ -379,12 +400,12 @@ public class ProfileCompany extends AppCompatActivity {
             queryApplyJob.include("JobId.CompanyId");
             //queryApplyJob.whereEqualTo("JobId.CompanyId", company);
 
-            List<ParseObject> resultsApplyJob=queryApplyJob.find();
-            for(ParseObject p:resultsApplyJob){
+            List<ParseObject> resultsApplyJob = queryApplyJob.find();
+            for (ParseObject p : resultsApplyJob) {
                 ParseObject job_result = p.getParseObject("JobId");
 
                 ParseObject companyCurrent = job_result.getParseObject("CompanyId");
-                if(companyCurrent!=null && companyCurrent.getObjectId().equals(company.getObjectId())){
+                if (companyCurrent != null && companyCurrent.getObjectId().equals(company.getObjectId())) {
                     p.delete();
                 }
             }
@@ -393,8 +414,8 @@ public class ProfileCompany extends AppCompatActivity {
             querySavedCompany.include("CompanyId");
             querySavedCompany.whereEqualTo("CompanyId", company);
 
-            List<ParseObject> resultsSavedCompany=querySavedCompany.find();
-            for(ParseObject p:resultsSavedCompany){
+            List<ParseObject> resultsSavedCompany = querySavedCompany.find();
+            for (ParseObject p : resultsSavedCompany) {
                 p.delete();
             }
 
@@ -403,12 +424,12 @@ public class ProfileCompany extends AppCompatActivity {
             querySavedJobOffer.include("OfferId.CompanyId");
             //querySavedJobOffer.whereEqualTo("OfferId.CompanyId", company);
 
-            List<ParseObject> resultsSavedJobOffer=querySavedJobOffer.find();
-            for(ParseObject p:resultsSavedJobOffer){
+            List<ParseObject> resultsSavedJobOffer = querySavedJobOffer.find();
+            for (ParseObject p : resultsSavedJobOffer) {
                 ParseObject job_result = p.getParseObject("OfferId");
 
                 ParseObject companyCurrent = job_result.getParseObject("CompanyId");
-                if(companyCurrent!=null && companyCurrent.getObjectId().equals(company.getObjectId())){
+                if (companyCurrent != null && companyCurrent.getObjectId().equals(company.getObjectId())) {
                     p.delete();
                 }
             }
@@ -417,8 +438,8 @@ public class ProfileCompany extends AppCompatActivity {
             querySavedStudent.include("CompanyId");
             querySavedStudent.whereEqualTo("CompanyId", company);
 
-            List<ParseObject> resultsSavedStudent=querySavedStudent.find();
-            for(ParseObject p:resultsSavedStudent){
+            List<ParseObject> resultsSavedStudent = querySavedStudent.find();
+            for (ParseObject p : resultsSavedStudent) {
                 p.delete();
             }
 
@@ -426,23 +447,23 @@ public class ProfileCompany extends AppCompatActivity {
             queryJobOffer.include("CompanyId");
             queryJobOffer.whereEqualTo("CompanyId", company);
 
-            List<ParseObject> resultsJobOffer=queryJobOffer.find();
-            for(ParseObject p:resultsJobOffer){
+            List<ParseObject> resultsJobOffer = queryJobOffer.find();
+            for (ParseObject p : resultsJobOffer) {
                 p.delete();
             }
 
 
             ParseQuery<ParseObject> queryMessage = ParseQuery.getQuery("Message");
             queryMessage.whereEqualTo("SenderId", ParseUser.getCurrentUser().getObjectId());
-            List<ParseObject> resultsMessage=queryMessage.find();
-            for(ParseObject p:resultsMessage){
+            List<ParseObject> resultsMessage = queryMessage.find();
+            for (ParseObject p : resultsMessage) {
                 p.delete();
             }
 
             queryMessage = ParseQuery.getQuery("Message");
             queryMessage.whereEqualTo("ReceiverId", ParseUser.getCurrentUser().getObjectId());
-            resultsMessage=queryMessage.find();
-            for(ParseObject p:resultsMessage){
+            resultsMessage = queryMessage.find();
+            for (ParseObject p : resultsMessage) {
                 p.delete();
             }
 

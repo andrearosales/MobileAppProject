@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -50,6 +51,7 @@ public class ProfileStudent extends AppCompatActivity {
     private static final String INFO_DEGREE = "com.example.arosales.mobileappproject.INFO_DEGREE";
     private static final String INFO_PHONE = "com.example.arosales.mobileappproject.INFO_PHONE";
     private static final String INFO_CURRENT_COMPANY = "com.example.arosales.mobileappproject.INFO_CURRENT_COMPANY";
+    private static final String INFO_EDIT = "com.example.arosales.mobileappproject.INFO_EDIT";
 
 
     private EditText NameView;
@@ -77,6 +79,8 @@ public class ProfileStudent extends AppCompatActivity {
     private ArrayAdapter<String> adapterIndustry;
     private ArrayAdapter<String> adapterDegree;
     private ArrayAdapter<String> adapterCurrentCompany;
+
+    private boolean isEditable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,68 +150,40 @@ public class ProfileStudent extends AppCompatActivity {
             ParseObject student = query.getFirst();
 
             NameView.setText(student.getString("Name"));
-            NameView.setFocusable(false);
-            NameView.setFocusableInTouchMode(false);
-            NameView.setClickable(false);
-
             SurnameView.setText(student.getString("Surname"));
-            SurnameView.setFocusable(false);
-            SurnameView.setFocusableInTouchMode(false);
-            SurnameView.setClickable(false);
+
 
             if (student.get("Location") == null) {
                 LocationView.setSelection(0);
             } else {
                 LocationView.setSelection(adapterLocation.getPosition(student.getString("Location")));
             }
-            LocationView.setFocusable(false);
-            LocationView.setFocusableInTouchMode(false);
-            LocationView.setClickable(false);
-            LocationView.setEnabled(false);
-
 
             if (student.get("Industry") == null) {
                 IndustryView.setSelection(0);
             } else {
                 IndustryView.setSelection(adapterIndustry.getPosition(student.getString("Industry")));
             }
-            IndustryView.setFocusable(false);
-            IndustryView.setFocusableInTouchMode(false);
-            IndustryView.setClickable(false);
-            IndustryView.setEnabled(false);
 
             if (student.getDate("Birthdate") != null) {
                 DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
                 Date birthdate = student.getDate("Birthdate");
                 DateOfBirthView.setText(df.format(birthdate));
             }
-            DateOfBirthView.setFocusable(false);
-            DateOfBirthView.setFocusableInTouchMode(false);
-            DateOfBirthView.setClickable(false);
 
             if (student.getString("Birthplace") != null) {
                 PlaceOfBirthView.setText(student.getString("Birthplace"));
             }
-            PlaceOfBirthView.setFocusable(false);
-            PlaceOfBirthView.setFocusableInTouchMode(false);
-            PlaceOfBirthView.setClickable(false);
 
             if (student.getString("Description") != null) {
                 DescriptionView.setText(student.getString("Description"));
             }
-            DescriptionView.setFocusable(false);
-            DescriptionView.setFocusableInTouchMode(false);
-            DescriptionView.setClickable(false);
 
             if (student.get("TechnicalSkills") != null){
                 ArrayList<String> technical_skills = (ArrayList<String>) student.get("TechnicalSkills");
                 if(technical_skills.size()>0)
                     TechnicalSkillsView.setText(technical_skills.toString().substring(1, technical_skills.toString().length() - 1));
             }
-            TechnicalSkillsView.setFocusable(false);
-            TechnicalSkillsView.setFocusableInTouchMode(false);
-            TechnicalSkillsView.setClickable(false);
-
 
             if (student.get("Languages") != null) {
                 ArrayList<String> languages = (ArrayList<String>) student.get("Languages");
@@ -234,50 +210,26 @@ public class ProfileStudent extends AppCompatActivity {
                 }
             }
 
-
-            language_eng.setClickable(false);
-            language_fra.setClickable(false);
-            language_ger.setClickable(false);
-            language_ita.setClickable(false);
-            language_man.setClickable(false);
-            language_por.setClickable(false);
-            language_spa.setClickable(false);
-
-
             if (student.get("Interests") != null) {
                 ArrayList<String> interests = (ArrayList<String>) student.get("Interests");
                 if(interests.size()>0)
                     InterestsView.setText(interests.toString().substring(1, interests.toString().length() - 1));
             }
-            InterestsView.setFocusable(false);
-            InterestsView.setFocusableInTouchMode(false);
-            InterestsView.setClickable(false);
 
             if (student.get("ExperienceYears") != null && student.getInt("ExperienceYears") != 0) {
                 int yearExperience = student.getInt("ExperienceYears");
                 YearOfExpView.setText(String.valueOf(yearExperience));
             }
-            YearOfExpView.setFocusable(false);
-            YearOfExpView.setFocusableInTouchMode(false);
-            YearOfExpView.setClickable(false);
 
             if (student.get("TypeOfDegree") == null) {
                 TypeOfDegreeView.setSelection(0);
             } else {
                 TypeOfDegreeView.setSelection(adapterDegree.getPosition(student.getString("TypeOfDegree")));
             }
-            TypeOfDegreeView.setFocusable(false);
-            TypeOfDegreeView.setFocusableInTouchMode(false);
-            TypeOfDegreeView.setClickable(false);
-            TypeOfDegreeView.setEnabled(false);
 
             if (student.get("PhoneNumber") != null) {
                 PhoneNumberView.setText(student.getString("PhoneNumber"));
             }
-            PhoneNumberView.setFocusable(false);
-            PhoneNumberView.setFocusableInTouchMode(false);
-            PhoneNumberView.setClickable(false);
-
 
             ParseObject current_company = student.getParseObject("CurrentCompany");
             if (current_company == null) {
@@ -285,10 +237,8 @@ public class ProfileStudent extends AppCompatActivity {
             } else {
                 CurrentCompanyView.setSelection(adapterCurrentCompany.getPosition(current_company.getString("Name")));
             }
-            CurrentCompanyView.setFocusable(false);
-            CurrentCompanyView.setFocusableInTouchMode(false);
-            CurrentCompanyView.setClickable(false);
-            CurrentCompanyView.setEnabled(false);
+
+            disableFields();
 
 
         } catch (ParseException e) {
@@ -379,6 +329,8 @@ public class ProfileStudent extends AppCompatActivity {
         if (!CurrentCompanyView.getSelectedItem().toString().equals("-"))
             outState.putString(INFO_CURRENT_COMPANY, CurrentCompanyView.getSelectedItem().toString());
 
+        outState.putBoolean(INFO_EDIT, isEditable);
+
         super.onSaveInstanceState(outState);
     }
 
@@ -443,6 +395,16 @@ public class ProfileStudent extends AppCompatActivity {
         if (savedInstanceState.containsKey(INFO_CURRENT_COMPANY))
             CurrentCompanyView.setSelection(adapterCurrentCompany.getPosition(savedInstanceState.getString(INFO_CURRENT_COMPANY)));
 
+        if (savedInstanceState.containsKey(INFO_EDIT)) {
+            if (savedInstanceState.getBoolean(INFO_EDIT)) {
+                enableFields();
+            }
+            else{
+                disableFields();
+                isEditable=false;
+            }
+            }
+
     }
 
 
@@ -505,66 +467,7 @@ public class ProfileStudent extends AppCompatActivity {
     }
     
     public void editProfile(View view) {
-        Button editButton= (Button) findViewById(R.id.editButton);
-        editButton.setVisibility(View.GONE);
-
-        LocationView.setFocusable(true);
-        LocationView.setFocusableInTouchMode(true);
-        LocationView.setClickable(true);
-        LocationView.setEnabled(true);
-
-        IndustryView.setFocusable(true);
-        IndustryView.setFocusableInTouchMode(true);
-        IndustryView.setClickable(true);
-        IndustryView.setEnabled(true);
-
-        DateOfBirthView.setFocusable(true);
-        DateOfBirthView.setFocusableInTouchMode(true);
-        DateOfBirthView.setClickable(true);
-
-        PlaceOfBirthView.setFocusable(true);
-        PlaceOfBirthView.setFocusableInTouchMode(true);
-        PlaceOfBirthView.setClickable(true);
-
-        DescriptionView.setFocusable(true);
-        DescriptionView.setFocusableInTouchMode(true);
-        DescriptionView.setClickable(true);
-
-        TechnicalSkillsView.setFocusable(true);
-        TechnicalSkillsView.setFocusableInTouchMode(true);
-        TechnicalSkillsView.setClickable(true);
-
-
-        language_eng.setClickable(true);
-        language_fra.setClickable(true);
-        language_ger.setClickable(true);
-        language_ita.setClickable(true);
-        language_man.setClickable(true);
-        language_por.setClickable(true);
-        language_spa.setClickable(true);
-
-        InterestsView.setFocusable(true);
-        InterestsView.setFocusableInTouchMode(true);
-        InterestsView.setClickable(true);
-
-        YearOfExpView.setFocusable(true);
-        YearOfExpView.setFocusableInTouchMode(true);
-        YearOfExpView.setClickable(true);
-
-        TypeOfDegreeView.setFocusable(true);
-        TypeOfDegreeView.setFocusableInTouchMode(true);
-        TypeOfDegreeView.setClickable(true);
-        TypeOfDegreeView.setEnabled(true);
-
-        PhoneNumberView.setFocusable(true);
-        PhoneNumberView.setFocusableInTouchMode(true);
-        PhoneNumberView.setClickable(true);
-
-        CurrentCompanyView.setFocusable(true);
-        CurrentCompanyView.setFocusableInTouchMode(true);
-        CurrentCompanyView.setClickable(true);
-        CurrentCompanyView.setEnabled(true);
-
+        enableFields();
     }
 
     public void saveProfile(View view) {
@@ -724,6 +627,143 @@ public class ProfileStudent extends AppCompatActivity {
             e.printStackTrace();
         }
 
+
+    }
+
+
+    private void enableFields(){
+        Button editButton= (Button) findViewById(R.id.editButton);
+        editButton.setVisibility(View.GONE);
+
+        LocationView.setFocusable(true);
+        LocationView.setFocusableInTouchMode(true);
+        LocationView.setClickable(true);
+        LocationView.setEnabled(true);
+
+        IndustryView.setFocusable(true);
+        IndustryView.setFocusableInTouchMode(true);
+        IndustryView.setClickable(true);
+        IndustryView.setEnabled(true);
+
+        DateOfBirthView.setFocusable(true);
+        DateOfBirthView.setFocusableInTouchMode(true);
+        DateOfBirthView.setClickable(true);
+
+        PlaceOfBirthView.setFocusable(true);
+        PlaceOfBirthView.setFocusableInTouchMode(true);
+        PlaceOfBirthView.setClickable(true);
+
+        DescriptionView.setFocusable(true);
+        DescriptionView.setFocusableInTouchMode(true);
+        DescriptionView.setClickable(true);
+
+        TechnicalSkillsView.setFocusable(true);
+        TechnicalSkillsView.setFocusableInTouchMode(true);
+        TechnicalSkillsView.setClickable(true);
+
+
+        language_eng.setClickable(true);
+        language_fra.setClickable(true);
+        language_ger.setClickable(true);
+        language_ita.setClickable(true);
+        language_man.setClickable(true);
+        language_por.setClickable(true);
+        language_spa.setClickable(true);
+
+        InterestsView.setFocusable(true);
+        InterestsView.setFocusableInTouchMode(true);
+        InterestsView.setClickable(true);
+
+        YearOfExpView.setFocusable(true);
+        YearOfExpView.setFocusableInTouchMode(true);
+        YearOfExpView.setClickable(true);
+
+        TypeOfDegreeView.setFocusable(true);
+        TypeOfDegreeView.setFocusableInTouchMode(true);
+        TypeOfDegreeView.setClickable(true);
+        TypeOfDegreeView.setEnabled(true);
+
+        PhoneNumberView.setFocusable(true);
+        PhoneNumberView.setFocusableInTouchMode(true);
+        PhoneNumberView.setClickable(true);
+
+        CurrentCompanyView.setFocusable(true);
+        CurrentCompanyView.setFocusableInTouchMode(true);
+        CurrentCompanyView.setClickable(true);
+        CurrentCompanyView.setEnabled(true);
+
+        isEditable = true;
+
+    }
+
+    private void disableFields(){
+        NameView.setFocusable(false);
+        NameView.setFocusableInTouchMode(false);
+        NameView.setClickable(false);
+
+        SurnameView.setFocusable(false);
+        SurnameView.setFocusableInTouchMode(false);
+        SurnameView.setClickable(false);
+
+        LocationView.setFocusable(false);
+        LocationView.setFocusableInTouchMode(false);
+        LocationView.setClickable(false);
+        LocationView.setEnabled(false);
+
+
+        IndustryView.setFocusable(false);
+        IndustryView.setFocusableInTouchMode(false);
+        IndustryView.setClickable(false);
+        IndustryView.setEnabled(false);
+
+        DateOfBirthView.setFocusable(false);
+        DateOfBirthView.setFocusableInTouchMode(false);
+        DateOfBirthView.setClickable(false);
+
+
+        PlaceOfBirthView.setFocusable(false);
+        PlaceOfBirthView.setFocusableInTouchMode(false);
+        PlaceOfBirthView.setClickable(false);
+
+        DescriptionView.setFocusable(false);
+        DescriptionView.setFocusableInTouchMode(false);
+        DescriptionView.setClickable(false);
+
+
+        TechnicalSkillsView.setFocusable(false);
+        TechnicalSkillsView.setFocusableInTouchMode(false);
+        TechnicalSkillsView.setClickable(false);
+
+        language_eng.setClickable(false);
+        language_fra.setClickable(false);
+        language_ger.setClickable(false);
+        language_ita.setClickable(false);
+        language_man.setClickable(false);
+        language_por.setClickable(false);
+        language_spa.setClickable(false);
+
+        InterestsView.setFocusable(false);
+        InterestsView.setFocusableInTouchMode(false);
+        InterestsView.setClickable(false);
+
+        YearOfExpView.setFocusable(false);
+        YearOfExpView.setFocusableInTouchMode(false);
+        YearOfExpView.setClickable(false);
+
+        TypeOfDegreeView.setFocusable(false);
+        TypeOfDegreeView.setFocusableInTouchMode(false);
+        TypeOfDegreeView.setClickable(false);
+        TypeOfDegreeView.setEnabled(false);
+
+        PhoneNumberView.setFocusable(false);
+        PhoneNumberView.setFocusableInTouchMode(false);
+        PhoneNumberView.setClickable(false);
+
+
+        CurrentCompanyView.setFocusable(false);
+        CurrentCompanyView.setFocusableInTouchMode(false);
+        CurrentCompanyView.setClickable(false);
+        CurrentCompanyView.setEnabled(false);
 
     }
 
