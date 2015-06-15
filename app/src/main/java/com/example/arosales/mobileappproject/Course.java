@@ -1,11 +1,12 @@
 package com.example.arosales.mobileappproject;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by ricardogarcia on 09/03/15.
  */
-public class Course {
+public class Course implements Serializable{
 
     private String id;
     private String name;

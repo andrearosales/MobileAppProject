@@ -38,81 +38,59 @@ public class StudentHome extends AppCompatActivity {
         if (id == R.id.action_home) {
             ParseUser currentUser = ParseUser.getCurrentUser();
             String typeUser = currentUser.getString("TypeUser");
-            if(typeUser.equals("Student")){
+            if (typeUser.equals("Student")) {
                 Intent intent = new Intent(this, StudentHome.class);
                 startActivity(intent);
-            }
-            else if (typeUser.equals("Company")){
+            } else if (typeUser.equals("Company")) {
                 Intent intent = new Intent(this, CompanyHome.class);
                 startActivity(intent);
-            }
-            else if (typeUser.equals("Teacher")){
+            } else if (typeUser.equals("Teacher")) {
                 Intent intent = new Intent(this, ProfessorHome.class);
                 startActivity(intent);
             }
             return true;
-        }
-        else if (id == R.id.action_profile) {
+        } else if (id == R.id.action_profile) {
             ParseUser currentUser = ParseUser.getCurrentUser();
             String typeUser = currentUser.getString("TypeUser");
-            if(typeUser.equals("Student")){
+            if (typeUser.equals("Student")) {
                 Intent intent = new Intent(this, ProfileStudent.class);
                 startActivity(intent);
-            }
-            else if (typeUser.equals("Company")){
+            } else if (typeUser.equals("Company")) {
                 Intent intent = new Intent(this, ProfileCompany.class);
                 startActivity(intent);
-            }else if (typeUser.equals("Teacher")){
+            } else if (typeUser.equals("Teacher")) {
                 Intent intent = new Intent(this, ProfileProfessor.class);
                 startActivity(intent);
             }
             return true;
-        }
-        else if (id == R.id.action_logout) {
+        } else if (id == R.id.action_logout) {
             ParseUser.logOut();
-            Intent intent= new Intent(this,LogIn.class);
+            Intent intent = new Intent(this, LogIn.class);
             startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-
-    public void searchCompanies(View v)
-    {
-        startActivity(new Intent(this,CompanySearch.class));
-    }
-
-    public void searchJobOffers(View v)
-    {
-        startActivity(new Intent(this, JobSearch.class));
-    }
-
-    public void viewMessages(View v)
-    {
+    public void viewMessages(View v) {
         startActivity(new Intent(this, Inbox.class));
     }
 
-    public void viewApplications(View view){
-        Intent intent= new Intent(this,ListApplication.class);
-        startActivity(intent);
-    }
-
-    public void logOut(View v){
+    public void logOut(View v) {
         ParseUser.logOut();
-        startActivity(new Intent(this,ManageSession.class));
+        startActivity(new Intent(this, ManageSession.class));
     }
 
 
     public void goDidactica(View view) {
-        startActivity(new Intent(this,DidacticalInfoMenu.class));
+        startActivity(new Intent(this, DidacticalInfoMenu.class));
     }
 
     public void goNoticeBoard(View view) {
-        startActivity(new Intent(this,Noticeboard.class));
+        startActivity(new Intent(this, Noticeboard.class));
     }
 
     public void goJobs(View view) {
-        startActivity(new Intent(this,JobPlacementMenu.class));
+        startActivity(new Intent(this, JobPlacementMenu.class));
     }
 }

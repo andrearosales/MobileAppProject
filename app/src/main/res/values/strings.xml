@@ -399,4 +399,11 @@
     <string name="message_course_found"> is already in your calendar</string>
     <string name="select_receiver">Select message receiver(s)</string>
     <string name="ok_button">OK</string>
+    <string name="notify">Notify</string>
+    <string name="messageheader_notification">Tap on a lesson to send a notification</string>
+    <string name="error_blank_title">Invalid title of notification</string>
+    <string name="error_blank_message">Invalid message</string>
+    <string name="sendnotificationtitle">Notifications</string>
+    <string name="sendnotification">Sending notification...</string>
+
 </resources>
