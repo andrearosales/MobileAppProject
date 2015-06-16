@@ -77,7 +77,7 @@ public class JobAdapter extends BaseAdapter implements View.OnClickListener {
                 vholder.textCompany = (TextView) v.findViewById(R.id.textCompany);
                 vholder.textLocation = (TextView) v.findViewById(R.id.textLocation);
                 vholder.textDate = (TextView) v.findViewById(R.id.textDatePosted);
-                vholder.buttonView = (Button) v.findViewById(R.id.buttonView);
+                //vholder.buttonView = (Button) v.findViewById(R.id.buttonView);
                 vholder.buttonSaveDelete = (Button) v.findViewById(R.id.buttonSaveDelete);
                 v.setTag(vholder);
             } else {
@@ -98,7 +98,7 @@ public class JobAdapter extends BaseAdapter implements View.OnClickListener {
                 vholder.buttonSaveDelete.setText(R.string.remove_button);
 
 
-            vholder.buttonView.setOnClickListener(new View.OnClickListener() {
+            /*vholder.buttonView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(activity, ViewJob.class);
@@ -106,7 +106,7 @@ public class JobAdapter extends BaseAdapter implements View.OnClickListener {
                     intent.putExtra(JOB, listjobs.get(position));
                     activity.startActivity(intent);
                 }
-            });
+            });*/
 
             vholder.buttonSaveDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -181,6 +181,15 @@ public class JobAdapter extends BaseAdapter implements View.OnClickListener {
                 }
             });
 
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(activity, ViewJob.class);
+                    intent.putExtra(SEARCH_TYPE, searchType);
+                    intent.putExtra(JOB, listjobs.get(position));
+                    activity.startActivity(intent);
+                }
+            });
         }
 
         return v;
@@ -197,7 +206,7 @@ public class JobAdapter extends BaseAdapter implements View.OnClickListener {
         public TextView textCompany;
         public TextView textLocation;
         public TextView textDate;
-        public Button buttonView;
+        //public Button buttonView;
         public Button buttonSaveDelete;
     }
 }

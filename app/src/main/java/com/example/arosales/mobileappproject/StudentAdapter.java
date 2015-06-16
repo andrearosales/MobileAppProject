@@ -70,7 +70,7 @@ public class StudentAdapter extends BaseAdapter {
                 vholder.textName = (TextView) v.findViewById(R.id.studentName);
                 vholder.textDescription = (TextView) v.findViewById(R.id.studentIndustry);
                 vholder.textIndustry = (TextView) v.findViewById(R.id.studentDescription);
-                vholder.buttonView = (Button) v.findViewById(R.id.viewButton);
+                //vholder.buttonView = (Button) v.findViewById(R.id.viewButton);
                 vholder.buttonSaveDelete = (Button) v.findViewById(R.id.saveDeleteButton);
                 v.setTag(vholder);
             } else {
@@ -99,7 +99,7 @@ public class StudentAdapter extends BaseAdapter {
             else
                 vholder.buttonSaveDelete.setText(R.string.remove_button);
 
-            vholder.buttonView.setOnClickListener(new View.OnClickListener() {
+            /*vholder.buttonView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(activity, ViewStudent.class);
@@ -107,7 +107,7 @@ public class StudentAdapter extends BaseAdapter {
                     intent.putExtra(STUDENT, listStudents.get(position));
                     activity.startActivity(intent);
                 }
-            });
+            });*/
 
             vholder.buttonSaveDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -189,6 +189,15 @@ public class StudentAdapter extends BaseAdapter {
                 }
             });
 
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(activity, ViewStudent.class);
+                    intent.putExtra(SEARCH_TYPE, searchType);
+                    intent.putExtra(STUDENT, listStudents.get(position));
+                    activity.startActivity(intent);
+                }
+            });
 
         }
 
@@ -199,7 +208,7 @@ public class StudentAdapter extends BaseAdapter {
         public TextView textName;
         public TextView textDescription;
         public TextView textIndustry;
-        public Button buttonView;
+        //public Button buttonView;
         public Button buttonSaveDelete;
     }
 }

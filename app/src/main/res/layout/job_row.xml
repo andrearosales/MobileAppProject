@@ -19,18 +19,6 @@
             android:paddingLeft="@dimen/padding_left"
             android:textSize="@dimen/text_size" />
 
-        <Button
-            android:id="@+id/buttonView"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/button_height_small"
-            android:layout_gravity="right|center_vertical"
-            android:layout_weight="1"
-            android:background="@drawable/background_color"
-            android:text="@string/view_button"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size"
-            android:textStyle="bold" />
-
     </TableRow>
 
     <TableRow>
@@ -45,6 +33,19 @@
             android:paddingLeft="@dimen/padding_left"
             android:textSize="@dimen/text_size" />
 
+
+        <Button
+            android:id="@+id/buttonSaveDelete"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/button_height_small"
+            android:layout_gravity="right|center_vertical"
+            android:layout_weight="1"
+            android:background="@drawable/background_color"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size"
+            android:textStyle="bold" />
+
+
     </TableRow>
 
     <TableRow android:gravity="center_horizontal">
@@ -58,17 +59,6 @@
             android:gravity="start"
             android:paddingLeft="@dimen/padding_left"
             android:textSize="@dimen/text_size" />
-
-        <Button
-            android:id="@+id/buttonSaveDelete"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/button_height_small"
-            android:layout_gravity="right|center_vertical"
-            android:layout_weight="1"
-            android:background="@drawable/background_color"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size"
-            android:textStyle="bold" />
 
     </TableRow>
 

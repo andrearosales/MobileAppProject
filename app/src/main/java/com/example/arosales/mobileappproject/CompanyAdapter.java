@@ -72,7 +72,7 @@ public class CompanyAdapter extends BaseAdapter implements View.OnClickListener 
                 vholder = new ViewHolder();
                 vholder.textName = (TextView) v.findViewById(R.id.textName);
                 vholder.textIndustry = (TextView) v.findViewById(R.id.textIndustry);
-                vholder.buttonView = (Button) v.findViewById(R.id.buttonView);
+                //vholder.buttonView = (Button) v.findViewById(R.id.buttonView);
                 vholder.buttonSaveDelete = (Button) v.findViewById(R.id.buttonSaveDelete);
                 v.setTag(vholder);
             } else {
@@ -85,7 +85,7 @@ public class CompanyAdapter extends BaseAdapter implements View.OnClickListener 
             else
                 vholder.textIndustry.setText("");
 
-            vholder.buttonView.setOnClickListener(new View.OnClickListener() {
+            /*vholder.buttonView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(activity, ViewCompany.class);
@@ -93,7 +93,7 @@ public class CompanyAdapter extends BaseAdapter implements View.OnClickListener 
                     intent.putExtra(COMPANY, listcompanies.get(position));
                     activity.startActivity(intent);
                 }
-            });
+            });*/
 
 
             if (searchType.equals("Search"))
@@ -185,6 +185,15 @@ public class CompanyAdapter extends BaseAdapter implements View.OnClickListener 
                 }
             });
 
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(activity, ViewCompany.class);
+                    intent.putExtra(SEARCH_TYPE, searchType);
+                    intent.putExtra(COMPANY, listcompanies.get(position));
+                    activity.startActivity(intent);
+                }
+            });
 
         }
 
@@ -200,7 +209,7 @@ public class CompanyAdapter extends BaseAdapter implements View.OnClickListener 
     public static class ViewHolder {
         public TextView textName;
         public TextView textIndustry;
-        public Button buttonView;
+        //public Button buttonView;
         public Button buttonSaveDelete;
     }
 }
