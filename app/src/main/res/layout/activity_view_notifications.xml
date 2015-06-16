@@ -37,26 +37,13 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textNoResults"
+            android:id="@+id/textNoNotifications"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:paddingTop="@dimen/margin_top"
             android:text="@string/no_notifications_text"
             android:textAppearance="?android:attr/textAppearanceLarge" />
-
-        <Button
-            android:id="@+id/backButton"
-            android:layout_width="@dimen/width_buttons"
-            android:layout_height="@dimen/button_height"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/margin_top"
-            android:background="@drawable/background_color"
-            android:onClick=""
-            android:text="@string/back_didacticalmenu_button"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size"
-            android:textStyle="bold" />
     </LinearLayout>
 
 </RelativeLayout>

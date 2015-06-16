@@ -33,9 +33,6 @@ import java.util.List;
 
 public class ListJobs extends AppCompatActivity {
 
-    public static final String APPLICATION_ID = "qT7ozC6SpBUGiaKxHQwZHRyNfT0GX2xECCVsJYyv";
-    public static final String CLIENT_KEY = "jLWrQSMm4uC97tkzwPZLeJ3000GQS8cDm65uXQnc";
-
     public void publishOffer (View view){
         Intent intent = new Intent(this, PublishOffer.class);
         startActivity(intent);
