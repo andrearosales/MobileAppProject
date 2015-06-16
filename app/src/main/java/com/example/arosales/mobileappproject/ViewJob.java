@@ -266,7 +266,7 @@ public class ViewJob extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_global, menu);
+        getMenuInflater().inflate(R.menu.menu_student, menu);
         return true;
     }
 
@@ -309,6 +309,10 @@ public class ViewJob extends AppCompatActivity {
                 Intent intent = new Intent(this, ProfileProfessor.class);
                 startActivity(intent);
             }
+            return true;
+        }else if (id == R.id.action_notifications) {
+            Intent intent = new Intent(this, ViewNotifications.class);
+            startActivity(intent);
             return true;
         }
         else if (id == R.id.action_logout) {

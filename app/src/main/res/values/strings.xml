@@ -144,6 +144,7 @@
     <string name="home_icon">Home</string>
     <string name="profile_icon">Profile</string>
     <string name="logout_icon">Log out</string>
+    <string name="notification_icon">Notifications</string>
 
     <string name="english">English</string>
     <string name="french">French</string>
@@ -428,5 +429,5 @@
     <string name="choose_gallery">Choose from Gallery</string>
     <string name="delete">Delete</string>
     <string name="select_option">Select option</string>
-
+    <string name="new_notification">New message of</string>
 </resources>

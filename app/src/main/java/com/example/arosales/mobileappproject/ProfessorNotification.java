@@ -2,6 +2,7 @@ package com.example.arosales.mobileappproject;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -16,9 +17,14 @@ import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParsePush;
+import com.parse.ParsePushBroadcastReceiver;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.PushService;
 import com.parse.SaveCallback;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 public class ProfessorNotification extends AppCompatActivity {
@@ -139,7 +145,7 @@ public class ProfessorNotification extends AppCompatActivity {
 
     public void sendNotification(View view) {
 
-        EditText title = (EditText) findViewById(R.id.textTitle);
+        final EditText title = (EditText) findViewById(R.id.textTitle);
         final EditText message = (EditText) findViewById(R.id.textMessage);
         boolean validationError = false;
 
@@ -176,8 +182,16 @@ public class ProfessorNotification extends AppCompatActivity {
             @Override
             public void done(ParseException e) {
                 ParsePush push = new ParsePush();
+                JSONObject data = new JSONObject();
+                try {
+                    data.put("title",title.getText().toString());
+                } catch (JSONException e1) {
+                    e1.printStackTrace();
+                }
+
                 push.setChannel(course.getString("Name").replaceAll("\\s", "").replaceAll("-",""));
-                push.setMessage(message.getText().toString());
+                push.setData(data);
+                push.setMessage(getResources().getString(R.string.new_notification)+" "+course.getString("Name"));
                 push.sendInBackground();
                 dlg.dismiss();
                 finish();

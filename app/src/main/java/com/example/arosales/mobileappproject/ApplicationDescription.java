@@ -26,7 +26,7 @@ public class ApplicationDescription extends AppCompatActivity {
     private static final String CONTRACT = "com.example.arosales.mobileappproject.CONTRACT";
 
     public void goBack(View view) {
-        Intent intent= new Intent(this,ListApplication.class);
+        Intent intent = new Intent(this, ListApplication.class);
         startActivity(intent);
     }
 
@@ -118,7 +118,7 @@ public class ApplicationDescription extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_global, menu);
+        getMenuInflater().inflate(R.menu.menu_student, menu);
         return true;
     }
 
@@ -133,39 +133,39 @@ public class ApplicationDescription extends AppCompatActivity {
         if (id == R.id.action_home) {
             ParseUser currentUser = ParseUser.getCurrentUser();
             String typeUser = currentUser.getString("TypeUser");
-            if(typeUser.equals("Student")){
+            if (typeUser.equals("Student")) {
                 Intent intent = new Intent(this, StudentHome.class);
                 startActivity(intent);
-            }
-            else if (typeUser.equals("Company")){
+            } else if (typeUser.equals("Company")) {
                 Intent intent = new Intent(this, CompanyHome.class);
                 startActivity(intent);
-            }
-            else if (typeUser.equals("Teacher")){
+            } else if (typeUser.equals("Teacher")) {
                 Intent intent = new Intent(this, ProfessorHome.class);
                 startActivity(intent);
             }
             return true;
-        }
-        else if (id == R.id.action_profile) {
+        } else if (id == R.id.action_profile) {
             ParseUser currentUser = ParseUser.getCurrentUser();
             String typeUser = currentUser.getString("TypeUser");
-            if(typeUser.equals("Student")){
+            if (typeUser.equals("Student")) {
                 Intent intent = new Intent(this, ProfileStudent.class);
                 startActivity(intent);
-            }
-            else if (typeUser.equals("Company")){
+            } else if (typeUser.equals("Company")) {
                 Intent intent = new Intent(this, ProfileCompany.class);
                 startActivity(intent);
-            }else if (typeUser.equals("Teacher")){
+            } else if (typeUser.equals("Teacher")) {
                 Intent intent = new Intent(this, ProfileProfessor.class);
                 startActivity(intent);
             }
             return true;
-        }
-        else if (id == R.id.action_logout) {
+        } else if (id == R.id.action_notifications) {
+            Intent intent= new Intent(this, ViewNotifications.class);
+            startActivity(intent);
+            return true;
+        } else if (id == R.id.action_logout) {
+            Utils.unsubscribeCourses();
             ParseUser.logOut();
-            Intent intent= new Intent(this,LogIn.class);
+            Intent intent = new Intent(this, LogIn.class);
             startActivity(intent);
             return true;
         }

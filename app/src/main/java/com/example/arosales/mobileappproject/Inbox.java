@@ -42,7 +42,7 @@ public class Inbox extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inbox);
 
-        ParseUser currentUser= ParseUser.getCurrentUser();
+        ParseUser currentUser = ParseUser.getCurrentUser();
         new RetrieveFromDatabase().execute(currentUser.getObjectId());
 
     }
@@ -50,7 +50,13 @@ public class Inbox extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_global, menu);
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        String typeUser = currentUser.getString("TypeUser");
+        if (typeUser.equals("Student")) {
+            getMenuInflater().inflate(R.menu.menu_student, menu);
+        } else if(typeUser.equals("Company")){
+            getMenuInflater().inflate(R.menu.menu_global, menu);
+        }
         return true;
     }
 
@@ -65,40 +71,39 @@ public class Inbox extends AppCompatActivity {
         if (id == R.id.action_home) {
             ParseUser currentUser = ParseUser.getCurrentUser();
             String typeUser = currentUser.getString("TypeUser");
-            if(typeUser.equals("Student")){
+            if (typeUser.equals("Student")) {
                 Intent intent = new Intent(this, StudentHome.class);
                 startActivity(intent);
-            }
-            else if (typeUser.equals("Company")){
+            } else if (typeUser.equals("Company")) {
                 Intent intent = new Intent(this, CompanyHome.class);
                 startActivity(intent);
-            }
-            else if (typeUser.equals("Teacher")){
+            } else if (typeUser.equals("Teacher")) {
                 Intent intent = new Intent(this, ProfessorHome.class);
                 startActivity(intent);
             }
             return true;
-        }
-        else if (id == R.id.action_profile) {
+        } else if (id == R.id.action_profile) {
             ParseUser currentUser = ParseUser.getCurrentUser();
             String typeUser = currentUser.getString("TypeUser");
-            if(typeUser.equals("Student")){
+            if (typeUser.equals("Student")) {
                 Intent intent = new Intent(this, ProfileStudent.class);
                 startActivity(intent);
-            }
-            else if (typeUser.equals("Company")){
+            } else if (typeUser.equals("Company")) {
                 Intent intent = new Intent(this, ProfileCompany.class);
                 startActivity(intent);
-            }else if (typeUser.equals("Teacher")){
+            } else if (typeUser.equals("Teacher")) {
                 Intent intent = new Intent(this, ProfileProfessor.class);
                 startActivity(intent);
             }
             return true;
-        }
-        else if (id == R.id.action_logout) {
+        } else if (id == R.id.action_notifications) {
+            Intent intent = new Intent(this, ViewNotifications.class);
+            startActivity(intent);
+            return true;
+        } else if (id == R.id.action_logout) {
             Utils.unsubscribeCourses();
             ParseUser.logOut();
-            Intent intent= new Intent(this,LogIn.class);
+            Intent intent = new Intent(this, LogIn.class);
             startActivity(intent);
             return true;
         }
@@ -106,41 +111,42 @@ public class Inbox extends AppCompatActivity {
     }
 
     public void newMessage(View view) {
-        Intent intent= new Intent(this,SendMessage.class);
+        Intent intent = new Intent(this, SendMessage.class);
         intent.putExtra(RECEIVERTYPE, "StudentSocial");
         startActivity(intent);
     }
 
-    private class RetrieveFromDatabase extends AsyncTask<String,Void,ArrayList<Message>>{
+    private class RetrieveFromDatabase extends AsyncTask<String, Void, ArrayList<Message>> {
 
-        private ProgressDialog progressDialog= new ProgressDialog(Inbox.this);
+        private ProgressDialog progressDialog = new ProgressDialog(Inbox.this);
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
             progressDialog.setTitle("Loading messages");
-            if(!progressDialog.isShowing()){
+            if (!progressDialog.isShowing()) {
                 progressDialog.show();
             }
         }
 
         @Override
         protected ArrayList<Message> doInBackground(String... params) {
-            ArrayList<Message> result_messages=new ArrayList<Message>();
+            ArrayList<Message> result_messages = new ArrayList<Message>();
             ParseQuery<ParseObject> query = ParseQuery.getQuery("Message");
             query.include("SenderId");
-            query.whereEqualTo("ReceiverIds",params[0]);
+            query.whereEqualTo("ReceiverIds", params[0]);
 
             try {
-                List<ParseObject> results=query.find();
-                for(ParseObject p:results){
-                    Message msg= new Message();
+                List<ParseObject> results = query.find();
+                for (ParseObject p : results) {
+                    Message msg = new Message();
 
                     msg.setFrom(p.getParseUser("SenderId"));
 
-                    if(!p.get("Subject").equals(""))
+                    if (!p.get("Subject").equals(""))
                         msg.setSubject((String) p.get("Subject"));
 
-                    if(!p.get("Message").equals(""))
+                    if (!p.get("Message").equals(""))
                         msg.setMessage((String) p.get("Message"));
 
                     result_messages.add(msg);
@@ -155,15 +161,15 @@ public class Inbox extends AppCompatActivity {
         @Override
         protected void onPostExecute(ArrayList<Message> messages) {
             super.onPostExecute(messages);
-            if(progressDialog.isShowing()) {
+            if (progressDialog.isShowing()) {
                 progressDialog.dismiss();
             }
 
-            MessageAdapter mAdapter= new MessageAdapter(Inbox.this,messages);
+            MessageAdapter mAdapter = new MessageAdapter(Inbox.this, messages);
 
-            ListView list_messages= (ListView) findViewById(R.id.listMessages);
+            ListView list_messages = (ListView) findViewById(R.id.listMessages);
 
-            if(!ParseUser.getCurrentUser().getString("TypeUser").equals("Company")) {
+            if (!ParseUser.getCurrentUser().getString("TypeUser").equals("Company")) {
                 final Button sendMessage = new Button(Inbox.this);
                 Drawable background = getResources().getDrawable(R.drawable.background_color);
 
@@ -191,7 +197,7 @@ public class Inbox extends AppCompatActivity {
 
             list_messages.setAdapter(mAdapter);
             list_messages.setEmptyView(findViewById(R.id.emptyView));
-            if(ParseUser.getCurrentUser().getString("TypeUser").equals("Company")) {
+            if (ParseUser.getCurrentUser().getString("TypeUser").equals("Company")) {
                 Button newEmptyButton = (Button) findViewById(R.id.sendNewMessage);
                 newEmptyButton.setVisibility(View.GONE);
             }
