@@ -463,7 +463,7 @@ public class ProfileCompany extends AppCompatActivity {
             }
 
             queryMessage = ParseQuery.getQuery("Message");
-            queryMessage.whereEqualTo("ReceiverId", ParseUser.getCurrentUser().getObjectId());
+            queryMessage.whereEqualTo("ReceiverIds", ParseUser.getCurrentUser().getObjectId());
             resultsMessage = queryMessage.find();
             for (ParseObject p : resultsMessage) {
                 p.delete();
