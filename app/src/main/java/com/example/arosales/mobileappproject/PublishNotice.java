@@ -1,6 +1,7 @@
 package com.example.arosales.mobileappproject;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -11,6 +12,7 @@ import android.graphics.Matrix;
 import android.provider.MediaStore;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -39,7 +41,8 @@ public class PublishNotice extends AppCompatActivity {
     private static final String DESCRIPTION = "com.example.arosales.getrent.DESCRIPTION";
     private static final String TITLE = "com.example.arosales.getrent.TITLE";
     private static final String PHOTO = "com.example.arosales.getrent.PHOTO";
-    private static final int REQUEST_IMAGE_GET = 1;
+    private static final int PHOTO_PATH_CODE = 1;
+    private static final int TAKE_PHOTO_CODE = 2;
 
     private ArrayAdapter<String> adapterCategories;
     private ImageView image;
@@ -161,13 +164,43 @@ public class PublishNotice extends AppCompatActivity {
     }
 
     public void uploadPhotos(View view) {
-        Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        /*Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(intent, REQUEST_IMAGE_GET);
-        }
+        }*/
+        final String[] option = new String[]{getString(R.string.take_photo), getString(R.string.choose_gallery), getString(R.string.delete)};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(PublishNotice.this, android.R.layout.select_dialog_item, option);
+        AlertDialog.Builder builder = new AlertDialog.Builder(PublishNotice.this);
+
+        builder.setTitle(R.string.select_option);
+        builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case 0:
+                        dispatchTakenPicture();
+                        break;
+
+                    case 1:
+                        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        startActivityForResult(photoPickerIntent, PHOTO_PATH_CODE);
+                        break;
+
+                    case 2:
+                        image.setImageResource(R.mipmap.camera_ic);
+                        bitmap = null;
+                }
+
+
+            }
+        });
+        final AlertDialog dialog = builder.create();
+
+        dialog.show();
+
     }
 
-    @Override
+    /*@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == REQUEST_IMAGE_GET && resultCode == RESULT_OK){
             if(data.getData() != null){
@@ -214,6 +247,72 @@ public class PublishNotice extends AppCompatActivity {
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }*/
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        switch (requestCode) {
+            case PHOTO_PATH_CODE: {
+                if (resultCode == RESULT_OK) {
+
+                    if (null != data) {
+                        Uri selectedImage = data.getData();
+                        String[] filePathColumn = {MediaStore.Images.Media.DATA};
+
+                        Cursor cursor = getContentResolver().query(selectedImage,
+                                filePathColumn, null, null, null);
+                        cursor.moveToFirst();
+
+                        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                        path = cursor.getString(columnIndex);
+                        cursor.close();
+
+                        try {
+                            ExifInterface exif = new ExifInterface(path);
+                            byte[] imageData = exif.getThumbnail();
+                            bitmap = BitmapFactory.decodeByteArray(imageData, 0, imageData.length);
+
+                            ExifInterface ei = new ExifInterface(path);
+                            int orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+                            Matrix matrix = new Matrix();
+                            switch (orientation) {
+
+                                case ExifInterface.ORIENTATION_ROTATE_90:
+                                    matrix.postRotate(90);
+                                    bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+                                    break;
+                                case ExifInterface.ORIENTATION_ROTATE_180:
+                                    matrix.postRotate(180);
+                                    bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+                                    break;
+                            }
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        image.setImageBitmap(bitmap);
+
+                    }
+                }
+                break;
+            }
+            case TAKE_PHOTO_CODE: {
+                if (resultCode == RESULT_OK) {
+
+                    Bundle extras = data.getExtras();
+                    bitmap = (Bitmap) extras.get("data");
+                    image.setImageBitmap(bitmap);
+
+
+                }
+                break;
+            }
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
+
     }
 
     public void cancel(View view) {
@@ -292,4 +391,14 @@ public class PublishNotice extends AppCompatActivity {
         Intent intent = new Intent(this, Noticeboard.class);
         startActivity(intent);
     }
+
+    public void dispatchTakenPicture() {
+
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, TAKE_PHOTO_CODE);
+        }
+
+    }
+
 }
