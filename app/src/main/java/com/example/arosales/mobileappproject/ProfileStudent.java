@@ -33,6 +33,7 @@ public class ProfileStudent extends AppCompatActivity {
 
     private static final String INFO_NAME = "com.example.arosales.mobileappproject.INFO_NAME";
     private static final String INFO_SURNAME = "com.example.arosales.mobileappproject.INFO_SURNAME";
+    private static final String INFO_EMAIL = "com.example.arosales.mobileappproject.INFO_EMAIL";
     private static final String INFO_LOCATION = "com.example.arosales.mobileappproject.INFO_LOCATION";
     private static final String INFO_INDUSTRY = "com.example.arosales.mobileappproject.INFO_INDUSTRY";
     private static final String INFO_BIRTHDATE = "com.example.arosales.mobileappproject.INFO_BIRTHDATE";
@@ -56,6 +57,7 @@ public class ProfileStudent extends AppCompatActivity {
 
     private EditText NameView;
     private EditText SurnameView;
+    private EditText EmailView;
     private Spinner LocationView;
     private Spinner IndustryView;
     private EditText DateOfBirthView;
@@ -89,6 +91,7 @@ public class ProfileStudent extends AppCompatActivity {
 
         NameView = (EditText) findViewById(R.id.textName);
         SurnameView = (EditText) findViewById(R.id.textSurname);
+        EmailView = (EditText) findViewById(R.id.textStudentEmail);
         LocationView = (Spinner) findViewById(R.id.spinnerLocation);
         adapterLocation = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.arrayLocation));
         adapterLocation.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -151,6 +154,7 @@ public class ProfileStudent extends AppCompatActivity {
 
             NameView.setText(student.getString("Name"));
             SurnameView.setText(student.getString("Surname"));
+            EmailView.setText(student.getString("Email"));
 
 
             if (student.get("Location") == null) {
@@ -253,6 +257,7 @@ public class ProfileStudent extends AppCompatActivity {
 
         NameView = (EditText) findViewById(R.id.textName);
         SurnameView = (EditText) findViewById(R.id.textSurname);
+        EmailView = (EditText) findViewById(R.id.textStudentEmail);
         LocationView = (Spinner) findViewById(R.id.spinnerLocation);
         IndustryView = (Spinner) findViewById(R.id.spinnerIndustry);
         DateOfBirthView = (EditText) findViewById(R.id.dateBirthText);
@@ -274,6 +279,9 @@ public class ProfileStudent extends AppCompatActivity {
 
         outState.putString(INFO_NAME, NameView.getText().toString());
         outState.putString(INFO_SURNAME, SurnameView.getText().toString());
+
+        if(!EmailView.getText().toString().equals(""))
+            outState.putString(INFO_EMAIL,EmailView.getText().toString());
 
         if (!LocationView.getSelectedItem().toString().equals("-"))
             outState.putString(INFO_LOCATION, LocationView.getSelectedItem().toString());
@@ -340,6 +348,9 @@ public class ProfileStudent extends AppCompatActivity {
 
         NameView.setText(savedInstanceState.getString(INFO_NAME));
         SurnameView.setText(savedInstanceState.getString(INFO_SURNAME));
+
+        if(savedInstanceState.containsKey(INFO_EMAIL))
+            EmailView.setText(savedInstanceState.getString(INFO_EMAIL));
 
         if (savedInstanceState.containsKey(INFO_LOCATION))
             LocationView.setSelection(adapterLocation.getPosition(savedInstanceState.getString(INFO_LOCATION)));
@@ -496,6 +507,12 @@ public class ProfileStudent extends AppCompatActivity {
             }
         }
 
+        if(EmailView.getText().toString().equals("")){
+            validationError=true;
+            validationErrorMessage.append(getResources().getString(R.string.error_blank_email));
+        }
+
+
         // If there is a validation error, display the error
         if (validationError) {
             Toast.makeText(ProfileStudent.this, validationErrorMessage.toString(), Toast.LENGTH_LONG)
@@ -640,6 +657,10 @@ public class ProfileStudent extends AppCompatActivity {
         Button editButton= (Button) findViewById(R.id.editButton);
         editButton.setVisibility(View.GONE);
 
+        EmailView.setFocusable(true);
+        EmailView.setFocusableInTouchMode(true);
+        EmailView.setClickable(true);
+
         LocationView.setFocusable(true);
         LocationView.setFocusableInTouchMode(true);
         LocationView.setClickable(true);
@@ -709,6 +730,10 @@ public class ProfileStudent extends AppCompatActivity {
         SurnameView.setFocusable(false);
         SurnameView.setFocusableInTouchMode(false);
         SurnameView.setClickable(false);
+
+        EmailView.setFocusable(false);
+        EmailView.setFocusableInTouchMode(false);
+        EmailView.setClickable(false);
 
         LocationView.setFocusable(false);
         LocationView.setFocusableInTouchMode(false);
