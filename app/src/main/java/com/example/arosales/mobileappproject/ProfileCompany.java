@@ -20,6 +20,7 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -464,9 +465,12 @@ public class ProfileCompany extends AppCompatActivity {
 
             queryMessage = ParseQuery.getQuery("Message");
             queryMessage.whereEqualTo("ReceiverIds", ParseUser.getCurrentUser().getObjectId());
-            resultsMessage = queryMessage.find();
+            ArrayList<String> id = new ArrayList<>();
+            id.add(ParseUser.getCurrentUser().getObjectId());
             for (ParseObject p : resultsMessage) {
-                p.delete();
+                //p.delete();
+                p.removeAll("ReceiverIds", id);
+                p.save();
             }
 
             company.delete();

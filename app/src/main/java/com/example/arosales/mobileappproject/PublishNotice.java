@@ -135,9 +135,9 @@ public class PublishNotice extends AppCompatActivity {
         }
         outState.putString(TITLE, title.getText().toString());
         outState.putString(DESCRIPTION, description.getText().toString());
-        if(bitmap!=null){
+        if(bitmap!=null)
             outState.putParcelable(PHOTO, bitmap);
-        }
+
         super.onSaveInstanceState(outState);
     }
 
@@ -159,6 +159,10 @@ public class PublishNotice extends AppCompatActivity {
         if(savedInstanceState.containsKey(PHOTO)){
             bitmap = savedInstanceState.getParcelable(PHOTO);
             photo.setImageBitmap(bitmap);
+        }
+        else {
+            photo.setImageResource(R.mipmap.camera_ic);
+            bitmap = null;
         }
 
     }
