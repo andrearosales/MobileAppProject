@@ -97,6 +97,7 @@ public class JobSearchResults extends AppCompatActivity {
             return true;
         }
         else if (id == R.id.action_logout) {
+            Utils.unsubscribeCourses();
             ParseUser.logOut();
             Intent intent= new Intent(this,LogIn.class);
             startActivity(intent);

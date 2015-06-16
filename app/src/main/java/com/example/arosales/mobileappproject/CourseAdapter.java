@@ -323,7 +323,7 @@ public class CourseAdapter extends BaseAdapter {
 
             }else if(typeUser.equals("Teacher")){
                 Intent intent= new Intent(activity,ProfessorNotification.class);
-                intent.putExtra(COURSE,list.get(position).getCourse());
+                intent.putExtra(COURSE,list.get(position).getCourse().getId());
                 activity.startActivity(intent);
             }
 

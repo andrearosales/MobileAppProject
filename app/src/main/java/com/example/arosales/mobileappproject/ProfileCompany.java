@@ -245,6 +245,7 @@ public class ProfileCompany extends AppCompatActivity {
             }
             return true;
         } else if (id == R.id.action_logout) {
+            Utils.unsubscribeCourses();
             ParseUser.logOut();
             Intent intent = new Intent(this, LogIn.class);
             startActivity(intent);
@@ -455,7 +456,7 @@ public class ProfileCompany extends AppCompatActivity {
 
 
             ParseQuery<ParseObject> queryMessage = ParseQuery.getQuery("Message");
-            queryMessage.whereEqualTo("SenderId", ParseUser.getCurrentUser().getObjectId());
+            queryMessage.whereEqualTo("SenderId", ParseUser.getCurrentUser());
             List<ParseObject> resultsMessage = queryMessage.find();
             for (ParseObject p : resultsMessage) {
                 p.delete();

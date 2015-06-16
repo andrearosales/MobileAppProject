@@ -26,6 +26,7 @@ public class ManageSession extends Activity {
             // Start an intent for the logged in activity
             String userType = currentUser.getString("TypeUser");//true for student //false for company
             if(userType.equals("Student")) {
+                Utils.subscribeCourses();
                 startActivity(new Intent(this, StudentHome.class));
             }else if(userType.equals("Company")) {
                 startActivity(new Intent(this, CompanyHome.class));

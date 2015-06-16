@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.parse.ParsePush;
 import com.parse.ParseUser;
 
 
@@ -69,6 +70,7 @@ public class CompanyHome extends AppCompatActivity {
             return true;
         }
         else if (id == R.id.action_logout) {
+            Utils.unsubscribeCourses();
             ParseUser.logOut();
             Intent intent= new Intent(this,LogIn.class);
             startActivity(intent);

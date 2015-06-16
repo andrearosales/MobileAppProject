@@ -4,6 +4,14 @@ import android.app.Activity;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.provider.CalendarContract;
+import android.util.Log;
+
+import com.parse.ParseException;
+import com.parse.ParseInstallation;
+import com.parse.ParseObject;
+import com.parse.ParsePush;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -69,15 +77,16 @@ public class Utils {
 
         return color;
     }
-   /*
-    public static String getDateFromDay(Activity activity, ExtendedLesson lesson) {
 
-        String[] shownDays = activity.getResources().getStringArray(R.array.week_days);
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        return shownDays[lesson.getDay() - 2] + " " + dateFormat.format(lesson.getStartTime());
+    /*
+     public static String getDateFromDay(Activity activity, ExtendedLesson lesson) {
 
-    }
-*/
+         String[] shownDays = activity.getResources().getStringArray(R.array.week_days);
+         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+         return shownDays[lesson.getDay() - 2] + " " + dateFormat.format(lesson.getStartTime());
+
+     }
+ */
     public static long searchCalendarId(Activity activity) {
 
         long calendarId;
@@ -130,5 +139,61 @@ public class Utils {
         }
 
         return -1;
+    }
+
+    public static void unsubscribeCourses() {
+
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        String typeUser = currentUser.getString("TypeUser");
+
+        if (typeUser.equals("Student")) {
+            ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+            installation.remove("channels");
+            try {
+                installation.save();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static void subscribeCourses() {
+        ParseQuery<ParseObject> courseQuery = ParseQuery.getQuery("Course");
+        ParseQuery<ParseObject> studentQuery = ParseQuery.getQuery("Student");
+        studentQuery.include("StudentId");
+        studentQuery.include("CurrentStudyCourse");
+        studentQuery.whereEqualTo("StudentId", ParseUser.getCurrentUser());
+
+        try {
+            ParseObject currentStudent = studentQuery.getFirst();
+            if (currentStudent != null) {
+                ParseObject currentStudyCourse = currentStudent.getParseObject("CurrentStudyCourse");
+                if (currentStudyCourse != null) {
+                    if (currentStudyCourse.get("Courses") != null) {
+                        ArrayList<String> courses = (ArrayList<String>) currentStudyCourse.get("Courses");
+                        if (courses.size() > 0) {
+                            courseQuery.whereContainedIn("objectId", courses);
+                        }
+                        List<ParseObject> results_courses = courseQuery.find();
+                        ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+                        installation.save();
+                        for (ParseObject p : results_courses) {
+                            if (p.get("Name") != null) {
+                                ParsePush.subscribeInBackground(p.getString("Name").replaceAll("\\s", "").replaceAll("-", ""));
+                            }
+                        }
+
+
+                    }
+
+                }
+
+
+            }
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
     }
 }

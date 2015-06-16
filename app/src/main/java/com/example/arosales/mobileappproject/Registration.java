@@ -18,10 +18,14 @@ import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.GetCallback;
+import com.parse.Parse;
 import com.parse.ParseException;
+import com.parse.ParseInstallation;
 import com.parse.ParseObject;
+import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.PushService;
 import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
 
@@ -67,8 +71,7 @@ public class Registration extends AppCompatActivity {
     private int defaultTabIndex = -1;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
@@ -79,7 +82,7 @@ public class Registration extends AppCompatActivity {
         query.findInBackground(new FindCallback<ParseObject>() {
             public void done(List<ParseObject> courseList, ParseException e) {
                 if (e == null) {
-                    for (ParseObject course:courseList) {
+                    for (ParseObject course : courseList) {
                         courses.add(course.getString("Name"));
                     }
                 }
@@ -100,7 +103,7 @@ public class Registration extends AppCompatActivity {
         teacherDepartment.setAdapter(adapterTeacherDepartment);
 
         //final TabHost tabHost= (TabHost) findViewById(R.id.mainTabbHost);
-        tabHost= (TabHost) findViewById(R.id.mainTabbHost);
+        tabHost = (TabHost) findViewById(R.id.mainTabbHost);
         tabHost.setup();
 
         createTabs(tabHost);
@@ -117,28 +120,26 @@ public class Registration extends AppCompatActivity {
 
         teacherName = (EditText) findViewById(R.id.TeacherNameTxt);
         teacherSurname = (EditText) findViewById(R.id.TeacherSrnameTxt);
-        teacherUsername= (EditText) findViewById(R.id.teacherUsernameTxt);
+        teacherUsername = (EditText) findViewById(R.id.teacherUsernameTxt);
         teacherPassword = (EditText) findViewById(R.id.teacherPasswordTxt);
 
 
     }
 
-    public void registerCompany(View v)
-    {
-        String []data=  new String[3];
+    public void registerCompany(View v) {
+        String[] data = new String[3];
         // Check for input data validation error, display the error
         //false used as a flag to say company
         if (validateRegisterInput("Company")) {
             data[0] = location.getSelectedItem().toString();
             data[1] = address.getText().toString();
             data[2] = companyName.getText().toString();
-            registerUser("Company",companyPassword.getText().toString(),data);
+            registerUser("Company", companyPassword.getText().toString(), data);
         }
     }
 
-    public void registerTeacher(View v)
-    {
-        String []data=  new String[4];
+    public void registerTeacher(View v) {
+        String[] data = new String[4];
         // Check for input data validation error, display the error
         //false used as a flag to say company
         if (validateRegisterInput("Teacher")) {
@@ -150,9 +151,8 @@ public class Registration extends AppCompatActivity {
         }
     }
 
-    public void registerStudent(View v)
-    {
-        String []data=  new String[5];
+    public void registerStudent(View v) {
+        String[] data = new String[5];
         // Check for input data validation error, display the error
         //true used as a flag to say student
         if (validateRegisterInput("Student")) {
@@ -161,44 +161,42 @@ public class Registration extends AppCompatActivity {
             data[2] = studentUsername.getText().toString();
             data[3] = studentEmail.getText().toString();
             data[4] = studentCourse.getSelectedItem().toString();
-            registerUser("Student",studentPassword.getText().toString(), data);
+            registerUser("Student", studentPassword.getText().toString(), data);
         }
     }
 
     //use type value = true for student and false for company data
-    private boolean validateRegisterInput(String type)
-    {
+    private boolean validateRegisterInput(String type) {
         // Validate the sign up data
         boolean validationError = false;
         StringBuilder validationErrorMessage =
-                new StringBuilder(getResources().getString(R.string.error_intro)+"\n");
-        if(type.equals("Student")) {
+                new StringBuilder(getResources().getString(R.string.error_intro) + "\n");
+        if (type.equals("Student")) {
             if (isEmpty(studentName)) {
                 validationError = true;
-                validationErrorMessage.append(getResources().getString(R.string.error_blank_name)+"\n");
+                validationErrorMessage.append(getResources().getString(R.string.error_blank_name) + "\n");
             }
             if (isEmpty(studentSurname)) {
                 validationError = true;
-                validationErrorMessage.append(getResources().getString(R.string.error_blank_surname)+"\n");
+                validationErrorMessage.append(getResources().getString(R.string.error_blank_surname) + "\n");
             }
             if (isEmpty(studentUsername)) {
                 validationError = true;
-                validationErrorMessage.append(getResources().getString(R.string.error_blank_username)+"\n");
+                validationErrorMessage.append(getResources().getString(R.string.error_blank_username) + "\n");
             }
             if (isEmpty(studentEmail)) {
                 validationError = true;
-                validationErrorMessage.append(getResources().getString(R.string.error_blank_email)+"\n");
+                validationErrorMessage.append(getResources().getString(R.string.error_blank_email) + "\n");
             }
             if (studentCourse.getSelectedItem().toString().equals("-")) {
                 validationError = true;
-                validationErrorMessage.append(getResources().getString(R.string.error_blank_course)+"\n");
+                validationErrorMessage.append(getResources().getString(R.string.error_blank_course) + "\n");
             }
             if (isEmpty(studentPassword)) {
                 validationError = true;
-                validationErrorMessage.append(getResources().getString(R.string.error_blank_password)+"\n");
+                validationErrorMessage.append(getResources().getString(R.string.error_blank_password) + "\n");
             }
-        }
-        else if(type.equals("Company")) {
+        } else if (type.equals("Company")) {
             if (isEmpty(companyName)) {
                 validationError = true;
                 validationErrorMessage.append(getResources().getString(R.string.error_blank_name) + "\n");
@@ -215,27 +213,26 @@ public class Registration extends AppCompatActivity {
                 validationError = true;
                 validationErrorMessage.append(getResources().getString(R.string.error_blank_password) + "\n");
             }
-        }
-        else if(type.equals("Teacher")){
+        } else if (type.equals("Teacher")) {
             if (isEmpty(teacherName)) {
                 validationError = true;
-                validationErrorMessage.append(getResources().getString(R.string.error_blank_name)+"\n");
+                validationErrorMessage.append(getResources().getString(R.string.error_blank_name) + "\n");
             }
             if (isEmpty(teacherSurname)) {
                 validationError = true;
-                validationErrorMessage.append(getResources().getString(R.string.error_blank_surname)+"\n");
+                validationErrorMessage.append(getResources().getString(R.string.error_blank_surname) + "\n");
             }
             if (isEmpty(teacherUsername)) {
                 validationError = true;
-                validationErrorMessage.append(getResources().getString(R.string.error_blank_username)+"\n");
+                validationErrorMessage.append(getResources().getString(R.string.error_blank_username) + "\n");
             }
             if (teacherDepartment.getSelectedItem().toString().equals("-")) {
                 validationError = true;
-                validationErrorMessage.append(getResources().getString(R.string.error_blank_course)+"\n");
+                validationErrorMessage.append(getResources().getString(R.string.error_blank_course) + "\n");
             }
             if (isEmpty(teacherPassword)) {
                 validationError = true;
-                validationErrorMessage.append(getResources().getString(R.string.error_blank_password)+"\n");
+                validationErrorMessage.append(getResources().getString(R.string.error_blank_password) + "\n");
             }
         }
 
@@ -264,9 +261,8 @@ public class Registration extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void createTabs(final TabHost tabHost)
-    {
-        String []tabNames = getResources().getStringArray(R.array.tabNames);
+    private void createTabs(final TabHost tabHost) {
+        String[] tabNames = getResources().getStringArray(R.array.tabNames);
         TabHost.TabSpec spec1 = tabHost.newTabSpec("tab1");
         spec1.setContent(R.id.scroller1);
         spec1.setIndicator(tabNames[0]);//"Mon", null);//res.getDrawable(R..drawable.tab_icon);
@@ -301,19 +297,18 @@ public class Registration extends AppCompatActivity {
         }
     }
 
-    protected void registerUser(final String type,String password,String[] data) {
+    protected void registerUser(final String type, String password, String[] data) {
         ParseUser user = new ParseUser();
         final ParseObject registerStudent = new ParseObject("Student");
         final ParseObject registerCompany = new ParseObject("Company");
         final ParseObject registerTeacher = new ParseObject("Teacher");
-        final String username= data[2];
+        final String username = data[2];
 
         user.setUsername(username);
         user.setPassword(password);
         // String id =  getObjectID(username,password);
-        if(type.equals("Student"))
-        {
-            registerStudent.put("Name",data[0].toLowerCase());//data[0] name of student
+        if (type.equals("Student")) {
+            registerStudent.put("Name", data[0].toLowerCase());//data[0] name of student
             registerStudent.put("Surname", data[1].toLowerCase());//data[1] surname of student
             registerStudent.put("Email", data[3]);//data[2] email of student
 
@@ -328,18 +323,16 @@ public class Registration extends AppCompatActivity {
             });
             user.put("TypeUser", "Student");
         } else if (type.equals("Company")) {
-            registerCompany.put("Name",data[2].toLowerCase());
-            registerCompany.put("Location",data[0]);//data[0] is Company Location
+            registerCompany.put("Name", data[2].toLowerCase());
+            registerCompany.put("Location", data[0]);//data[0] is Company Location
             registerCompany.put("Address", data[1]);//data[1] is address of company
-            user.put("TypeUser","Company");
-        }
-        else if(type.equals("Teacher")){
-            registerTeacher.put("Name",data[0]);//data[0] name of teacher
+            user.put("TypeUser", "Company");
+        } else if (type.equals("Teacher")) {
+            registerTeacher.put("Name", data[0]);//data[0] name of teacher
             registerTeacher.put("Surname", data[1]);//data[1] surname of teacher
-            registerTeacher.put("Department",data[3]);
+            registerTeacher.put("Department", data[3]);
             user.put("TypeUser", "Teacher");
         }
-
 
 
         // Set up a progress dialog
@@ -355,7 +348,7 @@ public class Registration extends AppCompatActivity {
                     dlg.dismiss();
                     if (type.equals("Student")) {
                         //Toast.makeText(ParseApplication.this, ParseUser.getCurrentUser().toString(), Toast.LENGTH_SHORT).show();
-                        registerStudent.put("StudentId", ParseUser.getCurrentUser());//act like a foreign key
+                        registerStudent.put("StudentId", ParseUser.getCurrentUser());
                         registerStudent.saveInBackground(new SaveCallback() {
                             @Override
                             public void done(ParseException e) {
@@ -367,7 +360,7 @@ public class Registration extends AppCompatActivity {
                                         new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int id) {
                                                 dialog.cancel();
-                                                Intent intent = new Intent(Registration.this, StudentHome.class);
+                                                Intent intent = new Intent(Registration.this, ManageSession.class);
                                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                                 startActivity(intent);
                                             }
@@ -393,7 +386,7 @@ public class Registration extends AppCompatActivity {
                                         new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int id) {
                                                 dialog.cancel();
-                                                Intent intent = new Intent(Registration.this, CompanyHome.class);
+                                                Intent intent = new Intent(Registration.this, ManageSession.class);
                                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                                 startActivity(intent);
                                             }
@@ -418,7 +411,7 @@ public class Registration extends AppCompatActivity {
                                         new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int id) {
                                                 dialog.cancel();
-                                                Intent intent = new Intent(Registration.this, ProfessorHome.class);
+                                                Intent intent = new Intent(Registration.this, ManageSession.class);
                                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                                 startActivity(intent);
                                             }

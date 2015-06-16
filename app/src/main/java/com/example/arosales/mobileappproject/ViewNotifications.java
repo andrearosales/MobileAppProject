@@ -3,13 +3,14 @@ package com.example.arosales.mobileappproject;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.parse.ParseUser;
 
 
-public class ViewNotifications extends ActionBarActivity {
+public class ViewNotifications extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +68,7 @@ public class ViewNotifications extends ActionBarActivity {
             return true;
         }
         else if (id == R.id.action_logout) {
+            Utils.unsubscribeCourses();
             ParseUser.logOut();
             Intent intent= new Intent(this,LogIn.class);
             startActivity(intent);

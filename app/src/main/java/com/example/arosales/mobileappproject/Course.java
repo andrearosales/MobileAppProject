@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * Created by ricardogarcia on 09/03/15.
  */
-public class Course implements Serializable{
+public class Course{
 
     private String id;
     private String name;

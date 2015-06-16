@@ -8,6 +8,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.parse.ParseException;
+import com.parse.ParseInstallation;
 import com.parse.ParseUser;
 
 
@@ -68,6 +70,7 @@ public class ProfessorHome extends AppCompatActivity {
             return true;
         }
         else if (id == R.id.action_logout) {
+            Utils.unsubscribeCourses();
             ParseUser.logOut();
             Intent intent= new Intent(this,LogIn.class);
             startActivity(intent);
