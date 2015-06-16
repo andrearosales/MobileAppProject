@@ -33,7 +33,6 @@
             android:paddingLeft="@dimen/padding_left"
             android:textSize="@dimen/text_size" />
 
-
         <Button
             android:id="@+id/buttonSaveDelete"
             android:layout_width="0dp"
