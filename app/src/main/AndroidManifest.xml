@@ -171,7 +171,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyA_GYQPSLcBXvRH5htN2R-Iw1lW3xJPlOQ" />
+            android:value="AIzaSyDEiNaCRGPgeCkIg9y_Fs9zKSavT1oH-nY" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />

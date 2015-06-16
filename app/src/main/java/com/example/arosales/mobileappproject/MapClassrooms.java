@@ -57,7 +57,7 @@ public class MapClassrooms extends AppCompatActivity {
                     ParseGeoPoint geopoint= parseClassroom.getParseGeoPoint("Location");
                     if(geopoint!=null){
                         mapFragment.addMarker(new MarkerOptions().position(new LatLng(geopoint.getLatitude(),geopoint.getLongitude())).title(classroom));
-                        mapFragment.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(geopoint.getLatitude(),geopoint.getLongitude()), 20));
+                        mapFragment.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(geopoint.getLatitude(),geopoint.getLongitude()), 17));
                     }
                 }
             }
