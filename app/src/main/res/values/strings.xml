@@ -261,6 +261,16 @@
         <item>Greater than 10000 employees</item>
     </string-array>
 
+    <string-array name="arrayNotices">
+        <item>-</item>
+        <item>Looking for rent</item>
+        <item>Offering rent</item>
+        <item>Selling used books</item>
+        <item>Buying used books</item>
+        <item>Selling class notes</item>
+        <item>Buying class notes</item>
+    </string-array>
+
     <string name="register">Register</string>
     <string name="registerHere">Register here</string>
     <string name="registration">Registration</string>
@@ -279,7 +289,7 @@
 
     <string name="error_invalid_Jobposition">Invalid Job Position</string>
     <string name="error_invalid_location">Invalid Location</string>
-    <string name="error_invalid_Description">Invalid Description</string>
+    <string name="error_invalid_description">Invalid Description</string>
     <string name="error_invalid_Salary">Invalid Salary</string>
     <string name="error_invalid_typeofjob">Invalid Type of Job</string>
     <string name="error_invalid_duration">Invalid Job duration</string>
@@ -405,5 +415,14 @@
     <string name="error_blank_message">Invalid message</string>
     <string name="sendnotificationtitle">Notifications</string>
     <string name="sendnotification">Sending notification...</string>
+    <string name="contact_button">Contact publisher</string>
+    <string name="delete_notice">Delete Notice</string>
+    <string name="error_invalid_notice_category">Select a category</string>
+    <string name="error_invalid_title">Insert a title</string>
+    <string name="error_insert_description">Insert a description</string>
+    <string name="publication_progress">Notice progress</string>
+    <string name="publish_notice_message">Notice publication in progress</string>
+    <string name="photo">Notice photo</string>
+    <string name="tab_below">Tab below to update a photo</string>
 
 </resources>

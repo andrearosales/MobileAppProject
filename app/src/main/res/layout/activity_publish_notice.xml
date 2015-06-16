@@ -118,6 +118,37 @@
                         android:textSize="@dimen/text_size" />
                 </TableRow>
 
+                <TableRow android:layout_marginTop="@dimen/margin_top_title">
+
+                    <TextView
+                        android:id="@+id/tabInformation"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        android:paddingLeft="@dimen/padding_left"
+                        android:text="@string/tab_below"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size"
+                        android:textStyle="italic"/>
+
+                </TableRow>
+
+                <TableRow>
+
+                    <ImageView
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/image_height"
+                        android:id="@+id/noticeImage"
+                        android:layout_span="6"
+                        android:layout_marginLeft="@dimen/padding_left"
+                        android:layout_marginRight="@dimen/padding_left"
+                        android:clickable="true"
+                        android:onClick="uploadPhotos"/>
+
+                </TableRow>
+
             </TableLayout>
 
             <Button
@@ -129,7 +160,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/margin_top"
                 android:background="@drawable/background_color"
-                android:onClick=""
+                android:onClick="publishNotice"
                 android:text="@string/publish_notice_button"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size"
@@ -144,7 +175,7 @@
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/background_color"
                 android:layout_marginTop="@dimen/margin_top"
-                android:onClick=""
+                android:onClick="cancel"
                 android:text="@string/cancel_button"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size"

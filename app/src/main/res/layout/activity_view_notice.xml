@@ -40,8 +40,7 @@
                 android:paddingLeft="@dimen/padding_left"
                 android:layout_below="@+id/noticeTitle"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size"
-                android:textStyle="bold"/>
+                android:textSize="@dimen/text_size"/>
 
             <TextView android:text="@string/description"
                 android:id="@+id/noticeDescription"
@@ -52,22 +51,86 @@
                 android:paddingLeft="@dimen/padding_left"
                 android:layout_below="@+id/noticeCategory"
                 android:textColor="@color/black"
+                android:textSize="@dimen/text_size"/>
+
+            <TextView
+                android:id="@+id/contact_text"
+                android:layout_marginTop="@dimen/margin_top_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_below="@id/noticeDescription"
+                android:gravity="start"
+                android:paddingLeft="@dimen/padding_left"
+                android:text="@string/contact_button"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size" />
+
+            <TextView
+                android:id="@+id/sendMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="start"
+                android:layout_marginLeft="@dimen/margin_top_title"
+                android:layout_below="@id/contact_text"
+                android:textColor="@color/black"
                 android:textSize="@dimen/text_size"
-                android:textStyle="bold"/>
+                android:textStyle="italic"
+                android:text="@string/send_button"
+                android:clickable="true"
+                android:onClick="sendMessage"/>
+
+            <TextView
+                android:id="@+id/phoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="start"
+                android:layout_marginLeft="@dimen/margin_top_title"
+                android:layout_below="@id/sendMessage"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size"
+                android:textStyle="italic"
+                android:clickable="true"
+                android:onClick="dialPhoneNumber"/>
+
+            <TextView
+                android:id="@+id/emailOwner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="start"
+                android:layout_marginLeft="@dimen/margin_top_title"
+                android:layout_below="@id/phoneNumber"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size"
+                android:textStyle="italic"
+                android:clickable="true"
+                android:onClick="sendEmail"/>
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/image_height"
+                android:id="@+id/noticeImage"
+                android:layout_marginLeft="@dimen/padding_left"
+                android:layout_marginRight="@dimen/padding_left"
+                android:layout_below="@id/emailOwner"
+                android:contentDescription="@string/photo"/>
 
             <Button
-                android:id="@+id/contactDelete_button"
+                android:id="@+id/delete_button"
                 android:layout_width="@dimen/width_buttons"
                 android:layout_height="@dimen/button_height"
                 android:layout_margin="@dimen/margin_top_title"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@+id/noticeDescription"
-                android:onClick=""
+                android:layout_below="@+id/noticeImage"
+                android:onClick="deleteNotice"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size"
                 android:background="@drawable/background_color"
                 android:textStyle="bold"
-                />
+                android:text="@string/delete_notice"/>
 
             <Button
                 android:text="@string/back_noticeboard_button"
@@ -75,9 +138,9 @@
                 android:layout_width="@dimen/width_buttons"
                 android:layout_height="@dimen/button_height"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@+id/contactDelete_button"
-                android:layout_margin="@dimen/margin_top"
-                android:onClick=""
+                android:layout_below="@+id/delete_button"
+                android:layout_marginTop="@dimen/margin_top"
+                android:onClick="goBack"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size"
                 android:background="@drawable/background_color"
