@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by ricardogarcia on 12/06/15.
  */
-public class ConsultingHour implements Serializable{
+public class ConsultingHour{
 
     private String id;
     private Course course;

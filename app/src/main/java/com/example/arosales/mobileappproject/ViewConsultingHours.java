@@ -143,6 +143,7 @@ public class ViewConsultingHours extends AppCompatActivity {
                                 List<ParseObject> result_hours = consultingInfoQuery.find();
                                 for (ParseObject parsedHour : result_hours) {
                                     ConsultingHour consultingHour = new ConsultingHour();
+                                    consultingHour.setId(parsedHour.getObjectId());
                                     if (parsedHour.get("Time") != null)
                                         consultingHour.setTime(parsedHour.get("Time").toString());
                                     if (parsedHour.get("Place") != null)
@@ -232,8 +233,10 @@ public class ViewConsultingHours extends AppCompatActivity {
 
         list_students.setAdapter(cAdapter);
         list_students.setEmptyView(findViewById(R.id.emptyView));
-
-
     }
 }
+
+    public void goBack(View view){
+        finish();
+    }
 }

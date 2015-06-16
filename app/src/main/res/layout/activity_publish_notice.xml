@@ -118,22 +118,7 @@
                         android:textSize="@dimen/text_size" />
                 </TableRow>
 
-                <TableRow android:layout_marginTop="@dimen/margin_top_title">
 
-                    <TextView
-                        android:id="@+id/tabInformation"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
-                        android:gravity="start"
-                        android:paddingLeft="@dimen/padding_left"
-                        android:text="@string/tab_below"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size"
-                        android:textStyle="italic"/>
-
-                </TableRow>
 
                 <TableRow>
 
@@ -145,7 +130,8 @@
                         android:layout_marginLeft="@dimen/padding_left"
                         android:layout_marginRight="@dimen/padding_left"
                         android:clickable="true"
-                        android:onClick="uploadPhotos"/>
+                        android:onClick="uploadPhotos"
+                        android:src="@mipmap/camera_ic"/>
 
                 </TableRow>
 

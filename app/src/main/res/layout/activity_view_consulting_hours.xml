@@ -52,7 +52,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/margin_top"
             android:background="@drawable/background_color"
-            android:onClick=""
+            android:onClick="goBack"
             android:text="@string/back_didacticalmenu_button"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size"

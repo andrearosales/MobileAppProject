@@ -25,17 +25,15 @@ import java.util.List;
  */
 public class ConsultingHourAdapter extends BaseAdapter{
 
-    private static final String CONSULTING_HOUR = "com.example.arosales.mobileappproject.CONSULTING_HOUR";
+    public static final String CONSULTING_HOUR = "com.example.arosales.mobileappproject.CONSULTING_HOUR";
     private LayoutInflater inflater;
     private Activity activity;
     private List<ConsultingHour> listHours;
-    private BaseAdapter adapter;
 
     public ConsultingHourAdapter(Activity activity, ArrayList list) {
         inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.activity = activity;
         this.listHours = list;
-        adapter = this;
     }
 
     @Override
@@ -126,7 +124,7 @@ public class ConsultingHourAdapter extends BaseAdapter{
                     @Override
                     public void onClick(View view) {
                         Intent intent=new Intent(activity,UpdateConsultingHours.class);
-                        intent.putExtra(CONSULTING_HOUR, listHours.get(position));
+                        intent.putExtra(CONSULTING_HOUR, listHours.get(position).getId());
                         activity.startActivity(intent);
                     }
                 });

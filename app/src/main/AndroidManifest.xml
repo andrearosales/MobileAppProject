@@ -182,7 +182,8 @@
         </activity>
         <activity
             android:name=".ProfessorNotification"
-            android:label="@string/title_activity_professor_notification" >
+            android:label="@string/title_activity_professor_notification"
+            android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
         <activity
             android:name=".ProfessorConsultingHours"
@@ -190,7 +191,8 @@
         </activity>
         <activity
             android:name=".UpdateConsultingHours"
-            android:label="@string/title_activity_update_consulting_hours" >
+            android:label="@string/title_activity_update_consulting_hours"
+            android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
         <activity
             android:name=".DidacticalInfoMenu"
@@ -206,7 +208,8 @@
         </activity>
         <activity
             android:name=".PublishNotice"
-            android:label="@string/title_activity_publish_notice" >
+            android:label="@string/title_activity_publish_notice"
+            android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
         <activity
             android:name=".ViewNotice"
@@ -214,11 +217,13 @@
         </activity>
         <activity
             android:name=".EditNotice"
-            android:label="@string/title_activity_edit_notice" >
+            android:label="@string/title_activity_edit_notice"
+            android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
         <activity
             android:name=".SearchClassrooms"
-            android:label="@string/title_activity_search_classrooms" >
+            android:label="@string/title_activity_search_classrooms"
+            android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
         <activity
             android:name=".MapClassrooms"
@@ -238,7 +243,8 @@
         </activity>
         <activity
             android:name=".SearchTimetables"
-            android:label="@string/title_activity_search_timetables" >
+            android:label="@string/title_activity_search_timetables"
+            android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
 
         <service android:name="com.parse.PushService" />
