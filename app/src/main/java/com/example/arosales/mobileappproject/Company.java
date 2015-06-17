@@ -17,6 +17,7 @@ public class Company implements Serializable{
     private String website;
     private String clients;
 
+
     public String getClients() {
         return clients;
     }
