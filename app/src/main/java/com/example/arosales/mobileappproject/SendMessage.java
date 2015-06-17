@@ -256,7 +256,7 @@ public class SendMessage extends AppCompatActivity {
         ParseQuery queryStudent = new ParseQuery("Student");
         queryStudent.include("StudentId");
         queryStudent.whereNotEqualTo("StudentId", ParseUser.getCurrentUser());
-
+        queryStudent.orderByAscending("Name");
         try {
             List<ParseObject> results=queryStudent.find();
             for(ParseObject p:results){
