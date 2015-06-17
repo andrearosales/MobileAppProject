@@ -120,13 +120,14 @@
 
 
 
-                <TableRow>
+                <TableRow android:layout_marginTop="@dimen/margin_top"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center">
 
                     <ImageView
-                        android:layout_width="fill_parent"
+                        android:layout_width="match_parent"
                         android:layout_height="@dimen/image_height"
                         android:id="@+id/noticeImage"
-                        android:layout_span="6"
                         android:layout_marginLeft="@dimen/padding_left"
                         android:layout_marginRight="@dimen/padding_left"
                         android:clickable="true"

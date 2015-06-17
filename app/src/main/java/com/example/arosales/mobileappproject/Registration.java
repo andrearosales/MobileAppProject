@@ -31,6 +31,8 @@ import com.parse.SignUpCallback;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class Registration extends AppCompatActivity {
@@ -187,6 +189,12 @@ public class Registration extends AppCompatActivity {
             if (isEmpty(studentEmail)) {
                 validationError = true;
                 validationErrorMessage.append(getResources().getString(R.string.error_blank_email) + "\n");
+            }
+            else {
+                if(!isEmailValid(studentEmail.getText().toString())){
+                    validationError = true;
+                    validationErrorMessage.append(getResources().getString(R.string.error_invalid_email) + "\n");
+                }
             }
             if (studentCourse.getSelectedItem().toString().equals("-")) {
                 validationError = true;
@@ -481,6 +489,20 @@ public class Registration extends AppCompatActivity {
         if (tabHost == null) {
             this.setContentView(R.layout.activity_registration);
         }
+    }
+
+    public static boolean isEmailValid(String email) {
+        boolean isValid = false;
+
+        String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
+        CharSequence inputStr = email;
+
+        Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(inputStr);
+        if (matcher.matches()) {
+            isValid = true;
+        }
+        return isValid;
     }
 
 }

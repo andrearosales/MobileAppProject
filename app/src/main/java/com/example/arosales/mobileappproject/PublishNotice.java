@@ -172,10 +172,6 @@ public class PublishNotice extends AppCompatActivity {
     }
 
     public void uploadPhotos(View view) {
-        /*Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(intent, REQUEST_IMAGE_GET);
-        }*/
         final String[] option = new String[]{getString(R.string.take_photo), getString(R.string.choose_gallery), getString(R.string.delete)};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(PublishNotice.this, android.R.layout.select_dialog_item, option);
         AlertDialog.Builder builder = new AlertDialog.Builder(PublishNotice.this);
@@ -208,55 +204,6 @@ public class PublishNotice extends AppCompatActivity {
 
     }
 
-    /*@Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == REQUEST_IMAGE_GET && resultCode == RESULT_OK){
-            if(data.getData() != null){
-                Uri selectedImage = data.getData();
-
-                String[] filePathColumn = {MediaStore.Images.Media.DATA};
-
-                Cursor cursor = getContentResolver().query(selectedImage,
-                        filePathColumn, null, null, null);
-                cursor.moveToFirst();
-
-                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                path = cursor.getString(columnIndex);
-                cursor.close();
-                final int THUMBNAIL_SIZE = 64;
-
-                try {
-                    InputStream is = getContentResolver().openInputStream(selectedImage);
-                    bitmap = BitmapFactory.decodeStream(is);
-                    is.close();
-                    bitmap = Bitmap.createScaledBitmap(bitmap, THUMBNAIL_SIZE, THUMBNAIL_SIZE, false);
-
-                    ExifInterface ei = new ExifInterface(path);
-                    int orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
-                    Matrix matrix = new Matrix();
-                    switch (orientation) {
-
-                        case ExifInterface.ORIENTATION_ROTATE_90:
-                            matrix.postRotate(90);
-                            bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-                            break;
-                        case ExifInterface.ORIENTATION_ROTATE_180:
-                            matrix.postRotate(180);
-                            bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-                            break;
-                    }
-
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                image.setImageBitmap(bitmap);
-            }
-        }
-        super.onActivityResult(requestCode, resultCode, data);
-    }*/
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -277,6 +224,7 @@ public class PublishNotice extends AppCompatActivity {
                         cursor.close();
 
                         try {
+
                             ExifInterface exif = new ExifInterface(path);
                             byte[] imageData = exif.getThumbnail();
                             bitmap = BitmapFactory.decodeByteArray(imageData, 0, imageData.length);
@@ -311,9 +259,8 @@ public class PublishNotice extends AppCompatActivity {
 
                     Bundle extras = data.getExtras();
                     bitmap = (Bitmap) extras.get("data");
+
                     image.setImageBitmap(bitmap);
-
-
                 }
                 break;
             }

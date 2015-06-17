@@ -28,6 +28,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ProfileStudent extends AppCompatActivity {
 
@@ -511,7 +513,12 @@ public class ProfileStudent extends AppCompatActivity {
             validationError=true;
             validationErrorMessage.append(getResources().getString(R.string.error_blank_email));
         }
-
+        else {
+            if(!isEmailValid(EmailView.getText().toString())){
+                validationError = true;
+                validationErrorMessage.append(getResources().getString(R.string.error_invalid_email) + "\n");
+            }
+        }
 
         // If there is a validation error, display the error
         if (validationError) {
@@ -888,4 +895,17 @@ public class ProfileStudent extends AppCompatActivity {
 
     }
 
+    public static boolean isEmailValid(String email) {
+        boolean isValid = false;
+
+        String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
+        CharSequence inputStr = email;
+
+        Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(inputStr);
+        if (matcher.matches()) {
+            isValid = true;
+        }
+        return isValid;
+    }
 }
