@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -268,7 +269,8 @@ public class SendMessage extends AppCompatActivity {
 
         final ReceiverAdapter receiverAdapter= new ReceiverAdapter(SendMessage.this,receivers);
         ListView list_messages= (ListView) layout.findViewById(R.id.listStudents);
-        /*EditText filter = new EditText(SendMessage.this);
+
+        EditText filter = new EditText(SendMessage.this);
         filter.setHeight(ActionBar.LayoutParams.WRAP_CONTENT);
         filter.setWidth(ActionBar.LayoutParams.MATCH_PARENT);
         filter.setHint("Filter by Name");
@@ -281,15 +283,17 @@ public class SendMessage extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Log.d("Text changed","Text changed");
+                /*
                 receivers = searchStudents(s);
-                receiverAdapter.notifyDataSetChanged();
+                receiverAdapter.notifyDataSetChanged();*/
             }
 
             @Override
             public void afterTextChanged(Editable s) {
             }
         });
-        list_messages.addHeaderView(filter);*/
+        list_messages.addHeaderView(filter);
 
         list_messages.setAdapter(receiverAdapter);
 

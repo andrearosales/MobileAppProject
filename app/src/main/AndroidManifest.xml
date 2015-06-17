@@ -41,117 +41,91 @@
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
-            android:name=".StudentHome"
-            android:label="@string/title_activity_student_home" >
+            android:name=".StudentHome" >
         </activity>
         <activity
-            android:name=".CompanyHome"
-            android:label="@string/title_activity_company_home" >
+            android:name=".CompanyHome">
         </activity>
         <activity
-            android:name=".ProfessorHome"
-            android:label="@string/title_activity_professor_home" >
+            android:name=".ProfessorHome" >
         </activity>
         <activity
             android:name=".Registration"
-            android:label="@string/title_activity_registration"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".ProfileCompany"
-            android:label="@string/title_activity_profile_company"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
-            android:name=".SearchStudents"
-            android:label="@string/title_activity_search_students" >
+            android:name=".SearchStudents">
         </activity>
         <activity
             android:name=".ResultStudents"
-            android:label="@string/title_activity_result_students"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
-            android:name=".ViewStudent"
-            android:label="@string/title_activity_view_student" >
+            android:name=".ViewStudent">
         </activity>
         <activity
             android:name=".SendMessage"
-            android:label="@string/title_activity_send_message"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
-            android:name=".ListJobs"
-            android:label="@string/title_activity_list_jobs" >
+            android:name=".ListJobs">
         </activity>
         <activity
             android:name=".UpdateOffer"
-            android:label="@string/title_activity_update_offer"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".PublishOffer"
-            android:label="@string/title_activity_publish_offer"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
-            android:name=".Inbox"
-            android:label="@string/title_activity_inbox" >
+            android:name=".Inbox">
         </activity>
         <activity
-            android:name=".InboxDescription"
-            android:label="@string/title_activity_inbox_description" >
+            android:name=".InboxDescription">
         </activity>
         <activity
-            android:name=".ListApplicant"
-            android:label="@string/title_activity_list_applicant" >
+            android:name=".ListApplicant">
         </activity>
         <activity
-            android:name=".ApplicantDescription"
-            android:label="@string/title_activity_applicant_description" >
+            android:name=".ApplicantDescription" >
         </activity>
         <activity
             android:name=".ProfileStudent"
-            android:label="@string/title_activity_profile_student"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".CompanySearch"
-            android:label="@string/title_activity_company_search"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
-            android:name=".CompanySearchResults"
-            android:label="@string/title_activity_company_search_results" >
+            android:name=".CompanySearchResults">
         </activity>
         <activity
-            android:name=".ViewCompany"
-            android:label="@string/title_activity_view_company" >
+            android:name=".ViewCompany">
         </activity>
         <activity
             android:name=".JobSearch"
-            android:label="@string/title_activity_job_search"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
-            android:name=".JobSearchResults"
-            android:label="@string/title_activity_job_search_results" >
+            android:name=".JobSearchResults">
         </activity>
         <activity
-            android:name=".ViewJob"
-            android:label="@string/title_activity_view_job" >
+            android:name=".ViewJob">
         </activity>
         <activity
-            android:name=".ListApplication"
-            android:label="@string/title_activity_list_application" >
+            android:name=".ListApplication">
         </activity>
         <activity
-            android:name=".ApplicationDescription"
-            android:label="@string/title_activity_application_description" >
+            android:name=".ApplicationDescription">
         </activity>
         <activity
             android:name=".ProfileProfessor"
-            android:label="@string/title_activity_profile_professor"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
@@ -177,73 +151,53 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".ProfessorCourses"
-            android:label="@string/title_activity_professor_courses" >
+            android:name=".ProfessorCourses">
         </activity>
         <activity
             android:name=".ProfessorNotification"
-            android:label="@string/title_activity_professor_notification"
             android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
         <activity
-            android:name=".ProfessorConsultingHours"
-            android:label="@string/title_activity_professor_consulting_hours" >
+            android:name=".ProfessorConsultingHours">
         </activity>
         <activity
             android:name=".UpdateConsultingHours"
-            android:label="@string/title_activity_update_consulting_hours"
             android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
         <activity
-            android:name=".DidacticalInfoMenu"
-            android:label="@string/title_activity_didactical_info_menu" >
+            android:name=".DidacticalInfoMenu">
         </activity>
         <activity
-            android:name=".JobPlacementMenu"
-            android:label="@string/title_activity_job_placement_menu" >
+            android:name=".JobPlacementMenu">
         </activity>
         <activity
-            android:name=".Noticeboard"
-            android:label="@string/title_activity_noticeboard" >
+            android:name=".Noticeboard">
         </activity>
         <activity
             android:name=".PublishNotice"
-            android:label="@string/title_activity_publish_notice"
             android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
         <activity
-            android:name=".ViewNotice"
-            android:label="@string/title_activity_view_notice" >
-        </activity>
-        <activity
-            android:name=".EditNotice"
-            android:label="@string/title_activity_edit_notice"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:name=".ViewNotice">
         </activity>
         <activity
             android:name=".SearchClassrooms"
-            android:label="@string/title_activity_search_classrooms"
             android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
         <activity
-            android:name=".MapClassrooms"
-            android:label="@string/title_activity_map_classrooms" >
+            android:name=".MapClassrooms">
         </activity>
         <activity
-            android:name=".StudentSchedule"
-            android:label="@string/title_activity_student_schedule" >
+            android:name=".StudentSchedule">
         </activity>
         <activity
-            android:name=".ViewNotifications"
-            android:label="@string/title_activity_view_notifications" >
+            android:name=".ViewNotifications">
         </activity>
         <activity
-            android:name=".ViewConsultingHours"
-            android:label="@string/title_activity_view_consulting_hours" >
+            android:name=".ViewConsultingHours">
         </activity>
         <activity
             android:name=".SearchTimetables"
-            android:label="@string/title_activity_search_timetables"
             android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
 
