@@ -25,6 +25,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.parse.GetCallback;
 import com.parse.Parse;
@@ -78,9 +79,15 @@ public class SendMessage extends AppCompatActivity {
             receiversIds.add(receiverIdtoDB);
         }
         else{
-            for(int i=0;i<selected.size();i++){
-                receiversIds.add(selected.get(i).getId());
+            if(selected.size()>0) {
+                for (int i = 0; i < selected.size(); i++) {
+                    receiversIds.add(selected.get(i).getId());
+                }
             }
+            else
+                Toast.makeText(SendMessage.this, "Select at least 1 receiver", Toast.LENGTH_LONG)
+                        .show();
+
         }
         message.put("ReceiverIds", receiversIds);
         EditText subjectText = (EditText) findViewById(R.id.textSubject);
