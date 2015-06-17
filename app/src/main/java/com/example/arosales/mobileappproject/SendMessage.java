@@ -52,6 +52,7 @@ public class SendMessage extends AppCompatActivity {
     private List<Student> selected;
     private ArrayList<Student> receivers;
     private TextView receiverText;
+    private ReceiverAdapter receiverAdapter;
 
     public void sendMessage(View view) {
         String senderId = ParseUser.getCurrentUser().getObjectId();
@@ -71,7 +72,7 @@ public class SendMessage extends AppCompatActivity {
         ParseObject message = new ParseObject("Message");
         //message.put("SenderId", senderId);
         message.put("SenderId", ParseUser.getCurrentUser());
-        ArrayList<String> receiversIds = new ArrayList<>();
+        ArrayList<String> receiversIds = new ArrayList<String>();
         if(receiverType.equals("Company") || receiverType.equals("Student") || receiverType.equals("Reply")) {
             //message.put("ReceiverIds", receiverIdtoDB);
             receiversIds.add(receiverIdtoDB);
@@ -267,49 +268,14 @@ public class SendMessage extends AppCompatActivity {
         LayoutInflater inflater = (LayoutInflater) SendMessage.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View layout = inflater.inflate(R.layout.popup_receivers, (ViewGroup) findViewById(R.id.popup));
 
-        final ReceiverAdapter receiverAdapter= new ReceiverAdapter(SendMessage.this,receivers);
+        receiverAdapter= new ReceiverAdapter(SendMessage.this,receivers);
         ListView list_messages= (ListView) layout.findViewById(R.id.listStudents);
-
-        EditText filter = new EditText(SendMessage.this);
-        filter.setHeight(ActionBar.LayoutParams.WRAP_CONTENT);
-        filter.setWidth(ActionBar.LayoutParams.MATCH_PARENT);
-        filter.setHint("Filter by Name");
-        filter.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.text_size));
-        filter.setTextColor(Color.BLACK);
-        filter.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                Log.d("Text changed","Text changed");
-                /*
-                receivers = searchStudents(s);
-                receiverAdapter.notifyDataSetChanged();*/
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
-        list_messages.addHeaderView(filter);
-
         list_messages.setAdapter(receiverAdapter);
 
         final PopupWindow popupWindow = new PopupWindow(layout, ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT, true);
         popupWindow.setOutsideTouchable(true);
         popupWindow.setTouchable(true);
         popupWindow.setBackgroundDrawable(new BitmapDrawable());
-        /*popupWindow.setTouchInterceptor(new View.OnTouchListener() {
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    popupWindow.dismiss();
-                    return true;
-                }
-                return false;
-            }
-        });*/
         Button ok_button = (Button) layout.findViewById(R.id.ok_button);
         ok_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -337,40 +303,5 @@ public class SendMessage extends AppCompatActivity {
             }
         });
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
-    }
-
-    public ArrayList<String> searchStudents(CharSequence filter){
-        ArrayList<String> receivers = new ArrayList<>();
-
-        ParseQuery<ParseObject> queryStudentName = new ParseQuery("Student");
-        //queryStudentName.include("StudentId");
-        //queryStudentName.whereNotEqualTo("StudentId", ParseUser.getCurrentUser());
-        queryStudentName.whereContains("Name", filter.toString());
-
-        ParseQuery<ParseObject> queryStudentSurname = new ParseQuery("Student");
-        //queryStudentSurname.include("StudentId");
-        //queryStudentSurname.whereNotEqualTo("StudentId", ParseUser.getCurrentUser());
-        queryStudentSurname.whereContains("Surname", filter.toString());
-
-        List<ParseQuery<ParseObject>> queries = new ArrayList<ParseQuery<ParseObject>>();
-        queries.add(queryStudentName);
-        queries.add(queryStudentSurname);
-
-        ParseQuery<ParseObject> superQuery = new ParseQuery("Student");
-        superQuery.include("StudentId");
-        superQuery.whereNotEqualTo("StudentId", ParseUser.getCurrentUser());
-        ParseQuery.or(queries);
-
-        try {
-            List<ParseObject> results=superQuery.find();
-            for(ParseObject p:results){
-                receivers.add(p.getString("Name").substring(0, 1).toUpperCase() + p.getString("Name").substring(1).toLowerCase()+
-                        " "+p.getString("Surname").substring(0,1).toUpperCase()+p.getString("Surname").substring(1).toLowerCase());
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        return receivers;
     }
 }

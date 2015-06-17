@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Created by Andrea Rosales on 15/06/2015.
  */
-public class ReceiverAdapter extends BaseAdapter implements View.OnClickListener {
+public class ReceiverAdapter extends BaseAdapter{
 
     public List<Student> selected;
     private LayoutInflater inflater;
@@ -68,28 +68,28 @@ public class ReceiverAdapter extends BaseAdapter implements View.OnClickListener
                 vholder = (ViewHolder) v.getTag();
             }
             //vholder.textTo.setText(listReceivers.get(position));
-            vholder.textTo.setText(listReceivers.get(position).getName().substring(0, 1).toUpperCase() + listReceivers.get(position).getName().substring(1).toLowerCase()+
-                    " "+listReceivers.get(position).getSurname().substring(0,1).toUpperCase()+listReceivers.get(position).getSurname().substring(1).toLowerCase());
+            if(listReceivers.get(position).getName()!=null && !listReceivers.get(position).getName().equals("") &&  listReceivers.get(position).getSurname()!=null && !listReceivers.get(position).getSurname().equals(""))
+            vholder.textTo.setText(listReceivers.get(position).getName()+" "+listReceivers.get(position).getSurname());
+
+
+
             vholder.check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
-                        if (!selected.contains(listReceivers.get(position)))
+                        if (!selected.contains(listReceivers.get(position))) {
                             selected.add(listReceivers.get(position));
+                        }
                     } else {
-                        if (selected.contains(listReceivers.get(position)))
+                        if (selected.contains(listReceivers.get(position))) {
                             selected.remove(listReceivers.get(position));
+                        }
                     }
                 }
             });
 
         }
         return v;
-    }
-
-    @Override
-    public void onClick(View v) {
-
     }
 
 

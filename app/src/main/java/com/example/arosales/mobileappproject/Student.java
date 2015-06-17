@@ -162,5 +162,7 @@ public class Student implements Serializable{
     public void setCurrentStudyCourse(String currentStudyCourse) {
         this.currentStudyCourse = currentStudyCourse;
     }
+
+
 }
 
