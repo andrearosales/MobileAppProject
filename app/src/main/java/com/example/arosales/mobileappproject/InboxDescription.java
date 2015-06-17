@@ -61,7 +61,7 @@ public class InboxDescription extends AppCompatActivity {
                 queryStudent.include("StudentId");
                 queryStudent.whereEqualTo("StudentId", student);
                 ParseObject result = queryStudent.getFirst();
-                txt_from.setText(result.getString("Name").substring(0, 1).toUpperCase() + result.getString("Name").substring(1).toLowerCase()+
+                txt_from.setText(getResources().getString(R.string.from)+": "+result.getString("Name").substring(0, 1).toUpperCase() + result.getString("Name").substring(1).toLowerCase()+
                         " "+result.getString("Surname").substring(0,1).toUpperCase()+result.getString("Surname").substring(1).toLowerCase());
             } catch (ParseException e) {
                 e.printStackTrace();
