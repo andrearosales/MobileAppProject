@@ -334,7 +334,7 @@
     <string name="email">Email</string>
     <string name="course">Course</string>
     <string name="department">Department</string>
-    <string name="courseOfStudy">Course of Study</string>
+    <string name="courseOfStudy">Field of Study</string>
     <string name="schedule_button">Schedule</string>
     <string name="consultinghours_button">Consulting hours</string>
     <string name="professor_courses">Schedule</string>
@@ -434,4 +434,5 @@
     <string name="updatingconsultinghourmessage">Updating consulting hour</string>
     <string name="error_invalid_email">Enter a valid email</string>
     <string name="from">From</string>
+    <string name="job_placement_title">Job placement</string>
 </resources>
