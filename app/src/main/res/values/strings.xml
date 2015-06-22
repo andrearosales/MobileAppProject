@@ -435,4 +435,6 @@
     <string name="error_invalid_email">Enter a valid email</string>
     <string name="from">From</string>
     <string name="job_placement_title">Job placement</string>
+    <string name="jobs">Jobs</string>
+    <string name="didactic">DidacticInfo</string>
 </resources>
