@@ -87,7 +87,7 @@ public class SendMessage extends AppCompatActivity {
             else
                 Toast.makeText(SendMessage.this, "Select at least 1 receiver", Toast.LENGTH_LONG)
                         .show();
-
+                return;
         }
         message.put("ReceiverIds", receiversIds);
         EditText subjectText = (EditText) findViewById(R.id.textSubject);
