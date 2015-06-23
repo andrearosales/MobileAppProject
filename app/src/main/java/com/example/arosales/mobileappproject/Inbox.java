@@ -145,9 +145,13 @@ public class Inbox extends AppCompatActivity {
 
                     if (!p.get("Subject").equals(""))
                         msg.setSubject((String) p.get("Subject"));
+                    else
+                        msg.setSubject("Subject");
 
                     if (!p.get("Message").equals(""))
                         msg.setMessage((String) p.get("Message"));
+                    else
+                        msg.setMessage("Message");
 
                     result_messages.add(msg);
                 }

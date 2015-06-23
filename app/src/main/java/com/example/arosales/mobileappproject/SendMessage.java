@@ -79,15 +79,16 @@ public class SendMessage extends AppCompatActivity {
             receiversIds.add(receiverIdtoDB);
         }
         else{
-            if(selected.size()>0) {
+            if(selected !=null && selected.size()>0) {
                 for (int i = 0; i < selected.size(); i++) {
                     receiversIds.add(selected.get(i).getId());
                 }
             }
-            else
+            else {
                 Toast.makeText(SendMessage.this, "Select at least 1 receiver", Toast.LENGTH_LONG)
                         .show();
                 return;
+            }
         }
         message.put("ReceiverIds", receiversIds);
         EditText subjectText = (EditText) findViewById(R.id.textSubject);
