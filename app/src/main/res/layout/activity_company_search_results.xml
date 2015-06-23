@@ -30,7 +30,7 @@
     <LinearLayout
         android:id="@+id/emptyView"
         android:layout_width="fill_parent"
-        android:layout_height="@dimen/height_header"
+        android:layout_height="fill_parent"
         android:layout_below="@id/titleSearchResults"
         android:orientation="vertical">
         <TextView

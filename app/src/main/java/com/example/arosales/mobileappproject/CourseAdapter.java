@@ -198,7 +198,7 @@ public class CourseAdapter extends BaseAdapter {
                 //Creation of export button
                 Button exportButton = new Button(activity);
 
-                exportButton.setText(activity.getString(R.string.export_button));
+                exportButton.setText(activity.getString(R.string.export_button).toUpperCase());
                 exportButton.setBackgroundColor(Color.BLACK);
                 exportButton.setTextColor(Color.WHITE);
                 exportButton.setTypeface(null, Typeface.BOLD);

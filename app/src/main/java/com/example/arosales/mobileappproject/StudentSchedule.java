@@ -294,7 +294,7 @@ public class StudentSchedule extends AppCompatActivity {
             newSearchButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.text_size));
             newSearchButton.setTextColor(Color.WHITE);
             newSearchButton.setTypeface(null, Typeface.BOLD);
-            newSearchButton.setText(R.string.backsearch_button);
+            newSearchButton.setText(getResources().getString(R.string.backsearch_button).toUpperCase());
 
             newSearchButton.setOnClickListener(new View.OnClickListener() {
                 @Override

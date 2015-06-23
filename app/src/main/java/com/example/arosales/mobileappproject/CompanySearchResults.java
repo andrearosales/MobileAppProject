@@ -279,9 +279,9 @@ public class CompanySearchResults extends AppCompatActivity {
             newSearchButton.setTypeface(null, Typeface.BOLD);
 
             if(searchType.equals("Search"))
-                newSearchButton.setText(R.string.new_search_button);
+                newSearchButton.setText(getResources().getString(R.string.new_search_button).toUpperCase());
             else
-                newSearchButton.setText(R.string.backsearch_button);
+                newSearchButton.setText(getResources().getString(R.string.backsearch_button).toUpperCase());
 
 
             newSearchButton.setOnClickListener(new View.OnClickListener() {

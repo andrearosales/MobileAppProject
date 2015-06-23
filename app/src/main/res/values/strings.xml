@@ -438,4 +438,5 @@
     <string name="jobs">Jobs</string>
     <string name="didactic">Didactics</string>
     <string name="compose_button">Compose message</string>
+    <string name="notices">Notices</string>
 </resources>

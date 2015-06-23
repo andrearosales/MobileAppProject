@@ -104,7 +104,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/title_activity_noticeboard"
+                        android:text="@string/notices"
                         android:layout_gravity="center_horizontal"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textStyle="bold" />

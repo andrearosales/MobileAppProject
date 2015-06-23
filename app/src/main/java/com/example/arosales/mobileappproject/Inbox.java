@@ -187,7 +187,7 @@ public class Inbox extends AppCompatActivity {
                 sendMessage.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.text_size));
                 sendMessage.setTextColor(Color.WHITE);
                 sendMessage.setTypeface(null, Typeface.BOLD);
-                sendMessage.setText(getResources().getString(R.string.send_button));
+                sendMessage.setText(getResources().getString(R.string.compose_button).toUpperCase());
 
                 sendMessage.setOnClickListener(new View.OnClickListener() {
                     @Override
