@@ -1,7 +1,9 @@
 package com.example.arosales.mobileappproject;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -13,7 +15,9 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Surface;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -114,6 +118,7 @@ public class ResultStudents extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            lockScreenOrientation();
             progressDialog.setTitle("Loading students");
             if (!progressDialog.isShowing()) {
                 progressDialog.show();
@@ -470,6 +475,8 @@ public class ResultStudents extends AppCompatActivity {
                 progressDialog.dismiss();
             }
 
+            unlockScreenOrientation();
+
             StudentAdapter sAdapter = new StudentAdapter(ResultStudents.this, students,searchType);
 
             ListView list_students = (ListView) findViewById(R.id.listResults);
@@ -510,6 +517,32 @@ public class ResultStudents extends AppCompatActivity {
 
 
         }
+    }
+
+    private void lockScreenOrientation() {
+        int orientation = getRequestedOrientation();
+        int rotation = ((WindowManager) getSystemService(
+                Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
+        switch (rotation) {
+            case Surface.ROTATION_0:
+                orientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+                break;
+            case Surface.ROTATION_90:
+                orientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
+                break;
+            case Surface.ROTATION_180:
+                orientation = ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
+                break;
+            default:
+                orientation = ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE;
+                break;
+        }
+
+        setRequestedOrientation(orientation);
+    }
+
+    private void unlockScreenOrientation() {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
     }
 
     public void newSearch(View view){
